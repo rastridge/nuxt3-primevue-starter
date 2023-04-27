@@ -75,7 +75,6 @@
 	//
 	// Get current news
 	//
-	//
 	const {
 		data: news,
 		pending,
