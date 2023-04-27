@@ -1,3 +1,6 @@
+import { useAuthStore } from '~/stores/authStore'
+const auth = useAuthStore()
+
 export function useNavigationMenu() {
 	const navigationMenu = () => {
 		return [
@@ -12,6 +15,26 @@ export function useNavigationMenu() {
 			},
 			{
 				items: [{ label: 'News', icon: 'pi pi-fw pi-bookmark', to: '/news' }],
+			},
+			{
+				items: [
+					{
+						label: 'Login',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/loginpage',
+						visible: () => !auth.isLoggedIn,
+					},
+				],
+			},
+			{
+				items: [
+					{
+						label: 'Log out',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/logout',
+						visible: () => auth.isLoggedIn,
+					},
+				],
 			},
 			{
 				label: 'PrimeVue',
