@@ -37,6 +37,26 @@ export function useNavigationMenu() {
 				],
 			},
 			{
+				label: 'Admin',
+				items: [
+					{
+						label: 'Admin Users',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/users',
+					},
+					{
+						label: 'Accounts',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/users',
+					},
+					{
+						label: 'Contents',
+						icon: 'pi pi-fw pi-table',
+						to: '/admin/users',
+					},
+				],
+			},
+			{
 				label: 'PrimeVue',
 				items: [
 					{

@@ -43,6 +43,8 @@ export default defineNuxtConfig({
 		'@nuxt/content',
 		'@vueuse/nuxt',
 	],
+	components: ['~/components/forms', '~/components'],
+
 	dayjs: {
 		locales: ['en'],
 		defaultLocale: 'en',
