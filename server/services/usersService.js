@@ -534,12 +534,8 @@ async function resetRequest({ username }) {
 	const admin_user_email = rows[0].admin_user_email
 	// if username exists
 	if (cnt) {
-		/* const msg =
-			'To reset your user admin password <a href="http://localhost:58117/reset/' +
-			username +
-			'">Click here</a>' */
 		const msg =
-			'To reset your user admin password <a href="https://lustrous-halva-085afc.netlify.app/reset/' +
+			'To reset your user admin password <a href="https://main--peaceful-tarsier-458ff9.netlify.app/reset/' +
 			username +
 			'">Click here</a>'
 
