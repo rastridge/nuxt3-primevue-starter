@@ -56,9 +56,11 @@
 		}
 	},
 	"dependencies": {
+		"@vueup/vue-quill": "^1.1.1",
 		"bcrypt": "^5.1.0",
 		"dayjs": "^1.11.7",
 		"jsonwebtoken": "^9.0.0",
-		"mysql2": "^3.2.4"
+		"mysql2": "^3.2.4",
+		"quill-image-uploader": "^1.2.4"
 	}
 }

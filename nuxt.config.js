@@ -2,7 +2,7 @@ import pkg from './package.json'
 
 export default defineNuxtConfig({
 	devtools: false,
-	ssr: true,
+	ssr: false,
 	runtimeConfig: {
 		API_SECRET: process.env.API_SECRET,
 		DB_HOST: process.env.DB_HOST,

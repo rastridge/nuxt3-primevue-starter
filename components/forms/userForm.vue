@@ -13,7 +13,14 @@
 					Submit
 				</Button>
 
-				<div style="width: 50%; min-width: 340px; margin: auto">
+				<div
+					style="
+						display: block;
+						width: 340px;
+						margin-left: auto;
+						margin-right: auto;
+					"
+				>
 					<label for="admin_user_name">Username</label>
 					<InputText
 						id="admin_user_name"
@@ -61,11 +68,19 @@
 					</div>
 				</div>
 				<div class="m-5 text-xl text-center">Admin User Permissions</div>
-				<div>
+				<div
+					style="
+						white-space: nowrap;
+						display: block;
+						width: 400px;
+						margin-left: auto;
+						margin-right: auto;
+					"
+				>
 					<table>
 						<thead>
 							<tr>
-								<th class="text-center">Application</th>
+								<th class="text-right">Application</th>
 								<th>Manage</th>
 								<th>Create</th>
 								<th>View</th>
@@ -119,9 +134,20 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="m-3">
-					<Button class="mb-2" @click="cancelForm"> Cancel </Button><br />
-					<Button @click="submitForm(state)"> Submit </Button>
+				<div>
+					<Button
+						class="m-1"
+						style="display: block; margin-left: auto; margin-right: auto"
+						@click="cancelForm"
+					>
+						Cancel </Button
+					><br />
+					<Button
+						@click="submitForm(state)"
+						style="display: block; margin-left: auto; margin-right: auto"
+					>
+						Submit
+					</Button>
 				</div>
 			</div>
 		</div>
@@ -230,3 +256,11 @@
 		navigateTo('/admin/users')
 	}
 </script>
+
+<style scoped>
+	.xcentered {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+</style>

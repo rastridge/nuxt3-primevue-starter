@@ -13,7 +13,6 @@ const checkPerm = (app) => {
 
 export function useNavigationMenu() {
 	const navigationMenu = () => {
-		const customMenuItems = JSON.parse(sessionStorage.getItem('custommenu'))
 		return [
 			{
 				items: [
@@ -23,6 +22,20 @@ export function useNavigationMenu() {
 						icon: 'pi pi-fw pi-home',
 						visible: () => !auth.isLoggedIn,
 					},
+				],
+			},
+			{
+				items: [
+					{
+						label: 'News',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/news',
+						visible: () => !auth.isLoggedIn,
+					},
+				],
+			},
+			{
+				items: [
 					{
 						label: 'Login',
 						icon: 'pi pi-fw pi-bookmark',
@@ -32,20 +45,14 @@ export function useNavigationMenu() {
 				],
 			},
 			{
-				label: 'About',
 				items: [
 					{
-						label: 'News',
+						label: 'Log out',
 						icon: 'pi pi-fw pi-bookmark',
-						to: '/news',
+						to: '/logout',
+						visible: () => auth.isLoggedIn,
 					},
 				],
-				visible: () => !auth.isLoggedIn,
-			},
-			{
-				label: 'Custom Pages',
-				items: customMenuItems,
-				visible: () => !auth.isLoggedIn,
 			},
 			{
 				label: 'Admin',
@@ -61,12 +68,6 @@ export function useNavigationMenu() {
 						icon: 'pi pi-fw pi-user-edit',
 						to: '/admin/content',
 						visible: () => checkPerm('content') > 0,
-					},
-					{
-						label: 'Log out',
-						icon: 'pi pi-fw pi-bookmark',
-						to: '/logout',
-						visible: () => auth.isLoggedIn,
 					},
 				],
 				visible: () => auth.isLoggedIn,

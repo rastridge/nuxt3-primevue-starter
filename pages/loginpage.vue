@@ -1,44 +1,38 @@
 <template>
 	<div id="loginpage">
-		<div class="grid">
-			<div class="col">
-				<div class="form-box">
-					<div v-if="alert.message" :class="`alert ${alert.type}`">
-						{{ alert.message }}
-					</div>
+		<div v-if="alert.message" :class="`alert ${alert.type}`">
+			{{ alert.message }}
+		</div>
 
-					<div v-if="!auth.isLoggedIn">
-						<h3 class="headline">Login Admin User</h3>
+		<div v-if="!auth.isLoggedIn">
+			<h3 class="headline">Login Admin Users</h3>
 
-						<FormKit
-							type="form"
-							submit_label="Login"
-							@submit="handleSubmit"
-							#default="{ state }"
-						>
-							<FormKit
-								type="text"
-								name="username"
-								label="Username"
-								validate="required|length:5"
-							>
-							</FormKit>
-							<FormKit
-								type="password"
-								name="password"
-								label="Password"
-								validate="required|length:5"
-							>
-							</FormKit>
-						</FormKit>
+			<FormKit
+				type="form"
+				submit_label="Login"
+				@submit="handleSubmit"
+				#default="{ state }"
+			>
+				<FormKit
+					type="text"
+					name="username"
+					label="Username"
+					validate="required|length:5"
+				>
+				</FormKit>
+				<FormKit
+					type="password"
+					name="password"
+					label="Password"
+					validate="required|length:5"
+				>
+				</FormKit>
+			</FormKit>
 
-						<div>
-							<nuxt-link to="/resetpassword" active-class="active"
-								><a>Forgot password?</a></nuxt-link
-							>
-						</div>
-					</div>
-				</div>
+			<div>
+				<nuxt-link to="/resetpassword" active-class="active"
+					><a>Forgot password?</a></nuxt-link
+				>
 			</div>
 		</div>
 	</div>
@@ -51,10 +45,6 @@
 	import { useAlertStore } from '~/stores/alertStore'
 	const auth = useAuthStore()
 	const alert = useAlertStore() // used in template
-	// definePageMeta({ layout: 'default' })
-
-	// const username = ref('')
-	// const password = ref('')
 
 	const handleSubmit = async (state) => {
 		if (state.username && state.password) {
