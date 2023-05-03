@@ -63,6 +63,12 @@ export function useNavigationMenu() {
 						visible: () => checkPerm('content') > 0,
 					},
 					{
+						label: 'Members Men',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/accounts/men',
+						visible: () => checkPerm('accounts/men') > 0,
+					},
+					{
 						label: 'Log out',
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/logout',

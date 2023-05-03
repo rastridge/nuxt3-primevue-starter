@@ -58,6 +58,7 @@
 	"dependencies": {
 		"@vueup/vue-quill": "^1.1.1",
 		"bcrypt": "^5.1.0",
+		"country-region-data": "^2.7.0",
 		"dayjs": "^1.11.7",
 		"jsonwebtoken": "^9.0.0",
 		"mysql2": "^3.2.4",

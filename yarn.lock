@@ -3287,6 +3287,11 @@ core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.3.tgz#a6042d3634c2b27e9328f837b965fac83808db85"
   integrity sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==
 
+country-region-data@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/country-region-data/-/country-region-data-2.7.0.tgz#e7332cc5fa252dc9111386b50fe65fd46bdb4bc1"
+  integrity sha512-bBh+6PMt2uMCL4pPMYeR6GnoyOFgiITXPAdLU86gYOTOVvdgUyQtCaoIwdySDOUaFIEKXT94yuw+ldx614IUcA==
+
 crc-32@^1.2.0:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/crc-32/-/crc-32-1.2.2.tgz#3cad35a934b8bf71f25ca524b6da51fb7eace2ff"

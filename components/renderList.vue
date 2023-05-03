@@ -22,15 +22,6 @@
 					:rows-per-page-options="[10, 20, 50]"
 					current-page-report-template="Showing {first} to {last} of {totalRecords}"
 				>
-					<!-- 					<template #header>
-						<div class="datatable-header">
-							<div class="flex justify-content-center">
-								<span class="text-l"
-									>{{ datalocal ? datalocal.length : 0 }} Records</span
-								>
-							</div>
-						</div>
-					</template> -->
 					<template #empty> No Data Found. </template>
 					<Column v-if="statusable" field="status" header="Use"
 						><template #body="slotProps">
