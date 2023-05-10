@@ -5,19 +5,24 @@
 			:config="{ validationVisibility: 'live' }"
 			v-model="state"
 			submit-label="Submit"
-			@submit="submitForm"
+			@submit="submitForm(state)"
 		>
 			<FormKit
-				label="Page Title"
-				name="content_name"
+				label="News Title"
+				name="news_title"
 				type="text"
 				validation="required"
 			/>
-
+			<FormKit
+				label="Synopsis"
+				name="news_synop"
+				type="textarea"
+				validation="required"
+			/>
 			<FormKit
 				v-if="peek"
 				label="Raw HTML Article"
-				name="content_body"
+				name="news_article"
 				type="textarea"
 				disabled="true"
 			/>
@@ -27,39 +32,34 @@
 				@click="toggle"
 			/>
 
-			<h6>Content</h6>
-			<div>
-				<input-body
-					:field="state.content_body"
-					@changeState="changeState"
-				></input-body>
-			</div>
-			<!-- </FormKit> -->
-			<FormKit
-				label="Order in Menu"
-				name="content_order"
-				type="number"
-				min="0"
-				validation="required"
-			/>
+			<h4>Content</h4>
+			<input-body
+				:field="state.news_article"
+				@changeState="changeState"
+			></input-body>
 
 			<FormKit
 				type="datetime-local"
+				label="Event Date"
+				name="news_event_dt"
+				validation="required"
+			/>
+			<FormKit
+				type="datetime-local"
 				label="Release Date"
-				name="content_release_dt"
+				name="news_release_dt"
 				validation="required"
 			/>
 
 			<FormKit
 				type="datetime-local"
 				label="Expire Date"
-				name="content_expire_dt"
+				name="news_expire_dt"
 				validation="required"
 			/>
 		</FormKit>
-		<Button @click="cancelForm()"> Cancel </Button>
+		<Button @click.prevent="cancelForm()"> Cancel </Button>
 	</div>
-	<!-- </div> -->
 </template>
 
 <script setup>
@@ -83,8 +83,9 @@
 	// incoming from inputBody component
 	//
 	const changeState = (field) => {
-		state.value.content_body = field
+		state.value.news_article = field
 	}
+
 	//
 	// raw html view
 	//
@@ -94,43 +95,46 @@
 	}
 
 	//
-	// Initialize form
+	// Initialize Add form
 	//
 	let state = ref({})
-	state.value.content_body = 'Add content here'
+	state.value.news_article = 'Enter news here'
 	const dt = $dayjs()
-	state.value.content_release_dt = dt.format('YYYY-MM-DD HH:mm')
-	state.value.content_expire_dt = dt.add(28, 'day').format('YYYY-MM-DD HH:mm')
+	state.value.news_release_dt = dt.format('YYYY-MM-DD HH:mm')
+	state.value.news_event_dt = dt.add(7, 'day').format('YYYY-MM-DD HH:mm')
+	state.value.news_expire_dt = dt.add(28, 'day').format('YYYY-MM-DD HH:mm')
 
 	//
 	// edit if there is an id - add if not
 	//
 	if (props.id !== 0) {
-		// get user with id === props.id
+		//
+		// Initialize Edit form
+		//
 		const {
-			data: content_data,
+			data: news_data,
 			pending,
 			error,
 			refresh,
-		} = await useFetch(`/content/${props.id}`, {
-			key: props.id,
+		} = await useFetch(`/news/${props.id}`, {
 			method: 'get',
 			headers: {
 				authorization: auth.user.token,
 			},
 		})
-
-		state.value = content_data.value
+		state.value = news_data.value
 
 		// Adjust for local time and Format for Primevue calendar
-		state.value.content_release_dt = $dayjs(
-			content_data.value.content_release_dt
+		state.value.news_event_dt = $dayjs(news_data.value.news_event_dt).format(
+			'YYYY-MM-DD HH:mm'
+		)
+		state.value.news_release_dt = $dayjs(
+			news_data.value.news_release_dt
 		).format('YYYY-MM-DD HH:mm')
-		state.value.content_expire_dt = $dayjs(
-			content_data.value.content_expire_dt
-		).format('YYYY-MM-DD HH:mm')
+		state.value.news_expire_dt = $dayjs(news_data.value.news_expire_dt).format(
+			'YYYY-MM-DD HH:mm'
+		)
 	}
-
 	//
 	// form handlers
 	//
@@ -139,6 +143,6 @@
 	}
 
 	const cancelForm = () => {
-		navigateTo('/admin/content') // needs to be / for self register
+		navigateTo('/admin/news') // needs to be / for self register
 	}
 </script>

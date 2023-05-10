@@ -52,7 +52,7 @@
 		navigateTo('/loginpage')
 	}
 	const handleSubmit = async function () {
-		const { data, error } = await useFetch('/api/users/resetrequest', {
+		const { data, error } = await useFetch('/users/resetrequest', {
 			method: 'POST',
 			body: { username },
 			headers: {

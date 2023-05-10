@@ -9,7 +9,7 @@
 			pending,
 			error,
 			refresh,
-		} = await useFetch(`/api/content/custommenuitems`, {
+		} = await useFetch(`/content/custommenuitems`, {
 			method: 'get',
 			headers: {
 				authorization: 'not-needed',

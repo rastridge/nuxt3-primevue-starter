@@ -19,7 +19,7 @@
 		pending,
 		error,
 		refresh,
-	} = await useFetch(`/api/content/${content_id.value}`, {
+	} = await useFetch(`/content/${content_id.value}`, {
 		initialCache: false,
 		method: 'get',
 		headers: {

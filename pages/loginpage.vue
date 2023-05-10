@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-	import '@formkit/themes/genesis'
+	// import '@formkit/themes/genesis'
 
 	import { useAuthStore } from '~/stores/authStore'
 	import { useAlertStore } from '~/stores/alertStore'
@@ -52,3 +52,9 @@
 		}
 	}
 </script>
+
+<style scoped>
+	.formkit-input {
+		color: white;
+	}
+</style>

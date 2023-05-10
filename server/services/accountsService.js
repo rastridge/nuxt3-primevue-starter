@@ -12,6 +12,7 @@ export const accountsService = {
 	editOne,
 	changeStatus,
 	deleteOne,
+	getShow,
 	getMemberTypes,
 	getMemberAdminTypes,
 }
@@ -44,6 +45,35 @@ async function getAll() {
 									status
 							FROM inbrc_accounts
 							WHERE deleted = 0
+							ORDER BY member_lastname ASC`
+
+	const accounts = await doDBQuery(sql)
+	return accounts
+}
+
+async function getShow() {
+	const sql = `SELECT
+								a.account_id,
+								a.member_firstname,
+								a.member_lastname,
+								CONCAT( a.member_firstname, ' ', a.member_lastname ) as name,
+								a.member_position,
+								a.member_year,
+								a.member_prev_club,
+								a.member_wall_of_fame_year,
+								a.member_type_id,
+								mt.member_type
+							FROM
+								inbrc_accounts a,
+								inbrc_member_types mt
+							WHERE
+								a.member_type_id NOT IN ('9','13')
+								AND
+								a.STATUS = 1 
+								AND 
+								a.deleted = 0 
+								AND 
+								a.member_type_id = mt.member_type_id
 							ORDER BY member_lastname ASC`
 
 	const accounts = await doDBQuery(sql)

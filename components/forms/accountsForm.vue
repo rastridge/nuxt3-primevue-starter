@@ -170,6 +170,7 @@
 	import '@formkit/themes/genesis'
 	import { useAuthStore } from '~/stores/authStore'
 	import { useAlertStore } from '~/stores/alertStore'
+	import { isWhiteSpaceLike } from 'typescript'
 	const auth = useAuthStore()
 	const alert = useAlertStore()
 	const { $dayjs } = useNuxtApp()
@@ -213,7 +214,7 @@
 			pending,
 			error,
 			refresh,
-		} = await useFetch(`/api/accounts/${props.id}`, {
+		} = await useFetch(`/accounts/${props.id}`, {
 			key: props.id,
 			method: 'get',
 			headers: {
@@ -268,3 +269,9 @@
 		})
 	})
 </script>
+
+<style scoped>
+	.formkit-input {
+		color: white;
+	}
+</style>

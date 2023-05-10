@@ -9,7 +9,7 @@ const alert = useAlertStore()
 export default function useSubmit() {
 	const auth = useAuthStore()
 	const onSubmitEdit = async function (app, form_state) {
-		const { data, pending, error } = await useFetch(`/api/${app}/editone`, {
+		const { data, pending, error } = await useFetch(`/${app}/editone`, {
 			method: 'post',
 			body: form_state,
 			headers: {
@@ -29,7 +29,7 @@ export default function useSubmit() {
 		}
 	}
 	const onSubmitAdd = async function (app, form_state) {
-		const { data, error } = await useFetch(`/api/${app}/addone`, {
+		const { data, error } = await useFetch(`/${app}/addone`, {
 			method: 'post',
 			body: form_state,
 			headers: {

@@ -43,7 +43,7 @@
 	const username = ref(route.params.username)
 
 	const submitHandler = async () => {
-		const { data, error } = await useFetch('/api/users/resetpassword', {
+		const { data, error } = await useFetch('/users/resetpassword', {
 			method: 'POST',
 			body: { username, password },
 			headers: {

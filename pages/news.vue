@@ -80,7 +80,7 @@
 		pending,
 		error,
 		refresh,
-	} = await useFetch('/api/news/getallcurrent', {
+	} = await useFetch('/news/getallcurrent', {
 		method: 'get',
 		headers: {
 			authorization: 'not-needed',

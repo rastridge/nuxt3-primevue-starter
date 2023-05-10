@@ -36,7 +36,7 @@ export const useAuthStore = defineStore('auth', {
 			const alert = useAlertStore()
 			this.status = { loggedIn: false }
 			alert.attempt('Logging in . . .')
-			const user = await $fetch('/api/users/authenticate', {
+			const user = await $fetch('/users/authenticate', {
 				headers: {
 					authorization: 'not-needed',
 				},

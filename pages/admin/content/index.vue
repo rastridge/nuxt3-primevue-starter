@@ -29,7 +29,6 @@
 	//
 	// Initialize values for Renderlist
 	//
-
 	const app = 'content'
 	const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
 	const { data: content_data, pending } = await getAll(app)

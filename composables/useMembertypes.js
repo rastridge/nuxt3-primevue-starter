@@ -5,7 +5,7 @@ export default function useMembertypes() {
 	//
 	// get member admin types for select
 	async function getMemberAdminTypeOptions() {
-		const { data, error } = await useFetch('/api/accounts/memberadmintypes', {
+		const { data, error } = await useFetch('/accounts/memberadmintypes', {
 			method: 'get',
 			headers: {
 				authorization: auth.user.token,
@@ -14,7 +14,7 @@ export default function useMembertypes() {
 		if (error.value) {
 			throw createError({
 				...error.value,
-				statusMessage: `Could not get data from /api/accounts/memberadmintypes`,
+				statusMessage: `Could not get data from /accounts/memberadmintypes`,
 			})
 		}
 		// convert for formkit
@@ -31,7 +31,7 @@ export default function useMembertypes() {
 	//
 	// get member types
 	async function getMemberTypeOptions() {
-		const { data } = await useFetch('/api/accounts/membertypes', {
+		const { data } = await useFetch('/accounts/membertypes', {
 			method: 'get',
 			headers: {
 				authorization: auth.user.token,

@@ -189,7 +189,7 @@
 	const email_required = computed(() => state.admin_user_email === '')
 
 	// get app names for access perms
-	const { data: apps_data } = await useFetch(`/api/users/getapps`, {
+	const { data: apps_data } = await useFetch(`/users/getapps`, {
 		method: 'get',
 		headers: {
 			authorization: auth.user.token,
@@ -233,7 +233,7 @@
 	// users id exists - get user data
 	if (!addForm) {
 		// get user data
-		const { data: form_data } = await useFetch(`/api/users/${props.id}`, {
+		const { data: form_data } = await useFetch(`/users/${props.id}`, {
 			method: 'get',
 			headers: {
 				authorization: auth.user.token,

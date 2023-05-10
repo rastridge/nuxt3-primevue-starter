@@ -39,6 +39,11 @@ export function useNavigationMenu() {
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/news',
 					},
+					{
+						label: 'Members',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/members',
+					},
 				],
 				visible: () => !auth.isLoggedIn,
 			},
@@ -67,6 +72,18 @@ export function useNavigationMenu() {
 						icon: 'pi pi-fw pi-user-edit',
 						to: '/admin/accounts/men',
 						visible: () => checkPerm('accounts/men') > 0,
+					},
+					{
+						label: 'News',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/news',
+						visible: () => checkPerm('news') > 0,
+					},
+					{
+						label: 'Newsletters',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/newsletters',
+						visible: () => checkPerm('newsletters') > 0,
 					},
 					{
 						label: 'Log out',
