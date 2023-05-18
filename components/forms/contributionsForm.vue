@@ -23,48 +23,48 @@
 					@complete="search"
 					@item-select="getPrevious"
 				/>
-				<!-- selectedItem.account_id = {{ selectedItem.account_id }} -->
+			</div>
+			<!-- selectedItem.account_id = {{ selectedItem.account_id }} -->
 
-				<FormKit
-					type="datetime-local"
-					label="Contribution Date"
-					name="contribution_date"
-					validation="required"
-				/>
+			<FormKit
+				type="datetime-local"
+				label="Contribution Date"
+				name="contribution_date"
+				validation="required"
+			/>
 
-				<FormKit
-					label="Amount"
-					name="contribution_amount"
-					type="text"
-					validation="required"
-				/>
+			<FormKit
+				label="Amount"
+				name="contribution_amount"
+				type="text"
+				validation="required"
+			/>
 
-				<FormKit
-					type="checkbox"
-					label="Show Name"
-					name="contribution_showName"
-					value="true"
-				/>
+			<FormKit
+				type="checkbox"
+				label="Show Name"
+				name="contribution_showName"
+				value="true"
+			/>
 
-				<FormKit
-					type="checkbox"
-					label="Show Amount"
-					name="contribution_showAmount"
-				/>
-				<div v-if="previous">
-					<h3>Previous Donations</h3>
-					<table>
-						<tbody>
-							<tr v-for="(item, index) in previous" :key="index">
-								<td>{{ item.name }}</td>
-								<td>{{ item.contribution_amount }}</td>
-								<td>
-									{{ $dayjs(item.dt).format('MMM DD YYYY') }}
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+			<FormKit
+				type="checkbox"
+				label="Show Amount"
+				name="contribution_showAmount"
+			/>
+			<div v-if="previous">
+				<h3>Previous Donations</h3>
+				<table>
+					<tbody>
+						<tr v-for="(item, index) in previous" :key="index">
+							<td>{{ item.name }}</td>
+							<td>{{ item.contribution_amount }}</td>
+							<td>
+								{{ $dayjs(item.dt).format('MMM DD YYYY') }}
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			<FormKit
 				type="textarea"
@@ -72,8 +72,6 @@
 				name="contribution_comment"
 				validation="required"
 			/>
-			<pre wrap> value {{ value }}</pre>
-			<pre wrap> state {{ state }}</pre>
 		</FormKit>
 		<Button @click="cancelForm()"> Cancel </Button>
 	</div>

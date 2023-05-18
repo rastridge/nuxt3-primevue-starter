@@ -2,7 +2,8 @@ import querystring from 'querystring'
 import https from 'https'
 
 export default function useEmail() {
-	const { EE_API_KEY } = useRuntimeConfig()
+	const { EE_API_KEY, FROM, FROM_NAME } = useRuntimeConfig()
+
 	function sendEmail(email_data) {
 		console.log('IN sendEmail email_data = ', email_data)
 		const post_data = querystring.stringify({
@@ -44,7 +45,49 @@ export default function useEmail() {
 
 		return result
 	}
+	function sendEmail2(to, subject, message) {
+		console.log('IN sendEmail2', FROM, FROM_NAME)
+		const post_data = querystring.stringify({
+			api_key: EE_API_KEY,
+			subject: subject,
+			from: FROM,
+			fromName: FROM_NAME,
+			to: to,
+			body_html: message,
+			body_text: '',
+			isTransactional: true,
+		})
+
+		const post_options = {
+			hostname: 'api.elasticemail.com',
+			path: '/v2/email/send',
+			port: '443',
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'Content-Length': post_data.length,
+			},
+		}
+
+		let result = ''
+		const post_req = https.request(post_options, function (res) {
+			res.setEncoding('utf8')
+			res.on('data', function (chunk) {
+				result = chunk
+				const { statusCode, statusMessage, headers } = res
+			})
+			res.on('error', function (e) {
+				result = 'Error: ' + e.message
+			})
+		})
+
+		post_req.write(post_data)
+		post_req.end()
+
+		return result
+	}
 	return {
 		sendEmail,
+		sendEmail2,
 	}
 }

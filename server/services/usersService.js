@@ -268,6 +268,11 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 			}
 			// console.log('4 emaildata= ', emaildata)
 			sendEmail(emaildata)
+			/* 			sendEmail2(
+				'ron.astridge@me.com',
+				'Buffalo Rugby Club Admin Account Modification',
+				msg
+			) */
 		} else {
 			const msg =
 				'A user with username ' +

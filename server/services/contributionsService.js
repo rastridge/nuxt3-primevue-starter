@@ -7,6 +7,7 @@
 
 const CONFIG = useRuntimeConfig()
 const { doDBQuery } = useQuery()
+const { sendEmail2 } = useEmail()
 
 export const contributionsService = {
 	getAll,
@@ -217,23 +218,18 @@ async function addOne({
 
 	// an error get thrown here
 
-	/* 	const email = {
-		from: CONFIG.FROM,
-		fromName: CONFIG.FROM_NAME,
-		to: rows[0].account_email,
-		subject: 'Thank you for Your Contribution to the Buffalo Rugby Club',
-		body_text: '',
-		body_html:
-			rows[0].member_firstname +
-			' ' +
-			rows[0].member_lastname +
-			', Thank you for your donation to the Buffalo Rugby Club. Buffalo Rugby is a NYS 501 C3 organization and as such your donation is tax deductible. This email serves as a record that you donated $' +
-			contribution_amount +
-			' to your Buffalo Rugby Club',
-	}
-
-	sendEmail(email)
- */
+	const msg =
+		rows[0].member_firstname +
+		' ' +
+		rows[0].member_lastname +
+		', Thank you for your donation to the Buffalo Rugby Club. Buffalo Rugby is a NYS 501 C3 organization and as such your donation is tax deductible. This email serves as a record that you donated $' +
+		contribution_amount +
+		' to your Buffalo Rugby Club'
+	sendEmail2(
+		rows[0].account_email,
+		'Thank you for Your Contribution to the Buffalo Rugby Club',
+		msg
+	)
 	return contributions
 }
 
