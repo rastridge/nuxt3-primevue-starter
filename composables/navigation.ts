@@ -86,6 +86,18 @@ export function useNavigationMenu() {
 						visible: () => checkPerm('newsletters') > 0,
 					},
 					{
+						label: 'Texts',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/sms',
+						visible: () => checkPerm('sms') > 0,
+					},
+					{
+						label: 'Contributions',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/contributions',
+						visible: () => checkPerm('contributions') > 0,
+					},
+					{
 						label: 'Log out',
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/logout',

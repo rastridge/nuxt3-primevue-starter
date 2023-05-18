@@ -2,10 +2,10 @@
 	import Swal from 'sweetalert2'
 	import { useAlertStore } from '~/stores/alertStore'
 	const alert = useAlertStore()
-	const { addNewsletter } = useNewsletter()
+	const { addSMS } = useSMS()
 
 	//
-	// Newsletters form action
+	// SMS form action
 	//
 	const onSubmit = async function (state) {
 		Swal.fire({
@@ -17,17 +17,14 @@
 			denyButtonText: `Send later`,
 		}).then((result) => {
 			if (result.isConfirmed) {
-				addNewsletter(state, 'sendNow')
+				addSMS(state, 'sendNow')
 				Swal.fire('Saved and Sent', '', 'success')
-				// navigateTo('/admin/newsletters')
 			} else if (result.isDenied) {
-				addNewsletter(state, 'sendLater')
+				addSMS(state, 'sendLater')
 				Swal.fire('Saved', '', 'success')
-				// navigateTo('/admin/newsletters')
 			} else if (result.isDismissed) {
-				// navigateTo('/admin/newsletters')
+				// this.submitStatus = ''
 			}
-			navigateTo('/admin/newsletters')
 		})
 	}
 </script>
@@ -35,11 +32,10 @@
 <template>
 	<div>
 		<Head>
-			<Title>Add Newsletter</Title>
+			<Title>Add SMS</Title>
 		</Head>
-		<common-header title="Add Newsletter" />
-		<newsletters-form @submitted="onSubmit" />
-		<!-- <newsletters-form @submitted="onSendSave" /> -->
+		<common-header title="Add SMS" />
+		<sms-form @submitted="onSubmit" />
 	</div>
 </template>
 

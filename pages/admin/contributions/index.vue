@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<Head>
-			<Title>News Items Admin</Title>
+			<Title>Contributions Admin</Title>
 		</Head>
-		<common-header title="News Items Admin" />
-
+		<common-header :title="app" />
+		<span v-if="error" class="text-danger">ERROR: {{ error }}</span>
 		<div v-if="pending" class="text-center text-2xl">Loading ...</div>
 		<div v-else>
 			<!--Select year -->
@@ -16,7 +16,6 @@
 				/>
 				<p class="text-2xl">{{ year }}</p>
 			</div>
-
 			<render-list
 				:data="filteredData"
 				:app="app"
@@ -27,6 +26,7 @@
 				:viewable="viewable"
 				@changeStatus="changeStatus"
 				@deleteItem="deleteItem"
+				@addItem="addItem"
 			/>
 		</div>
 	</div>
@@ -40,28 +40,27 @@
 	//
 
 	const { getAccess } = useRenderListAccess()
-	const app = 'news'
+	const app = 'contributions'
 	const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
 
-	const startyear = ref(2020)
+	const startyear = ref(2012)
 	const { $dayjs } = useNuxtApp()
 	let year = ref(parseInt($dayjs().format('YYYY')))
 
 	//
-	// Get all news
+	// Get all contributions
 	//
-	const { data: news, pending } = await getAll(app)
+	const { data: contributions, pending } = await getAll(app)
 
 	//
 	// Select year action
 	//
 	const onSubmit = function (value) {
-		// console.log('in onSubmit value = ', value)
 		year.value = value
 	}
 
 	const filteredData = computed(() => {
-		return news.value.filter((d) => {
+		return contributions.value.filter((d) => {
 			return parseInt($dayjs(d.dt).format('YYYY')) === year.value
 		})
 	})
@@ -70,10 +69,10 @@
 	// Renderlist actions
 	//
 	const deleteItem = async (id) => {
-		await deleteOne('news', id)
+		await deleteOne('contributions', id)
 	}
 
 	const changeStatus = async ({ id, status }) => {
-		await changeStatusOne('news', { id, status })
+		await changeStatusOne('contributions', { id, status })
 	}
 </script>

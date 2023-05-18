@@ -1,0 +1,26 @@
+<script setup>
+	const { onSubmitEdit } = useSubmit()
+	//
+	// Get content item id
+	//
+	const route = useRoute()
+	const id = ref(route.params.id)
+
+	//
+	// content form action
+	//
+	const onSubmit = function (form_state) {
+		onSubmitEdit('contributions', form_state)
+		navigateTo(`/admin/contributions`)
+	}
+</script>
+
+<template>
+	<div>
+		<Head>
+			<Title>Edit Contributions {{ id }}</Title>
+		</Head>
+		<common-header title="Edit Contributions" />
+		<contributions-form :id="id" @submitted="onSubmit" />
+	</div>
+</template>

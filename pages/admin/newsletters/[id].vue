@@ -24,14 +24,15 @@
 			if (result.isConfirmed) {
 				editNewsletter(state, 'sendNow')
 				Swal.fire('Saved and Sent', '', 'success')
-				navigateTo('/admin/newsletters')
+				// navigateTo('/admin/newsletters')
 			} else if (result.isDenied) {
 				editNewsletter(state, 'sendLater')
 				Swal.fire('Saved', '', 'success')
-				navigateTo('/admin/newsletters')
+				// navigateTo('/admin/newsletters')
 			} else if (result.isDismissed) {
-				navigateTo('/admin/newsletters')
+				// navigateTo('/admin/newsletters')
 			}
+			navigateTo('/admin/newsletters')
 		})
 	}
 </script>

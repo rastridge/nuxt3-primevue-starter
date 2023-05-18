@@ -9,7 +9,7 @@
 				v-model:filters="filters"
 				:globalFilterFields="['member_type']"
 				:class="'p-datatable-sm'"
-				tableStyle="width: 40rem"
+				tableStyle="width: 40rem; font-family: Lora"
 				filterDisplay="row"
 				paginator
 				:rows="20"

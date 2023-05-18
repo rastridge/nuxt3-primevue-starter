@@ -174,7 +174,7 @@
 	}
 </script>
 
-<style scoped>
+<!-- <style scoped>
 	.table-box {
 		background-color: rgb(255, 255, 255);
 		padding: 0.5rem;
@@ -188,4 +188,4 @@
 		font-size: 0.9rem;
 		font-weight: normal;
 	}
-</style>
+</style> -->

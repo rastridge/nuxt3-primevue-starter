@@ -43,6 +43,7 @@ export default defineNuxtConfig({
 		'@nuxt/content',
 		'@vueuse/nuxt',
 	],
+	buildModules: ['@nuxtjs/google-fonts'],
 	components: ['~/components/forms', '~/components'],
 
 	dayjs: {
@@ -94,6 +95,24 @@ export default defineNuxtConfig({
 		'@sfxcode/formkit-primevue/dist/sass/formkit-prime-inputs.scss',
 		'@sfxcode/formkit-primevue/dist/sass/formkit-primevue.scss',
 	],
+	/* 	googleFonts: {
+		prefetch: true,
+		families: {
+			Roboto: true,
+			'Josefin+Sans': true,
+			Lato: [100, 300],
+			Raleway: {
+				wght: [100, 400],
+				ital: [100],
+			},
+		},
+	}, */
+	googleFonts: {
+		prefetch: true,
+		families: {
+			Lora: true,
+		},
+	},
 	pinia: {
 		autoImports: [
 			// automatically imports `defineStore`

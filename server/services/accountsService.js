@@ -10,6 +10,7 @@ export const accountsService = {
 	getOne,
 	addOne,
 	editOne,
+	getSuggestions,
 	changeStatus,
 	deleteOne,
 	getShow,
@@ -396,6 +397,22 @@ async function editOne(info) {
 		console.log('END TRANSACTION ROLLBACK')
 		return e
 	}
+}
+
+async function getSuggestions() {
+	const sql = `SELECT
+									account_id as id,
+									account_id,
+									member_firstname,
+									member_lastname,
+									CONCAT(member_firstname," ", member_lastname) as title
+							FROM inbrc_accounts
+							WHERE deleted = 0 AND status = 1
+							ORDER BY member_lastname ASC`
+
+	const accounts = await doDBQuery(sql)
+
+	return accounts
 }
 
 async function deleteOne(id) {
