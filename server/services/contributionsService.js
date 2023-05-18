@@ -7,7 +7,6 @@
 
 const CONFIG = useRuntimeConfig()
 const { doDBQuery } = useQuery()
-// const { $dayjs } = useNuxtApp()
 
 export const contributionsService = {
 	getAll,
@@ -215,6 +214,8 @@ async function addOne({
 		`SELECT member_firstname, member_lastname, account_email FROM inbrc_accounts WHERE account_id = ` +
 		account_id
 	const rows = await doDBQuery(sql)
+
+	// an error get thrown here
 
 	/* 	const email = {
 		from: CONFIG.FROM,
