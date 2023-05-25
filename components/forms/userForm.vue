@@ -21,6 +21,9 @@
 						margin-right: auto;
 					"
 				>
+					<p v-if="alert.message" class="alert-danger">
+						message = {{ alert.message }}
+					</p>
 					<label for="admin_user_name">Username</label>
 					<InputText
 						id="admin_user_name"
@@ -156,7 +159,10 @@
 
 <script setup>
 	import { useAuthStore } from '~/stores/authStore'
+	import { useAlertStore } from '~/stores/alertStore'
 	const auth = useAuthStore()
+	const alert = useAlertStore()
+
 	//
 	// Incoming
 	//

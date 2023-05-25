@@ -258,21 +258,12 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 				password +
 				' email = ' +
 				lc_admin_user_email
-			const emaildata = {
-				from: config.FROM,
-				fromName: config.FROM_NAME,
-				to: 'ron.astridge@me.com',
-				subject: 'Buffalo Rugby Club Admin Account Modification',
-				body_text: '',
-				body_html: '<h3>' + msg + '</h3>',
-			}
-			// console.log('4 emaildata= ', emaildata)
-			sendEmail(emaildata)
-			/* 			sendEmail2(
+
+			sendEmail(
 				'ron.astridge@me.com',
 				'Buffalo Rugby Club Admin Account Modification',
 				msg
-			) */
+			)
 		} else {
 			const msg =
 				'A user with username ' +
@@ -284,16 +275,11 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 			user = { message: msg }
 			console.log('EXISTS ', msg)
 
-			const emaildata = {
-				from: config.FROM,
-				fromName: config.FROM_NAME,
-				to: 'ron.astridge@me.com',
-				subject: 'Buffalo Rugby Club Admin Account Modification',
-				body_text: '',
-				body_html: '<h3>' + msg + '</h3>',
-			}
-
-			sendEmail(emaildata)
+			sendEmail(
+				'ron.astridge@me.com',
+				'Buffalo Rugby Club Admin Account Modification',
+				msg
+			)
 		}
 
 		await conn.query('COMMIT')
@@ -319,12 +305,13 @@ async function editOne(info) {
 		perms,
 		password,
 	} = info
+	const conn = await getConnection()
 
 	try {
-		const conn = await getConnection()
 		await conn.query('START TRANSACTION')
-
+		//
 		// check for existing admin_user_name or admin_user_email
+		//
 		let sql = `SELECT *
 							FROM inbrc_admin_users
 							WHERE
@@ -341,8 +328,10 @@ async function editOne(info) {
 				u.admin_user_email == lc_admin_user_email
 			)
 		})
-
+		//
 		// if no other users with proposed username or email
+		//
+		let msg = null
 		if (!user) {
 			sql = `UPDATE inbrc_admin_users
 							SET
@@ -353,7 +342,9 @@ async function editOne(info) {
 							WHERE
 									admin_user_id = ?`
 
+			//
 			// If user has reset password
+			//
 			let inserts = []
 			if (password.length > 0) {
 				const salt = bcrypt.genSaltSync(10)
@@ -378,7 +369,9 @@ async function editOne(info) {
 			const [rows, fields] = await conn.execute(sql)
 			user = rows
 
+			//
 			// update user perms by deleting records - creating new
+			//
 			sql = `DELETE
 						FROM
 							inbrc_admin_perms
@@ -403,48 +396,34 @@ async function editOne(info) {
 								)`
 				await conn.execute(sql)
 			}
-			const msg =
+
+			// send email notification
+			sendEmail(
+				'ron.astridge@me.com',
+				'BRC Admin Account Modification',
 				'The account for admin user ' +
-				lc_admin_username +
-				'  has been modified, password = ' +
-				password +
-				' email = ' +
-				lc_admin_user_email
-
-			const emaildata = {
-				from: config.FROM,
-				fromName: config.FROM_NAME,
-				to: 'ron.astridge@me.com',
-				subject: 'BRC Member Account Modification',
-				body_text: '',
-				body_html: '<h3>' + msg + '</h3>',
-			}
-			sendEmail(emaildata)
+					lc_admin_username +
+					'  has been modified'
+			)
 		} else {
-			const msg = 'A user with this username or email already exists'
-			user = { message: msg }
-			const emaildata = {
-				from: config.FROM,
-				fromName: config.FROM_NAME,
-				to: 'ron.astridge@me.com',
-				subject: 'BRC Member Account Modification',
-				body_text: '',
-				body_html: '<h3>' + msg + '</h3>',
-			}
-			// console.log(emaildata)
-			console.log('EXISTS ', msg)
-
-			sendEmail(emaildata)
+			msg =
+				'An admin with this username ' +
+				lc_admin_username +
+				' or email ' +
+				lc_admin_user_email +
+				' already exists'
+			console.log(msg)
+			sendEmail('ron.astridge@me.com', 'BRC Member Account Modification', msg)
 		}
 
 		await conn.query('COMMIT')
 		await conn.end()
-		console.log('userservice editOne COMMIT ')
-		return user
+		console.log('COMMIT')
+		return { message: msg }
 	} catch (e) {
 		await conn.query('ROLLBACK')
 		await conn.end()
-		console.log('userservice editOne ROLLBACK ')
+		console.log('ROLLBACK')
 	}
 }
 /***************************************** */
@@ -544,15 +523,11 @@ async function resetRequest({ username }) {
 			username +
 			'">Click here</a>'
 
-		const email_data = {
-			from: config.FROM,
-			fromName: config.FROM_NAME,
-			to: admin_user_email,
-			subject: 'BRC Admin User Password Reset',
-			body_text: '',
-			body_html: '<h3>' + msg + '</h3>',
-		}
-		sendEmail(email_data)
+		sendEmail(
+			admin_user_email,
+			'BRC Admin User Password Reset',
+			'<h3>' + msg + '</h3>'
+		)
 	}
 	return username
 }
@@ -572,18 +547,11 @@ async function resetPassword({ username, password }) {
 	inserts.push(hashedpassword, username)
 	const result = await doDBQuery(sql, inserts)
 
-	const email_data = {
-		from: config.FROM,
-		fromName: config.FROM_NAME,
-		to: 'ron.astridge@me.com',
-		subject: 'BRC Member Account Modification',
-		body_text: '',
-		body_html: `<h3>The password has been changed for ${username}. The new password is "${password}"</h3>`,
-	}
-
-	console.log(' IN resetpassword email_data = ', email_data)
-
-	const sc = sendEmail(email_data)
+	sendEmail(
+		'ron.astridge@me.com',
+		'BRC Member Account Modification',
+		`<h3>The password has been changed for ${username}. The new password is "${password}"</h3>`
+	)
 
 	return 'Probably sent ok'
 }

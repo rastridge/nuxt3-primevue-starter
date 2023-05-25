@@ -44,7 +44,6 @@ export default function useSubmit() {
 				statusMessage: `Error submitting data to /${app}/addone`,
 			})
 		} else {
-			// used to report duplicate email exists
 			if (data.value.message) {
 				alert.error(data.value.message)
 			}

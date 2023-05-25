@@ -204,7 +204,7 @@ async function addOne(info) {
 
  */
 			//
-			// for email when it I get it working
+			// Compose and send individual email
 			//
 			const email_msg =
 				'An account for account ' +
@@ -215,16 +215,11 @@ async function addOne(info) {
 				' email = ' +
 				lc_account_email
 
-			const email_data = {
-				from: CONFIG.FROM,
-				fromName: CONFIG.FROM_NAME,
-				to: CONFIG.TO,
-				subject: 'Buffalo Ruggby Club Member Account Addition',
-				body_text: '',
-				body_html: '<h3>' + email_msg + '</h3>',
-			}
-			// the problem - causes CONN undefined
-			await sendEmail(email_data)
+			await sendEmail(
+				CONFIG.TO,
+				'Buffalo Rugby Club Member Account Addition',
+				email_msg
+			)
 		} else {
 			error_msg =
 				'An account with email ' + lc_account_email + ' already exists'
@@ -235,7 +230,6 @@ async function addOne(info) {
 		await CONN.end()
 		console.log('END TRANSACTION COMMIT')
 		return { message: error_msg }
-		// return { message: 'ok' }
 	} catch (e) {
 		await CONN.query('ROLLBACK')
 		await CONN.end()
@@ -355,14 +349,8 @@ async function editOne(info) {
 			const [rows, fields] = await CONN.execute(sql)
 			account = rows
 
-			//unneeded?
-			// const [rows, fields] = await CONN.execute(sql)
-			// account = rows
-			// const id = account.insertId
-
-			/*						 */
 			//
-			// for email when it I get it working
+			// Compose and send individual email
 			//
 			const email_msg =
 				'An account for account ' +
@@ -372,15 +360,12 @@ async function editOne(info) {
 				'  has been updated ' +
 				' email = ' +
 				lc_account_email
-			const email_data = {
-				from: CONFIG.FROM,
-				fromName: CONFIG.FROM_NAME,
-				to: CONFIG.TO,
-				subject: 'Buffalo Ruggby Club Member Account Addition',
-				body_text: '',
-				body_html: '<h3>' + email_msg + '</h3>',
-			}
-			await sendEmail(email_data)
+
+			await sendEmail(
+				CONFIG.TO,
+				'Buffalo Rugby Club Member Account Update',
+				email_msg
+			)
 		} else {
 			error_msg =
 				'An account with email ' + lc_account_email + ' already exists'

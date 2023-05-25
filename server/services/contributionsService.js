@@ -1,13 +1,8 @@
-// const { DB_PREFIX } = require("config");
-// const doDBQuery = require("_helpers/do-query");
-// const { FROM, FROM_NAME } = require("email_constants.json");
-// const sendEmail = require("_helpers/sendEmail");
-// const moment = require("moment");
-// const activityLog = require("_helpers/activity-log");
-
-const CONFIG = useRuntimeConfig()
+import mysql from 'mysql2/promise'
 const { doDBQuery } = useQuery()
-const { sendEmail2 } = useEmail()
+const { getConnection } = useDBConnection()
+
+const { sendEmail } = useEmail()
 
 export const contributionsService = {
 	getAll,
@@ -182,6 +177,9 @@ async function editOne({
 	return contributions
 }
 
+/***************************************** */
+/*              addOne                     */
+/***************************************** */
 async function addOne({
 	account_id,
 	contribution_date,
@@ -190,7 +188,12 @@ async function addOne({
 	contribution_showAmount,
 	contribution_comment,
 }) {
-	let sql = `INSERT INTO inbrc_contributions SET
+	const CONN = await getConnection()
+	try {
+		await CONN.query('START TRANSACTION')
+		console.log('START contribution TRANSACTION')
+
+		let sql = `INSERT INTO inbrc_contributions SET
 		account_id = ?,
 		contribution_date = ?,
 		contribution_amount = ?,
@@ -200,39 +203,50 @@ async function addOne({
 		created_dt = NOW(),
 		modified_dt= NOW()`
 
-	let inserts = []
-	inserts.push(
-		account_id,
-		contribution_date,
-		contribution_amount,
-		contribution_showName,
-		contribution_showAmount,
-		contribution_comment
-	)
-	const contributions = await doDBQuery(sql, inserts)
+		let inserts = []
+		inserts.push(
+			account_id,
+			contribution_date,
+			contribution_amount,
+			contribution_showName,
+			contribution_showAmount,
+			contribution_comment
+		)
+		sql = mysql.format(sql, inserts)
+		await CONN.execute(sql)
 
-	sql =
-		`SELECT member_firstname, member_lastname, account_email FROM inbrc_accounts WHERE account_id = ` +
-		account_id
-	const rows = await doDBQuery(sql)
+		//
+		// Compose and send individual email
+		//
+		sql =
+			`SELECT member_firstname, member_lastname, account_email FROM inbrc_accounts WHERE account_id = ` +
+			account_id
+		const [rows, fields] = await CONN.execute(sql)
 
-	// an error get thrown here
-
-	const msg =
-		rows[0].member_firstname +
-		' ' +
-		rows[0].member_lastname +
-		', Thank you for your donation to the Buffalo Rugby Club. Buffalo Rugby is a NYS 501 C3 organization and as such your donation is tax deductible. This email serves as a record that you donated $' +
-		contribution_amount +
-		' to your Buffalo Rugby Club'
-	sendEmail2(
-		rows[0].account_email,
-		'Thank you for Your Contribution to the Buffalo Rugby Club',
-		msg
-	)
-	return contributions
+		const msg =
+			rows[0].member_firstname +
+			' ' +
+			rows[0].member_lastname +
+			', Thank you for your donation to the Buffalo Rugby Club. Buffalo Rugby is a NYS 501 C3 organization and as such your donation is tax deductible. This email serves as a record that you donated $' +
+			contribution_amount +
+			' to your Buffalo Rugby Club'
+		sendEmail(
+			rows[0].account_email,
+			'Thank you for Your Contribution to the Buffalo Rugby Club',
+			msg
+		)
+		await CONN.query('COMMIT')
+		await CONN.end()
+		console.log('END TRANSACTION COMMIT')
+		return { message: 'ok' }
+	} catch (e) {
+		await CONN.query('ROLLBACK')
+		await CONN.end()
+		console.log('END TRANSACTION ROLLBACK')
+		return { message: e }
+	}
+	return true
 }
-
 async function deleteOne(id) {
 	const sql = `UPDATE inbrc_contributions SET deleted = 1, deleted_dt= NOW() WHERE contribution_id = ${id}`
 	contributions = await doDBQuery(sql)

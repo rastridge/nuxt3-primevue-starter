@@ -24,7 +24,8 @@
 
 <script setup>
 	// definePageMeta({ layout: 'admin' })
-
+	import { useAlertStore } from '~/stores/alertStore'
+	const alert = useAlertStore()
 	const { getAll, deleteOne, changeStatusOne } = useFetchAll()
 
 	//
@@ -34,6 +35,7 @@
 	const app = 'users'
 	const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
 
+	alert.clear()
 	//
 	// Get all users
 	//
