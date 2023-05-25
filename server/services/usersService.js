@@ -272,7 +272,7 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 				lc_admin_user_email +
 				' already exists'
 
-			user = { message: msg }
+			// user = { message: msg }
 			console.log('EXISTS ', msg)
 
 			sendEmail(
@@ -285,7 +285,7 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 		await conn.query('COMMIT')
 		await conn.end()
 		console.log('userservice addOne COMMIT')
-		return user
+		return { message: msg }
 	} catch (e) {
 		await conn.query('ROLLBACK')
 		await conn.end()
@@ -412,7 +412,6 @@ async function editOne(info) {
 				' or email ' +
 				lc_admin_user_email +
 				' already exists'
-			console.log(msg)
 			sendEmail('ron.astridge@me.com', 'BRC Member Account Modification', msg)
 		}
 
