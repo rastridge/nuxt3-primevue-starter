@@ -4,7 +4,6 @@
 			<Title>Edit User {{ id }}</Title>
 		</Head>
 		<common-header title="Edit users" />
-
 		<p v-if="saving" class="text-center text-2xl">Saving ...</p>
 		<div v-else>
 			<user-form :id="id" @submitted="onSubmit" />

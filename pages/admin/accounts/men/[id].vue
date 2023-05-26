@@ -1,5 +1,8 @@
 <script setup>
+	import { useAlertStore } from '~/stores/alertStore'
+	const alert = useAlertStore()
 	const { onSubmitEdit } = useSubmit()
+	const saving = ref(false)
 
 	//
 	// Get account id to edit
@@ -10,8 +13,12 @@
 	// Accounts form action
 	//
 	const onSubmit = async function (form_state) {
+		saving.value = true
 		await onSubmitEdit('accounts', form_state)
-		navigateTo(`/admin/accounts/men`)
+		saving.value = false
+		if (alert.message === null) {
+			navigateTo(`/admin/accounts/men`)
+		}
 	}
 </script>
 
@@ -21,6 +28,9 @@
 			<Title>Edit Account {{ id }}</Title>
 		</Head>
 		<common-header title="Edit account" />
-		<accounts-form :id="id" @submitted="onSubmit" />
+		<p v-if="saving" class="text-center text-2xl">Saving ...</p>
+		<div v-else>
+			<accounts-form :id="id" @submitted="onSubmit" />
+		</div>
 	</div>
 </template>

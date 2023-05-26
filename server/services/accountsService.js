@@ -1,9 +1,9 @@
 ﻿import mysql from 'mysql2/promise'
 const CONFIG = useRuntimeConfig()
 
+const { sendEmail } = useEmail()
 const { doDBQuery } = useQuery()
 const { getConnection } = useDBConnection()
-const { sendEmail } = useEmail()
 
 export const accountsService = {
 	getAll,
@@ -108,7 +108,7 @@ async function addOne(info) {
 		const lc_account_email = info.account_email.toLowerCase()
 		let account = accounts.find((u) => u.account_email === lc_account_email)
 
-		let error_msg = null
+		let msg = null
 		// If no email conflict
 		//
 		if (!account) {
@@ -196,13 +196,7 @@ async function addOne(info) {
 			)
 			sql = mysql.format(sql, inserts)
 			await CONN.execute(sql)
-			/*
-			//unneeded?
-			// const [rows, fields] = await CONN.execute(sql)
-			// account = rows
-			// const id = account.insertId
 
- */
 			//
 			// Compose and send individual email
 			//
@@ -221,15 +215,20 @@ async function addOne(info) {
 				email_msg
 			)
 		} else {
-			error_msg =
-				'An account with email ' + lc_account_email + ' already exists'
-			console.log('EXISTS ', error_msg)
+			msg = 'An account with email ' + lc_account_email + ' already exists'
+			console.log('EXISTS ', msg)
+
+			sendEmail(
+				'ron.astridge@me.com',
+				'Buffalo Rugby Club Admin Account Modification',
+				msg
+			)
 		}
 
 		await CONN.query('COMMIT')
 		await CONN.end()
 		console.log('END TRANSACTION COMMIT')
-		return { message: error_msg }
+		return { message: msg }
 	} catch (e) {
 		await CONN.query('ROLLBACK')
 		await CONN.end()
@@ -242,8 +241,8 @@ async function addOne(info) {
 /*               editOne                   */
 /***************************************** */
 async function editOne(info) {
+	const CONN = await getConnection()
 	try {
-		const CONN = await getConnection()
 		await CONN.query('START TRANSACTION')
 		console.log('START TRANSACTION')
 
@@ -256,7 +255,7 @@ async function editOne(info) {
 		const lc_account_email = info.account_email.toLowerCase()
 		let account = accounts.find((u) => u.account_email === lc_account_email)
 
-		let error_msg = null
+		let msg = null
 		// If no email conflict
 		//
 		if (!account) {
@@ -352,35 +351,35 @@ async function editOne(info) {
 			//
 			// Compose and send individual email
 			//
-			const email_msg =
-				'An account for account ' +
-				member_firstname +
-				' ' +
-				member_lastname +
-				'  has been updated ' +
-				' email = ' +
-				lc_account_email
 
-			await sendEmail(
+			sendEmail(
 				CONFIG.TO,
 				'Buffalo Rugby Club Member Account Update',
-				email_msg
+				'The account for ' +
+					member_firstname +
+					' ' +
+					member_lastname +
+					'  has been updated ' +
+					' email = ' +
+					lc_account_email
 			)
 		} else {
-			error_msg =
-				'An account with email ' + lc_account_email + ' already exists'
-			console.log('EXISTS ', error_msg)
+			console.log('email EXISTS ')
+
+			msg = ' An account with that email address already exists'
+
+			sendEmail(CONFIG.TO, 'BRC Member Account Action', msg)
 		}
 
 		await CONN.query('COMMIT')
 		await CONN.end()
 		console.log('END TRANSACTION COMMIT')
-		return { message: error_msg }
+		return { message: msg }
 	} catch (e) {
 		await CONN.query('ROLLBACK')
 		await CONN.end()
 		console.log('END TRANSACTION ROLLBACK')
-		return e
+		// return e
 	}
 }
 

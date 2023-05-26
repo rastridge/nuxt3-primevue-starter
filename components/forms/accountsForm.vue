@@ -8,6 +8,7 @@
 			<span class="visually-hidden">Loading...</span>
 		</div>
 		<div v-else class="form-box">
+			<p v-if="alert.message" class="alert-danger">ERROR{{ alert.message }}</p>
 			<FormKit
 				type="form"
 				#default="{ state }"
@@ -271,6 +272,9 @@
 </script>
 
 <style scoped>
+	.alert-danger {
+		color: red;
+	}
 	.formkit-input {
 		color: white;
 	}

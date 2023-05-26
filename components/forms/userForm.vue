@@ -22,7 +22,7 @@
 					"
 				>
 					<p v-if="alert.message" class="alert-danger">
-						message = {{ alert.message }}
+						ERROR{{ alert.message }}
 					</p>
 					<label for="admin_user_name">Username</label>
 					<InputText
@@ -264,6 +264,9 @@
 </script>
 
 <style scoped>
+	.alert-danger {
+		color: red;
+	}
 	.xcentered {
 		display: block;
 		margin-left: auto;

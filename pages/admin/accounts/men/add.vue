@@ -2,6 +2,7 @@
 	import { useAlertStore } from '~/stores/alertStore'
 	const alert = useAlertStore()
 	const { onSubmitAdd } = useSubmit()
+	const saving = ref(false)
 
 	//
 	// Accounts form action
@@ -26,7 +27,9 @@
 			<Title>Add Account</Title>
 		</Head>
 		<common-header title="Add account" />
-		<!-- <ErrorDialog /> -->
-		<accounts-form @submitted="onSubmit" />
+		<p v-if="saving" class="text-center text-2xl">Saving ...</p>
+		<div v-else>
+			<accounts-form @submitted="onSubmit" />
+		</div>
 	</div>
 </template>
