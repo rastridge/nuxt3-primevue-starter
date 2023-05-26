@@ -9,8 +9,8 @@
 	//
 	// News form action
 	//
-	const onSubmit = function (form_state) {
-		onSubmitAdd('news', form_state)
+	const onSubmit = async function (form_state) {
+		await onSubmitAdd('news', form_state)
 		navigateTo(`/admin/news`)
 	}
 </script>

@@ -364,10 +364,7 @@ async function editOne(info) {
 					lc_account_email
 			)
 		} else {
-			console.log('email EXISTS ')
-
 			msg = ' An account with that email address already exists'
-
 			sendEmail(CONFIG.TO, 'BRC Member Account Action', msg)
 		}
 

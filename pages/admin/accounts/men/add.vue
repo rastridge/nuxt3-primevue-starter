@@ -13,12 +13,6 @@
 			navigateTo(`/admin/accounts/men`)
 		}
 	}
-
-	/* 	const displayModal = ref(false)
-
-	const closeModal = () => {
-		displayModal.value = false
-	} */
 </script>
 
 <template>

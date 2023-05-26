@@ -9,8 +9,8 @@
 	//
 	// content form action
 	//
-	const onSubmit = function (form_state) {
-		onSubmitEdit('contributions', form_state)
+	const onSubmit = async function (form_state) {
+		await onSubmitEdit('contributions', form_state)
 		navigateTo(`/admin/contributions`)
 	}
 </script>

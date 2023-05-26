@@ -95,19 +95,6 @@ async function authenticate({ username, password }) {
 	let user = users.find((u) => {
 		let match = false
 
-		/* 		console.log(
-			'compare ',
-			password,
-			u.admin_user_pass,
-			bcrypt.compareSync(password, u.admin_user_pass)
-		)
-		console.log(
-			'compare ',
-			u.admin_user_name,
-			lc_admin_user_name,
-			u.admin_user_name === lc_admin_user_name
-		) */
-
 		if (
 			u.admin_user_name === lc_admin_user_name &&
 			bcrypt.compareSync(password, u.admin_user_pass)
@@ -199,7 +186,7 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 				u.admin_user_name === lc_admin_user_name ||
 				u.admin_user_email === lc_admin_user_email
 		)
-
+		let msg = null
 		if (!user) {
 			// no other users with same username or email
 			// hash password
@@ -220,12 +207,12 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 			let inserts = []
 			inserts.push(lc_admin_user_name, hashedpassword, lc_admin_user_email)
 			sql = mysql.format(sql, inserts)
-			console.log('INSert INTO inbrc_admin_users sql = ', sql)
+			// console.log('INSert INTO inbrc_admin_users sql = ', sql)
 			const [rows, fields] = await conn.execute(sql)
 			user = rows
 			// save id of new user
 			const id = user.insertId
-			console.log('1 user.insertId = ', user.insertId)
+			// console.log('1 user.insertId = ', user.insertId)
 
 			// initial permissions with view only
 
@@ -240,45 +227,40 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 				inserts = []
 				inserts.push(id, p.admin_app_id, p.admin_perm)
 				sql = mysql.format(sql, inserts)
-				// console.log('INSERT INTO inbrc_admin_perms sql= ', sql)
 
 				await conn.execute(sql)
-				console.log(
+				/* console.log(
 					'INSERT INTO inbrc_admin_perms id, p.admin_app_id, p.admin_perm= ',
 					id,
 					p.admin_app_id,
 					p.admin_perm
-				)
+				) */
 			}
-
-			const msg =
-				'An account for user ' +
-				lc_admin_user_name +
-				'  has been created, password = ' +
-				password +
-				' email = ' +
-				lc_admin_user_email
-
 			sendEmail(
 				'ron.astridge@me.com',
 				'Buffalo Rugby Club Admin Account Modification',
-				msg
+				'An account for user ' +
+					lc_admin_user_name +
+					'  has been created, password = ' +
+					password +
+					' email = ' +
+					lc_admin_user_email
 			)
 		} else {
-			const msg =
+			msg =
 				'A user with username ' +
 				lc_admin_user_name +
 				' or email ' +
 				lc_admin_user_email +
 				' already exists'
-
-			// user = { message: msg }
-			console.log('EXISTS ', msg)
-
 			sendEmail(
 				'ron.astridge@me.com',
 				'Buffalo Rugby Club Admin Account Modification',
-				msg
+				'A user with username ' +
+					lc_admin_user_name +
+					' or email ' +
+					lc_admin_user_email +
+					' already exists'
 			)
 		}
 

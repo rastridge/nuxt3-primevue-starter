@@ -4,8 +4,8 @@
 	//
 	// Content form action
 	//
-	const onSubmit = function (form_state) {
-		onSubmitAdd('content', form_state)
+	const onSubmit = async function (form_state) {
+		await onSubmitAdd('content', form_state)
 		navigateTo(`/admin/content`)
 	}
 </script>
