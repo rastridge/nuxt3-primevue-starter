@@ -1,5 +1,7 @@
 import { useAuthStore } from '~/stores/authStore'
 const auth = useAuthStore()
+import { useMenuStore } from '@/stores'
+const menuStore = useMenuStore()
 
 const checkPerm = (app) => {
 	// const user = JSON.parse(sessionStorage.getItem('auth'))
@@ -13,7 +15,9 @@ const checkPerm = (app) => {
 
 export function useNavigationMenu() {
 	const navigationMenu = () => {
-		const customMenuItems = JSON.parse(sessionStorage.getItem('custommenu'))
+		// const customMenuItems = JSON.parse(sessionStorage.getItem('custommenu'))
+
+		const customMenuItems = menuStore.getCustomMenuItems
 		return [
 			{
 				items: [

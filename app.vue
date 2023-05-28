@@ -1,9 +1,15 @@
 <script setup>
+	import { useMenuStore } from '@/stores'
+	const menuStore = useMenuStore()
+
 	useHead({
 		title: 'Nuxt 3 PrimeVue Starter',
 	})
 
-	onMounted(async () => {
+	// onMounted(async () => {
+	await menuStore.initCustomMenuItems()
+	// })
+	/* 	onMounted(async () => {
 		const {
 			data: menu_data,
 			pending,
@@ -26,7 +32,7 @@
 			})
 		})
 		sessionStorage.setItem('custommenu', JSON.stringify(custommenuitems))
-	})
+	}) */
 </script>
 
 <template>
