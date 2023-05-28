@@ -18,7 +18,6 @@ export const useMenuStore = defineStore('menuitems', {
 					this.items[i].label = this.items[i].content_name
 					this.items[i].to = `/content/${this.items[i].content_id}`
 					this.items[i].icon = 'pi pi-fw pi-bookmark'
-					console.log(this.items[i])
 				}
 			}
 		},

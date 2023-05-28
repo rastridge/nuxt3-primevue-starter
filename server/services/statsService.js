@@ -47,7 +47,7 @@ async function getHistoryOneTeamTotals(id) {
 								AND deleted = 0
 								AND Status = 1`
 
-	stats = await doDBQuery(sql)
+	const stats = await doDBQuery(sql)
 	return stats[0]
 }
 
@@ -82,7 +82,7 @@ async function getHistoryStreaks(id) {
 								HAVING COUNT(*) > 1
 								ORDER BY Min(date)`
 
-	stats = await doDBQuery(sql)
+	const stats = await doDBQuery(sql)
 	return stats
 }
 async function getHistoryCurrentStreak(id) {
@@ -189,16 +189,17 @@ async function getHistory(id) {
 		ORDER BY
 			g.date ASC`
 
-	games = await doDBQuery(sql)
+	const games = await doDBQuery(sql)
 	return games
 }
 
 async function getAll(sort = 'DESC') {
-	sql =
+	const sql =
 		`SELECT
 				game_id,
 				game_id as id,
 				o.opponent_name,
+				o.opponent_name AS title,
 				g.opponent_id,
 				referee,
 				venue,
@@ -229,12 +230,12 @@ async function getAll(sort = 'DESC') {
 			ORDER BY
 				date ` + sort
 
-	games = await doDBQuery(sql)
+	const games = await doDBQuery(sql)
 	return games
 }
 
 async function getPrevious(date) {
-	sql = `SELECT
+	const sql = `SELECT
 						g.game_id,
 						o.opponent_name,
 						CONVERT_TZ(date,'UTC','-07:00') as date,
@@ -250,14 +251,14 @@ async function getPrevious(date) {
 						date DESC
 					LIMIT 10`
 
-	games = await doDBQuery(sql)
+	const games = await doDBQuery(sql)
 	return games
 }
 
 async function getYear(year) {
 	const YEAR2 = parseInt(year) + 1
 
-	sql = `SELECT
+	const sql = `SELECT
 				game_id,
 				game_id as id,
 				o.opponent_name as title,
@@ -291,7 +292,7 @@ async function getYear(year) {
 			ORDER BY
 				date DESC`
 
-	games = await doDBQuery(sql)
+	const games = await doDBQuery(sql)
 
 	return games
 }
@@ -337,21 +338,19 @@ async function getSeason(year) {
 
 	// activityLog("getSeason", "getSeason sql= ", "----- " + sql);
 
-	games = await doDBQuery(sql)
-
+	const games = await doDBQuery(sql)
 	return games
 }
 
 async function getGameTypes() {
-	sql = `SELECT
+	const sql = `SELECT
 				game_type,
 				game_type_id
 			FROM
 				inbrc_stats_game_types
 			WHERE 1`
 
-	gametypes = await doDBQuery(sql)
-
+	const gametypes = await doDBQuery(sql)
 	return gametypes
 }
 
@@ -383,8 +382,7 @@ async function getOne(id) {
 									g.game_id = ${id}
 									AND g.game_type_id = t.game_type_id`
 
-	games = await doDBQuery(sql)
-
+	const games = await doDBQuery(sql)
 	return games[0]
 }
 
@@ -424,7 +422,7 @@ async function getAdjacent(direction) {
 					date ${FILTER2}
 				LIMIT 2`
 
-	stats = await doDBQuery(sql)
+	const stats = await doDBQuery(sql)
 	return stats
 }
 
@@ -466,7 +464,7 @@ async function getRosterStats() {
 					yr
 				DESC`
 
-	roster_count = await doDBQuery(sql)
+	const roster_count = await doDBQuery(sql)
 	return roster_count
 }
 
@@ -495,7 +493,7 @@ async function getPlayers(id) {
 							ORDER BY
 								position_id asc`
 
-	players = await doDBQuery(sql)
+	const players = await doDBQuery(sql)
 	return players
 }
 
@@ -569,7 +567,7 @@ async function getPlayerStats(id) {
 							ORDER BY
 								games desc`
 
-	stats = await doDBQuery(sql)
+	const stats = await doDBQuery(sql)
 	return stats
 }
 
@@ -615,7 +613,7 @@ async function getTeamStats(gt) {
 							ORDER BY
 								year DESC, season ASC`
 
-	stats = await doDBQuery(sql)
+	const stats = await doDBQuery(sql)
 	return stats
 }
 
@@ -640,7 +638,7 @@ async function getTeamStatsTotal(gt) {
 								${FILTER}
 								AND Status = 1`
 
-	stats = await doDBQuery(sql)
+	const stats = await doDBQuery(sql)
 	return stats[0]
 }
 
@@ -926,7 +924,7 @@ async function changeStatus({ id, status }) {
 		`UPDATE inbrc_stats_games SET status = "` +
 		status +
 		`" WHERE game_id = ${id}`
-	players = await doDBQuery(sql)
+	const players = await doDBQuery(sql)
 
 	return players
 }

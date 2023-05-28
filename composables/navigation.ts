@@ -102,6 +102,12 @@ export function useNavigationMenu() {
 						visible: () => checkPerm('contributions') > 0,
 					},
 					{
+						label: 'Stats',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/game_player_stats',
+						visible: () => checkPerm('game_player_stats') > 0,
+					},
+					{
 						label: 'Log out',
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/logout',

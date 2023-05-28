@@ -18,5 +18,3 @@
 	// 	layout: 'admin',
 	// })
 </script>
-
-<style></style>
