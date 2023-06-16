@@ -108,6 +108,12 @@ export function useNavigationMenu() {
 						visible: () => checkPerm('game_player_stats') > 0,
 					},
 					{
+						label: 'Opponents',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/opponents',
+						visible: () => checkPerm('opponents') > 0,
+					},
+					{
 						label: 'Log out',
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/logout',

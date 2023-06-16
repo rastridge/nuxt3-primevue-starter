@@ -9,9 +9,15 @@
 		</div>
 		<div v-else class="form-box">
 			<p v-if="alert.message" class="alert-danger">ERROR{{ alert.message }}</p>
-			<FormKit
+			<!-- 			<FormKit
 				type="form"
 				#default="{ state }"
+				v-model="state"
+				submit-label="Submit"
+				@submit="submitForm"
+			> -->
+			<FormKit
+				type="form"
 				v-model="state"
 				submit-label="Submit"
 				@submit="submitForm"

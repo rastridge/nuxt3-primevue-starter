@@ -7,12 +7,7 @@
 		<div v-if="!auth.isLoggedIn">
 			<h3 class="headline">Login Admin Users</h3>
 
-			<FormKit
-				type="form"
-				submit_label="Login"
-				@submit="handleSubmit"
-				#default="{ state }"
-			>
+			<FormKit type="form" submit_label="Login" @submit="handleSubmit">
 				<FormKit
 					type="text"
 					name="username"

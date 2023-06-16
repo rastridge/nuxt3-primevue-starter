@@ -10,7 +10,6 @@
 		<FormKit
 			type="form"
 			name="contribution"
-			#default="{ value }"
 			:value="item"
 			submit-label="Submit"
 			@submit="submitForm"
@@ -24,7 +23,6 @@
 					@item-select="getPrevious"
 				/>
 			</div>
-			<!-- selectedItem.account_id = {{ selectedItem.account_id }} -->
 
 			<FormKit
 				type="datetime-local"
@@ -124,7 +122,6 @@
 	}
 
 	const getPrevious = async () => {
-		console.log(selectedItem.value.account_id)
 		const { data, pending, error, refresh } = await useFetch(
 			`/contributions/previous/${selectedItem.value.account_id}`,
 			{
@@ -152,8 +149,7 @@
 		)
 		suggestions.value = data.value
 
-		const dt = $dayjs()
-		item.contribution_date = dt.format('YYYY-MM-DD HH:mm')
+		item.contribution_date = $dayjs().format('YYYY-MM-DD HH:mm')
 		item.showName = 1
 		item.showAmount = 1
 	} else {

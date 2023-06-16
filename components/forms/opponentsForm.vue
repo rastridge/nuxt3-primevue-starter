@@ -1,0 +1,100 @@
+<template>
+	<div class="form-box">
+		<FormKit
+			type="form"
+			:config="{ validationVisibility: 'live' }"
+			v-model="state"
+			submit-label="Submit"
+			@submit="submitForm"
+		>
+			<FormKit
+				label="Opponent Name"
+				name="opponent_name"
+				type="text"
+				validation="required"
+			/>
+
+			<FormKit
+				label="Opponent Location"
+				name="opponent_location"
+				type="text"
+				validation="required"
+			/>
+
+			<FormKit
+				type="select"
+				label="Opponent Type"
+				name="opponent_type"
+				validation="required"
+			/>
+
+			<FormKit
+				type="select"
+				label="Opponent level"
+				name="opponent_level"
+				validation="required"
+			/>
+
+			<FormKit
+				label="Opponent Description"
+				name="opponent_description"
+				type="textarea"
+				validation="required"
+			/>
+		</FormKit>
+		<Button @click="cancelForm()"> Cancel </Button>
+	</div>
+	<!-- </div> -->
+</template>
+
+<script setup>
+	import { useAuthStore } from '~/stores/authStore'
+	const auth = useAuthStore()
+
+	//
+	// Outgoing
+	//
+	const emit = defineEmits(['submitted'])
+	//
+	// Incoming
+	//
+	const props = defineProps({
+		id: { Number, default: 0 },
+	})
+
+	//
+	// Initialize form
+	//
+	let state = ref({})
+
+	//
+	// edit if there is an id - add if not
+	//
+	if (props.id !== 0) {
+		// get user with id === props.id
+		const {
+			data: opponents_data,
+			pending,
+			error,
+			refresh,
+		} = await useFetch(`/opponents/${props.id}`, {
+			key: props.id,
+			method: 'get',
+			headers: {
+				authorization: auth.user.token,
+			},
+		})
+		state.value = opponents_data.value
+	}
+
+	//
+	// form handlers
+	//
+	const submitForm = (state) => {
+		emit('submitted', state)
+	}
+
+	const cancelForm = () => {
+		navigateTo('/admin/opponents')
+	}
+</script>

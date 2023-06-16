@@ -1,8 +1,7 @@
 import mysql from 'mysql2/promise'
-const CONFIG = useRuntimeConfig()
-
+const { SEASON_DIVIDE_DATE } = useRuntimeConfig()
 const { doDBQuery } = useQuery()
-// const { getConnection } = useDBConnection()
+const { getConnection } = useDBConnection()
 
 export const statsService = {
 	getAll,
@@ -204,15 +203,14 @@ async function getAll(sort = 'DESC') {
 				referee,
 				venue,
 				comment,
-				CONVERT_TZ(g.date,'UTC','-07:00') as date,
-				CONVERT_TZ(g.date,'UTC','-07:00') as dt,
+				g.date,
+				g.date as dt,
 				t.game_type,
 				t.game_type_id,
 				game_level,
 				occasion,
 				ptsFor,
 				ptsAgn,
-				game_pic_path,
 				g.Status,
 				g.Status as status,
 				g.deleted,
@@ -238,7 +236,7 @@ async function getPrevious(date) {
 	const sql = `SELECT
 						g.game_id,
 						o.opponent_name,
-						CONVERT_TZ(date,'UTC','-07:00') as date,
+						g.date,
 						g.date dt,
 						g.game_level
 					FROM
@@ -250,7 +248,6 @@ async function getPrevious(date) {
 					ORDER BY
 						date DESC
 					LIMIT 10`
-
 	const games = await doDBQuery(sql)
 	return games
 }
@@ -265,15 +262,14 @@ async function getYear(year) {
 				referee,
 				venue,
 				comment,
-				CONVERT_TZ(g.date,'UTC','-07:00') as date,
-				CONVERT_TZ(g.date,'UTC','-07:00') as dt,
+				g.date,
+				g.date as dt,
 				t.game_type,
 				t.game_type_id,
 				game_level,
 				occasion,
 				ptsFor,
 				ptsAgn,
-				game_pic_path,
 				g.Status,
 				g.Status as status,
 				g.deleted,
@@ -293,7 +289,6 @@ async function getYear(year) {
 				date DESC`
 
 	const games = await doDBQuery(sql)
-
 	return games
 }
 
@@ -309,15 +304,14 @@ async function getSeason(year) {
 					referee,
 					venue,
 					comment,
-					CONVERT_TZ(g.date,'UTC','-07:00') as date,
-					CONVERT_TZ(g.date,'UTC','-07:00') as dt,
+					g.date,
+					g.date as dt,
 					t.game_type,
 					t.game_type_id,
 					game_level,
 					occasion,
 					ptsFor,
 					ptsAgn,
-					game_pic_path,
 					g.Status,
 					g.Status as status,
 					g.deleted,
@@ -335,8 +329,6 @@ async function getSeason(year) {
 					AND ( DATE(date) > DATE(CONCAT("${year}","${SEASON_DIVIDE_DATE}"))) AND ( DATE(date) <= DATE(CONCAT("${YEAR2}","${SEASON_DIVIDE_DATE}")) )
 				ORDER BY
 					date DESC`
-
-	// activityLog("getSeason", "getSeason sql= ", "----- " + sql);
 
 	const games = await doDBQuery(sql)
 	return games
@@ -362,15 +354,13 @@ async function getOne(id) {
 									g.referee,
 									g.venue,
 									g.comment,
-									CONVERT_TZ(g.date,'UTC','-07:00') as date,
-									CONVERT_TZ(g.date,'UTC','-07:00') as dt,
+									g.date,
 									g.game_type_id,
 									t.game_type,
 									g.game_level,
 									g.occasion,
 									g.ptsFor,
 									g.ptsAgn,
-									g.game_pic_path,
 									g.status,
 									g.created_dt,
 									g.modified_dt
@@ -403,8 +393,8 @@ async function getAdjacent(direction) {
 					o.opponent_name,
 					referee,
 					venue,
-					CONVERT_TZ(g.date,'UTC','-07:00') as date,
-					CONVERT_TZ(g.date,'UTC','-07:00') as dt,
+					g.date,
+					g.date as dt,
 					t.game_type,
 					game_level,
 					ptsFor,
@@ -474,8 +464,10 @@ async function getPlayers(id) {
 								player_id,
 								a1.member_firstname pfn,
 								a1.member_lastname pln,
+								CONCAT(a1.member_lastname,"\, ",a1.member_firstname) as pname,
 								a2.member_firstname rfn,
 								a2.member_lastname rln,
+								CONCAT(a2.member_lastname,"\, ",a2.member_firstname) as rname,
 								tries,
 								assists,
 								conv,
@@ -652,7 +644,7 @@ async function playerGamesPlayed(id) {
 					g.game_level,
 					g.occasion,
 					g.venue,
-					CONVERT_TZ(g.date,'UTC','-07:00') as date,
+					g.date,
 					g.ptsFor,
 					g.ptsAgn,
 					p.tries,
@@ -689,42 +681,35 @@ async function addOne({
 	opponent_id,
 	referee,
 	venue,
-	comment,
 	date,
 	game_type_id,
 	game_level,
+	comment,
 	occasion,
 	ptsFor,
 	ptsAgn,
-	game_pic_path,
 	players,
 }) {
-	const conn = await mysql.createConnection({
-		host: DB.DB_HOST,
-		user: DB.DB_USER,
-		password: DB.DB_PASSWORD,
-		database: DB.DB_DATABASE,
-	})
-
 	try {
+		const conn = await getConnection()
 		await conn.query('START TRANSACTION')
 
-		let sql = `INSERT INTO inbrc_stats_games SET
-									opponent_id = ?,
-									referee = ?,
-									venue = ?,
-									comment = ?,
-									date = ?,
-									game_type_id = ?,
-									game_level = ?,
-									occasion = ?,
-									ptsFor = ?,
-									ptsAgn = ?,
-									game_pic_path = ?,
-									status = 1,
-									deleted = 0,
-									created_dt = NOW(),
-									modified_dt = NOW()`
+		let sql = `INSERT INTO inbrc_stats_games 
+								SET
+								opponent_id = ?,
+								referee = ?,
+								venue = ?,
+								comment = ?,
+								date = ?,
+								game_type_id = ?,
+								game_level = ?,
+								occasion = ?,
+								ptsFor = ?,
+								ptsAgn = ?,
+								status = 1,
+								deleted = 0,
+								created_dt = NOW(),
+								modified_dt = NOW()`
 		let inserts = []
 		inserts.push(
 			opponent_id,
@@ -736,16 +721,29 @@ async function addOne({
 			game_level,
 			occasion,
 			ptsFor,
-			ptsAgn,
-			game_pic_path
+			ptsAgn
 		)
 		sql = mysql.format(sql, inserts)
 		const [rows, fields] = await conn.execute(sql)
-		const id = rows.insertId
+		const game_id = rows.insertId
+		// console.log('IN addone game_id = ', game_id)
+
 		// add records for 23 players
-		players.forEach(function (player) {
-			let sql = `INSERT INTO inbrc_stats_player SET
-									game_id = ${id},
+		for (let i = 0; i < 23; i++) {
+			/* 			console.log(
+				'IN players.for ',
+				'i = ',
+				i,
+				' new game id = ',
+				game_id,
+				' player[i].position_id = ',
+				players[i].position_id,
+
+				' player[i].player_id = ',
+				players[i].player_id
+			) */
+			sql = `INSERT INTO inbrc_stats_player SET
+									game_id = ${game_id},
 									position_id = ?,
 									player_id = ?,
 									replaced_by = ?,
@@ -760,26 +758,27 @@ async function addOne({
 									deleted = 0,
 									modified_dt = NOW(),
 									created_dt = NOW()`
-			let inserts = []
+			inserts = []
 			inserts.push(
-				player.position_id,
-				player.player_id,
-				player.replaced_by,
-				player.tries,
-				player.assists,
-				player.conv,
-				player.penk,
-				player.dgoal,
-				player.yellow,
-				player.red
+				players[i].position_id,
+				players[i].player_id,
+				players[i].replaced_by,
+				players[i].tries,
+				players[i].assists,
+				players[i].conv,
+				players[i].penk,
+				players[i].dgoal,
+				players[i].yellow,
+				players[i].red
 			)
-			const preppedsql = mysql.format(sql, inserts)
-			conn.execute(preppedsql)
-		})
+			sql = mysql.format(sql, inserts)
 
-		await conn.commit()
+			await conn.execute(sql)
+		}
+
+		await conn.query('COMMIT')
 		await conn.end()
-		return 'commit'
+		return `commit game_id = ${game_id}`
 	} catch (e) {
 		await conn.query('ROLLBACK')
 		await conn.end()
@@ -788,28 +787,21 @@ async function addOne({
 }
 
 async function editOne({
-	id,
+	game_id,
 	opponent_id,
 	referee,
 	venue,
-	comment,
 	date,
 	game_type_id,
 	game_level,
+	comment,
 	occasion,
 	ptsFor,
 	ptsAgn,
-	game_pic_path,
 	players,
 }) {
-	const conn = await mysql.createConnection({
-		host: DB.DB_HOST,
-		user: DB.DB_USER,
-		password: DB.DB_PASSWORD,
-		database: DB.DB_DATABASE,
-	})
-
 	try {
+		const conn = await getConnection()
 		await conn.query('START TRANSACTION')
 
 		let sql = `UPDATE inbrc_stats_games SET
@@ -823,9 +815,6 @@ async function editOne({
 								occasion = ?,
 								ptsFor = ?,
 								ptsAgn = ?,
-								game_pic_path = ?,
-								status = 1,
-								deleted = 0,
 								modified_dt= NOW()
 							WHERE
 								game_id = ?`
@@ -842,49 +831,58 @@ async function editOne({
 			occasion,
 			ptsFor,
 			ptsAgn,
-			game_pic_path,
-			id
+			game_id
 		)
 		sql = mysql.format(sql, inserts)
-		conn.execute(sql)
+		// console.log('IN editOne1 sql = ', sql)
+		await conn.execute(sql)
 
-		// add new records for 23 players
-		players.forEach(function (player) {
-			let inserts = []
+		// update records for 23 players
+		for (let i = 0; i < 23; i++) {
+			/* 			console.log('IN players.for ', 'i = ', i, ' game id = ', game_id)
+			console.log(
+				' position_id = ',
+				players[i].position_id,
+				' player_id = ',
+				players[i].player_id
+			) */
+			sql = `UPDATE inbrc_stats_player SET
+					
+					player_id = ?,
+					replaced_by = ?,
+					tries = ?,
+					assists = ?,
+					conv = ?,
+					penk = ?,
+					dgoal = ?,
+					yellow = ?,
+					red = ?,
+					modified_dt = NOW()
+				WHERE
+					game_id = ? && position_id = ?`
+
+			inserts = []
 			inserts.push(
-				player.player_id,
-				player.replaced_by,
-				player.tries,
-				player.assists,
-				player.conv,
-				player.penk,
-				player.dgoal,
-				player.yellow,
-				player.red,
-				id,
-				player.position_id
+				players[i].player_id,
+				players[i].replaced_by,
+				players[i].tries,
+				players[i].assists,
+				players[i].conv,
+				players[i].penk,
+				players[i].dgoal,
+				players[i].yellow,
+				players[i].red,
+				game_id,
+				players[i].position_id
 			)
 
-			let sql = `UPDATE inbrc_stats_player SET
-									player_id = ?,
-									replaced_by = ?,
-									tries = ?,
-									assists = ?,
-									conv = ?,
-									penk = ?,
-									dgoal = ?,
-									yellow = ?,
-									red = ?,
-									modified_dt = NOW()
-								WHERE
-									game_id = ? AND position_id = ?`
-
-			const preppedsql = mysql.format(sql, inserts)
-			conn.execute(preppedsql)
-		})
-		await conn.commit()
+			sql = mysql.format(sql, inserts)
+			// console.log('IN players.for sql = ', sql)
+			await conn.execute(sql)
+		}
+		await conn.query('COMMIT')
 		await conn.end()
-		return 'committed'
+		return `commit game_id = ${game_id}`
 	} catch (e) {
 		await conn.query('ROLLBACK')
 		await conn.end()
@@ -893,12 +891,7 @@ async function editOne({
 }
 
 async function deleteOne(id) {
-	const conn = await mysql.createConnection({
-		host: DB.DB_HOST,
-		user: DB.DB_USER,
-		password: DB.DB_PASSWORD,
-		database: DB.DB_DATABASE,
-	})
+	const conn = await getConnection()
 
 	try {
 		await conn.query('START TRANSACTION')
@@ -909,7 +902,7 @@ async function deleteOne(id) {
 		sql = `UPDATE inbrc_stats_player SET deleted = 1, deleted_dt = NOW() WHERE game_id = ${id}`
 		conn.execute(sql)
 
-		await conn.commit()
+		await conn.query('COMMIT')
 		await conn.end()
 		return 'COMMIT'
 	} catch (e) {

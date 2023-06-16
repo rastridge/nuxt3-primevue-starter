@@ -5,7 +5,6 @@
 		</p>
 		<FormKit
 			type="form"
-			#default="{ state }"
 			v-model="state"
 			submit-label="Submit"
 			@submit="submitForm"

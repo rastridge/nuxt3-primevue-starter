@@ -79,19 +79,21 @@ html {
 	text-align: left;
 }
 
-.formkit-inner {
-	background-color: rgba(255, 255, 255, 0.5);
+.formroot {
+	text-align: left;
 }
+
 [data-invalid] .formkit-inner {
 	border-color: red;
 	box-shadow: 0 0 0 1px red;
 }
 
 [data-complete] .formkit-inner {
-	border-color: red;
+	border-color: green;
 	box-shadow: 0 0 0 1px green;
 }
 [data-complete] .formkit-inner::after {
+	content: '✅';
 	display: block;
 	padding: 0.5em;
 }

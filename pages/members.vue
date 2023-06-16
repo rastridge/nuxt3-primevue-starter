@@ -133,7 +133,7 @@
 		// Get gaemcount
 		//
 		const { data: gmcnt } = await useFetch(
-			`/stats/getgamecount/?gametype=1&account_id=${event.data.account_id}`,
+			`/game_player_stats/getgamecount/?gametype=1&account_id=${event.data.account_id}`,
 			{
 				method: 'get',
 				headers: {
@@ -145,7 +145,7 @@
 		// toast.add({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
 
 		const { data: gmcnt7s } = await useFetch(
-			`/stats/getgamecount/?gametype=7&account_id=${event.data.account_id}`,
+			`/game_player_stats/getgamecount/?gametype=7&account_id=${event.data.account_id}`,
 			{
 				method: 'get',
 				headers: {

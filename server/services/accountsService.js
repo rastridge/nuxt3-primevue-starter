@@ -382,7 +382,6 @@ async function editOne(info) {
 
 async function getSuggestions() {
 	const sql = `SELECT
-									account_id as id,
 									account_id,
 									member_firstname,
 									member_lastname,
@@ -392,7 +391,6 @@ async function getSuggestions() {
 							ORDER BY member_lastname ASC`
 
 	const accounts = await doDBQuery(sql)
-
 	return accounts
 }
 
