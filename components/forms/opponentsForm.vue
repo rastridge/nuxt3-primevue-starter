@@ -4,8 +4,8 @@
 			type="form"
 			:config="{ validationVisibility: 'live' }"
 			v-model="state"
-			submit-label="Submit"
-			@submit="submitForm"
+			submit-label="Submit Opponent"
+			@submit="submitForm(state)"
 		>
 			<FormKit
 				label="Opponent Name"
@@ -25,6 +25,11 @@
 				type="select"
 				label="Opponent Type"
 				name="opponent_type"
+				:options="[
+					{ label: 'Men', value: 'men' },
+					{ label: 'College', value: 'college' },
+					{ label: 'Old Boys', value: 'oldboys' },
+				]"
 				validation="required"
 			/>
 
@@ -32,6 +37,11 @@
 				type="select"
 				label="Opponent level"
 				name="opponent_level"
+				:options="[
+					{ label: 'First Side', value: 'A' },
+					{ label: 'Second Side', value: 'B' },
+					{ label: 'Third  Side', value: 'C' },
+				]"
 				validation="required"
 			/>
 
@@ -71,7 +81,7 @@
 	// edit if there is an id - add if not
 	//
 	if (props.id !== 0) {
-		// get user with id === props.id
+		// get opponent with id === props.id
 		const {
 			data: opponents_data,
 			pending,

@@ -37,7 +37,7 @@
 				type="form"
 				:config="{ validationVisibility: 'live' }"
 				v-model="state"
-				submit-label="Submit"
+				submit-label="Submit Game"
 				@submit="submitForm(state)"
 			>
 				<!-- opponent input-->

@@ -1,4 +1,6 @@
 <script setup>
+	const { onSubmitEdit } = useSubmit()
+
 	//
 	// Get opponent id
 	//
@@ -7,7 +9,10 @@
 	//
 	// Opponents form action
 	//
-	const onSubmit = async function (state) {}
+	const onSubmit = async function (state) {
+		await onSubmitEdit('opponents', state)
+		navigateTo(`/admin/opponents`)
+	}
 </script>
 
 <template>
