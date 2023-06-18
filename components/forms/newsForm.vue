@@ -39,20 +39,20 @@
 			></input-body>
 
 			<FormKit
-				type="datetime-local"
+				type="date"
 				label="Event Date"
 				name="news_event_dt"
 				validation="required"
 			/>
 			<FormKit
-				type="datetime-local"
+				type="date"
 				label="Release Date"
 				name="news_release_dt"
 				validation="required"
 			/>
 
 			<FormKit
-				type="datetime-local"
+				type="date"
 				label="Expire Date"
 				name="news_expire_dt"
 				validation="required"
@@ -100,9 +100,9 @@
 	let state = ref({})
 	state.value.news_article = 'Enter news here'
 	const dt = $dayjs()
-	state.value.news_release_dt = dt.format('YYYY-MM-DD HH:mm')
-	state.value.news_event_dt = dt.add(7, 'day').format('YYYY-MM-DD HH:mm')
-	state.value.news_expire_dt = dt.add(28, 'day').format('YYYY-MM-DD HH:mm')
+	state.value.news_release_dt = dt.format('YYYY-MM-DD')
+	state.value.news_event_dt = dt.add(7, 'day').format('YYYY-MM-DD')
+	state.value.news_expire_dt = dt.add(28, 'day').format('YYYY-MM-DD')
 
 	//
 	// edit if there is an id - add if not
@@ -126,13 +126,13 @@
 
 		// Adjust for local time and Format for Primevue calendar
 		state.value.news_event_dt = $dayjs(news_data.value.news_event_dt).format(
-			'YYYY-MM-DD HH:mm'
+			'YYYY-MM-DD'
 		)
 		state.value.news_release_dt = $dayjs(
 			news_data.value.news_release_dt
-		).format('YYYY-MM-DD HH:mm')
+		).format('YYYY-MM-DD')
 		state.value.news_expire_dt = $dayjs(news_data.value.news_expire_dt).format(
-			'YYYY-MM-DD HH:mm'
+			'YYYY-MM-DD'
 		)
 	}
 	//

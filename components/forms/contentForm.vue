@@ -44,14 +44,14 @@
 			/>
 
 			<FormKit
-				type="datetime-local"
+				type="date"
 				label="Release Date"
 				name="content_release_dt"
 				validation="required"
 			/>
 
 			<FormKit
-				type="datetime-local"
+				type="date"
 				label="Expire Date"
 				name="content_expire_dt"
 				validation="required"
@@ -99,8 +99,8 @@
 	let state = ref({})
 	state.value.content_body = 'Add content here'
 	const dt = $dayjs()
-	state.value.content_release_dt = dt.format('YYYY-MM-DD HH:mm')
-	state.value.content_expire_dt = dt.add(28, 'day').format('YYYY-MM-DD HH:mm')
+	state.value.content_release_dt = dt.format('YYYY-MM-DD')
+	state.value.content_expire_dt = dt.add(28, 'day').format('YYYY-MM-DD')
 
 	//
 	// edit if there is an id - add if not
@@ -125,10 +125,10 @@
 		// Adjust for local time and Format for Primevue calendar
 		state.value.content_release_dt = $dayjs(
 			content_data.value.content_release_dt
-		).format('YYYY-MM-DD HH:mm')
+		).format('YYYY-MM-DD')
 		state.value.content_expire_dt = $dayjs(
 			content_data.value.content_expire_dt
-		).format('YYYY-MM-DD HH:mm')
+		).format('YYYY-MM-DD')
 	}
 
 	//

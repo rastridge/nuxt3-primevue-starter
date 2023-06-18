@@ -4,13 +4,13 @@
 		<!-- <p v-if="items">items = {{ items }}</p> -->
 
 		<h5 v-if="props.id" class="text-left">
-			Contributor {{ item.contribution_name }} {{ props.id }}
+			Contributor {{ contribution_data.contribution_name }}
 		</h5>
 
 		<FormKit
 			type="form"
 			name="contribution"
-			:value="item"
+			:value="contribution_data"
 			submit-label="Submit"
 			@submit="submitForm"
 		>
@@ -23,9 +23,10 @@
 					@item-select="getPrevious"
 				/>
 			</div>
+			Contribution daate = {{ contribution_data.contribution_date }}
 
 			<FormKit
-				type="datetime-local"
+				type="date"
 				label="Contribution Date"
 				name="contribution_date"
 				validation="required"
@@ -54,11 +55,11 @@
 				<h3>Previous Donations</h3>
 				<table>
 					<tbody>
-						<tr v-for="(item, index) in previous" :key="index">
-							<td>{{ item.name }}</td>
-							<td>{{ item.contribution_amount }}</td>
+						<tr v-for="(contribution_data, index) in previous" :key="index">
+							<td>{{ contribution_data.name }}</td>
+							<td>{{ contribution_data.contribution_amount }}</td>
 							<td>
-								{{ $dayjs(item.dt).format('MMM DD YYYY') }}
+								{{ $dayjs(contribution_data.dt).format('MMM DD YYYY') }}
 							</td>
 						</tr>
 					</tbody>
@@ -95,7 +96,7 @@
 	})
 
 	// Form field values
-	let item = {}
+	let contribution_data = {}
 
 	// Add form
 	//
@@ -137,6 +138,8 @@
 	// Add
 	//
 	if (!props.id) {
+		//
+		// get suggestions
 		const { data, pending, error, refresh } = await useFetch(
 			`/accounts/suggestions`,
 			{
@@ -149,9 +152,9 @@
 		)
 		suggestions.value = data.value
 
-		item.contribution_date = $dayjs().format('YYYY-MM-DD HH:mm')
-		item.showName = 1
-		item.showAmount = 1
+		contribution_data.contribution_date = $dayjs().format('YYYY-MM-DD')
+		contribution_data.showName = 1
+		contribution_data.showAmount = 1
 	} else {
 		//
 		// edit
@@ -168,9 +171,9 @@
 		)
 		// Adjust for local time and Format for Formkit calendar? ??
 		data.value.contribution_date = $dayjs(data.value.contribution_date).format(
-			'YYYY-MM-DD HH:mm'
+			'YYYY-MM-DD'
 		)
-		item = data.value
+		contribution_data = data.value
 	}
 
 	//

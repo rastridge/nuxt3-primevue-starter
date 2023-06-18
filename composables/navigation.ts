@@ -114,6 +114,12 @@ export function useNavigationMenu() {
 						visible: () => checkPerm('opponents') > 0,
 					},
 					{
+						label: 'Videos',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/videos',
+						visible: () => checkPerm('videos') > 0,
+					},
+					{
 						label: 'Log out',
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/logout',
