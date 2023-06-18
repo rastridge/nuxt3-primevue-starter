@@ -226,7 +226,7 @@ async function getAll(sort = 'DESC') {
 				AND g.Status = 1
 				AND t.game_type_id = g.game_type_id
 			ORDER BY
-				date ` + sort
+				dt ` + sort
 
 	const games = await doDBQuery(sql)
 	return games
@@ -286,7 +286,7 @@ async function getYear(year) {
 				AND t.game_type_id = g.game_type_id
 				AND ( YEAR(date) = ${year} OR YEAR(date) = ${YEAR2} )
 			ORDER BY
-				date DESC`
+				dt DESC`
 
 	const games = await doDBQuery(sql)
 	return games
@@ -296,39 +296,39 @@ async function getSeason(year) {
 	const YEAR2 = parseInt(year) + 1
 
 	const sql = `SELECT
-					game_id,
-					game_id as id,
-					o.opponent_name,
-					g.opponent_id,
-					o.opponent_name as title,
-					referee,
-					venue,
-					comment,
-					g.date,
-					g.date as dt,
-					t.game_type,
-					t.game_type_id,
-					game_level,
-					occasion,
-					ptsFor,
-					ptsAgn,
-					g.Status,
-					g.Status as status,
-					g.deleted,
-					g.deleted_dt,
-					g.created_dt,
-					g.modified_dt
-				FROM
-					inbrc_stats_game_types t,
-					inbrc_stats_games g
-					LEFT JOIN inbrc_opponents o ON o.opponent_id = g.opponent_id
-				WHERE
-					g.deleted = 0
-					AND t.game_type_id = g.game_type_id
-					AND ( YEAR(date) = ${year} OR YEAR(date) = ${YEAR2} )
-					AND ( DATE(date) > DATE(CONCAT("${year}","${SEASON_DIVIDE_DATE}"))) AND ( DATE(date) <= DATE(CONCAT("${YEAR2}","${SEASON_DIVIDE_DATE}")) )
-				ORDER BY
-					date DESC`
+								game_id,
+								game_id as id,
+								o.opponent_name,
+								g.opponent_id,
+								o.opponent_name as title,
+								referee,
+								venue,
+								comment,
+								g.date,
+								g.date as dt,
+								t.game_type,
+								t.game_type_id,
+								game_level,
+								occasion,
+								ptsFor,
+								ptsAgn,
+								g.Status,
+								g.Status as status,
+								g.deleted,
+								g.deleted_dt,
+								g.created_dt,
+								g.modified_dt
+							FROM
+								inbrc_stats_game_types t,
+								inbrc_stats_games g
+								LEFT JOIN inbrc_opponents o ON o.opponent_id = g.opponent_id
+							WHERE
+								g.deleted = 0
+								AND t.game_type_id = g.game_type_id
+								AND ( YEAR(date) = ${year} OR YEAR(date) = ${YEAR2} )
+								AND ( DATE(date) > DATE(CONCAT("${year}","${SEASON_DIVIDE_DATE}"))) AND ( DATE(date) <= DATE(CONCAT("${YEAR2}","${SEASON_DIVIDE_DATE}")) )
+							ORDER BY
+								dt DESC`
 
 	const games = await doDBQuery(sql)
 	return games

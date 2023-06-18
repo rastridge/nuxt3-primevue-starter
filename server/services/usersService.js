@@ -126,13 +126,14 @@ async function authenticate({ username, password }) {
 /***************************************** */
 
 async function getAll() {
-	const sql = `select
+	const sql = `SELECT
 									admin_user_name as title,
 									modified_dt as dt,
 									admin_user_id as id,
 									STATUS as status
-								from inbrc_admin_users
-								where deleted = 0`
+								FROM inbrc_admin_users
+								WHERE deleted = 0
+								ORDER BY dt DESC`
 	const users = await doDBQuery(sql)
 
 	return users

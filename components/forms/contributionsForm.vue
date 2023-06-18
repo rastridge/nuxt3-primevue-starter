@@ -23,7 +23,6 @@
 					@item-select="getPrevious"
 				/>
 			</div>
-			Contribution daate = {{ contribution_data.contribution_date }}
 
 			<FormKit
 				type="date"

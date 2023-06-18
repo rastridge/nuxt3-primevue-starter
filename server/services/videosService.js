@@ -17,13 +17,13 @@ async function getAll() {
                     video_synop,
                     video_url,
                     video_release_dt,
-                    video_event_dt,
+                    video_event_dt as dt,
                     video_expire_dt,
                     status,
                     deleted,
                     created_dt,
                     modified_dt,
-                    modified_dt as dt
+                    modified_dt
                 FROM
                     inbrc_video
                 WHERE
@@ -31,7 +31,7 @@ async function getAll() {
                     AND
                     status = 1
                 ORDER BY
-                    video_event_dt DESC`
+                    dt DESC`
 
 	const videos = await doDBQuery(sql)
 	return videos

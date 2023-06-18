@@ -38,9 +38,9 @@
 							></a> </template
 					></Column>
 					<Column field="title" header="Name"></Column>
-					<Column field="dt" header="Modified">
+					<Column field="dt" header="Date">
 						<template #body="slotProps">
-							{{ $dayjs(slotProps.data.dt).format('YYYY-MM-DD h:mm a') }}
+							{{ $dayjs(slotProps.data.dt).format('YYYY-MM-DD') }}
 						</template></Column
 					>
 					<Column

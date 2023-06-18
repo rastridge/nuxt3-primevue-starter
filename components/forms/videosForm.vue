@@ -27,7 +27,6 @@
 				validation="required"
 			/>
 
-			state.value.video_event_dt = {{ state.video_event_dt }}
 			<!-- Date input-->
 			<FormKit
 				type="date"
