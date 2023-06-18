@@ -4,17 +4,17 @@
 	// Opponents form action
 	//
 	const onSubmit = async function (state) {
-		await onSubmitAdd('opponents', state)
-		navigateTo(`/admin/opponents`)
+		await onSubmitAdd('videos', state)
+		navigateTo(`/admin/videos`)
 	}
 </script>
 
 <template>
 	<div>
 		<Head>
-			<Title> Add Opponent {{ id }}</Title>
+			<Title> Add Video {{ id }}</Title>
 		</Head>
-		<common-header title="Add Opponent" />
-		<opponents-form :id="id" @submitted="onSubmit" />
+		<common-header title="Add Video" />
+		<videos-form :id="id" @submitted="onSubmit" />
 	</div>
 </template>
