@@ -4,7 +4,7 @@
 			type="form"
 			:config="{ validationVisibility: 'live' }"
 			v-model="state"
-			submit-label="Submit Opponent"
+			submit-label="Submit Video"
 			@submit="submitForm(state)"
 		>
 			<FormKit

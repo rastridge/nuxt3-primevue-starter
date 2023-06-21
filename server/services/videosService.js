@@ -39,6 +39,8 @@ async function getAll() {
 
 async function getOne(id) {
 	const sql = `SELECT
+									video_id,
+									video_id as id,
 									video_title,
 									video_synop,
 									video_url,
