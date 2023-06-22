@@ -1,4 +1,5 @@
 import { useAuthStore } from '~/stores/authStore'
+import nuxtStorage from 'nuxt-storage'
 
 export default function useRenderListAccess() {
 	const auth = useAuthStore()
@@ -19,6 +20,7 @@ export default function useRenderListAccess() {
 		access.deleteable = false
 		access.statusable = false
 		access.viewable = true
+		// const user = nuxtStorage.sessionStorage.getData('auth')
 		const user = JSON.parse(sessionStorage.getItem('auth'))
 		const temp = user.perms
 

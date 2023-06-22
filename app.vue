@@ -17,6 +17,7 @@
 	} else {
 		auth.user = nuxtStorage.localStorage.getData('auth')
 		auth.status = { loggedIn: true }
+		// nuxtStorage.sessionStorage.setData('auth', auth.user)
 		sessionStorage.setItem('auth', JSON.stringify(auth.user))
 		navigateTo('/admin')
 	} /*   */

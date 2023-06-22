@@ -28,20 +28,9 @@ export const useAuthStore = defineStore('auth', {
 			this.loginRequest(username, password, keeploggedin)
 		},
 
-		logout() {
-			const alert = useAlertStore()
-			alert.clear()
-			this.status = { loggedIn: false }
-			this.keep = { isKeeped: false }
-			this.user = {}
-			sessionStorage.removeItem('auth')
-			nuxtStorage.localStorage.removeItem('auth')
-			navigateTo('/')
-		},
-
 		async loginRequest(username, password, keeploggedin) {
-			nuxtStorage.localStorage.removeItem('user')
-			nuxtStorage.localStorage.removeItem('status')
+			// nuxtStorage.localStorage.removeItem('user')
+			// nuxtStorage.localStorage.removeItem('status')
 
 			const alert = useAlertStore()
 			this.status = { loggedIn: false }
@@ -65,6 +54,9 @@ export const useAuthStore = defineStore('auth', {
 			this.user = user
 			this.keep = { keeped: keeploggedin }
 			sessionStorage.removeItem('auth')
+			// nuxtStorage.sessionStorage.removeItem('auth')
+			// nuxtStorage.sessionStorage.removeItem('auth')
+			nuxtStorage.sessionStorage.setData('auth2', user)
 			sessionStorage.setItem('auth', JSON.stringify(user))
 
 			// if (keeploggedin) {
@@ -72,17 +64,29 @@ export const useAuthStore = defineStore('auth', {
 				console.log('keeploggedin ', keeploggedin)
 				nuxtStorage.localStorage.setData('auth', user, 1, 'h')
 			}
-			navigateTo('/admin')
 			const alert = useAlertStore()
 			alert.success('Login successful')
+			navigateTo('/admin')
 		},
+
+		logout() {
+			const alert = useAlertStore()
+			alert.clear()
+			this.status = { loggedIn: false }
+			this.keep = { isKeeped: false }
+			this.user = {}
+			// nuxtStorage.sessionStorage.removeItem('auth')
+			sessionStorage.removeItem('auth')
+			// c.removeItem('auth')
+			navigateTo('/')
+		},
+
 		loginFailure() {
 			this.status = { loggedIn: false }
 			this.keep = { keeped: false }
 			this.user = {}
 			const alert = useAlertStore()
 			alert.error('Login failed - try again')
-			// this.navigate('/loginpage')
 			navigateTo('/loginpage')
 		},
 	},
