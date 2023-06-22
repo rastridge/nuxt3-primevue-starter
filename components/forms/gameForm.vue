@@ -608,7 +608,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.formroot {
 		text-align: left;
 	}

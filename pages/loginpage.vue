@@ -4,7 +4,7 @@
 			{{ alert.message }}
 		</div>
 
-		<div v-if="!auth.isLoggedIn">
+		<div v-if="!auth.isLoggedIn" class="formroot">
 			<h3 class="headline">Login Admin Users</h3>
 
 			<FormKit type="form" submit_label="Login" @submit="handleSubmit">
@@ -55,7 +55,22 @@
 </script>
 
 <style scoped>
-	.formkit-input {
-		color: white;
+	.formroot {
+		text-align: left;
+		margin-left: 4rem;
+	}
+	[data-invalid] .formkit-inner {
+		border-color: red;
+		box-shadow: 0 0 0 1px red;
+	}
+
+	[data-complete] .formkit-inner {
+		border-color: red;
+		box-shadow: 0 0 0 1px green;
+	}
+	[data-complete] .formkit-inner::after {
+		content: '✅';
+		display: block;
+		padding: 0.5em;
 	}
 </style>
