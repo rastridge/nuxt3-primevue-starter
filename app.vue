@@ -1,5 +1,8 @@
 <script setup>
 	import { useMenuStore } from '@/stores'
+	import nuxtStorage from 'nuxt-storage'
+	import { useAuthStore } from '~/stores/authStore'
+	const auth = useAuthStore()
 	const menuStore = useMenuStore()
 
 	useHead({
@@ -8,6 +11,16 @@
 
 	// onMounted(async () => {
 	await menuStore.initCustomMenuItems()
+
+	if (!nuxtStorage.localStorage.getData('auth')) {
+		navigateTo('/')
+	} else {
+		auth.user = nuxtStorage.localStorage.getData('auth')
+		auth.status = { loggedIn: true }
+		sessionStorage.setItem('auth', JSON.stringify(auth.user))
+		navigateTo('/admin')
+	} /*   */
+
 	// })
 	/* 	onMounted(async () => {
 		const {

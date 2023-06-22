@@ -22,8 +22,14 @@
 					validate="required|length:5"
 				>
 				</FormKit>
+				<FormKit
+					type="checkbox"
+					label="Keep me logged in"
+					name="keeploggedin"
+					:value="false"
+				/>
+				<!-- state.keeploggedin = {{ state.keeploggedin }} -->
 			</FormKit>
-
 			<div>
 				<nuxt-link to="/resetpassword" active-class="active"
 					><a>Forgot password?</a></nuxt-link
@@ -43,7 +49,7 @@
 
 	const handleSubmit = async (state) => {
 		if (state.username && state.password) {
-			auth.login(state.username, state.password) // pinia auth store
+			auth.login(state.username, state.password, state.keeploggedin) // pinia auth store
 		}
 	}
 </script>

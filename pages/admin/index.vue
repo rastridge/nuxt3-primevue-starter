@@ -7,6 +7,7 @@
 		<p>session Admin user name is {{ sess.admin_user_name }}</p>
 		<p>session Admin user token is {{ sess.token }}</p>
 		<p>auth Admin user is logged in {{ auth.isLoggedIn }}</p>
+		<p>Keep me logged in {{ auth.isKeeped }}</p>
 	</div>
 </template>
 

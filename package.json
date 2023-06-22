@@ -63,6 +63,7 @@
 		"dayjs": "^1.11.7",
 		"jsonwebtoken": "^9.0.0",
 		"mysql2": "^3.2.4",
+		"nuxt-storage": "^1.2.2",
 		"quill-image-uploader": "^1.2.4",
 		"sweetalert2": "^11.7.5",
 		"twilio": "^4.11.0"
