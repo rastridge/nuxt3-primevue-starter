@@ -60,7 +60,7 @@
 	})
 
 	const getSeason = async () => {
-		const url = `/${app}/getseason/${year.value}`
+		const url = `/game_player_stats/getseason/${year.value}`
 		const { data, error } = await useFetch(url, {
 			method: 'get',
 			headers: {
