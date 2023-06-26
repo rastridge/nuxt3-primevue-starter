@@ -62,7 +62,6 @@
 		}
 		stats.value = data.value
 	}
-	getSeason()
 
 	//
 	// get season after drop down choice
@@ -74,6 +73,7 @@
 	//
 	// get current season on start
 	//
+	getSeason()
 	/* 	onMounted(() => {
 		getSeason()
 	}) */

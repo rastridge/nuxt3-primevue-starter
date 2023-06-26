@@ -329,9 +329,9 @@ async function getSeason(year) {
 								AND ( DATE(date) > DATE(CONCAT("${year}","${SEASON_DIVIDE_DATE}"))) AND ( DATE(date) <= DATE(CONCAT("${YEAR2}","${SEASON_DIVIDE_DATE}")) )
 							ORDER BY
 								dt DESC`
-	// console.log('IN getSeason sql = ', sql)
+	console.log('IN getSeason sql = ', sql)
 	const games = await doDBQuery(sql)
-	return games
+	return sql
 }
 
 async function getGameTypes() {
