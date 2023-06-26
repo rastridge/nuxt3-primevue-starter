@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { useAlertStore } from '~/stores/alertStore'
-import nuxtStorage from 'nuxt-storage'
 
 export const useAuthStore = defineStore('auth', {
 	state: () => ({
@@ -12,7 +11,6 @@ export const useAuthStore = defineStore('auth', {
 		loggingIn: (state) => state.status.loggingIn,
 		isLoggedIn: (state) => state.status.loggedIn,
 		isKeeped: (state) => state.keep.keeped,
-		// getToken: (state) => state.status.user.token,
 		getUser: (state) => state.status.user,
 	},
 
@@ -29,9 +27,6 @@ export const useAuthStore = defineStore('auth', {
 		},
 
 		async loginRequest(username, password, keeploggedin) {
-			// nuxtStorage.localStorage.removeItem('user')
-			// nuxtStorage.localStorage.removeItem('status')
-
 			const alert = useAlertStore()
 			this.status = { loggedIn: false }
 			alert.attempt('Logging in . . .')
@@ -54,15 +49,10 @@ export const useAuthStore = defineStore('auth', {
 			this.user = user
 			this.keep = { keeped: keeploggedin }
 			sessionStorage.removeItem('auth')
-			// nuxtStorage.sessionStorage.removeItem('auth')
-			// nuxtStorage.sessionStorage.removeItem('auth')
-			nuxtStorage.sessionStorage.setData('auth2', user)
-			sessionStorage.setItem('auth', JSON.stringify(user))
+			sessionStorage.setItem('auth', JSON.stringify(this.user))
 
-			// if (keeploggedin) {
 			if (this.keep.keeped) {
-				console.log('keeploggedin ', keeploggedin)
-				nuxtStorage.localStorage.setData('auth', user, 1, 'h')
+				localStorage.setItem('auth', JSON.stringify(this.user))
 			}
 			const alert = useAlertStore()
 			alert.success('Login successful')
@@ -75,9 +65,8 @@ export const useAuthStore = defineStore('auth', {
 			this.status = { loggedIn: false }
 			this.keep = { isKeeped: false }
 			this.user = {}
-			// nuxtStorage.sessionStorage.removeItem('auth')
+			localStorage.removeItem('auth')
 			sessionStorage.removeItem('auth')
-			// c.removeItem('auth')
 			navigateTo('/')
 		},
 
@@ -88,6 +77,14 @@ export const useAuthStore = defineStore('auth', {
 			const alert = useAlertStore()
 			alert.error('Login failed - try again')
 			navigateTo('/loginpage')
+		},
+
+		loginAuto() {
+			this.user = JSON.parse(localStorage.getItem('auth'))
+			this.status = { loggedIn: true }
+			this.keep = { keeped: true }
+			sessionStorage.setItem('auth', JSON.stringify(this.user))
+			navigateTo('/admin')
 		},
 	},
 })

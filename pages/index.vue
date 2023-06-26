@@ -1,7 +1,5 @@
 <script setup lang="ts">
 	import AdvertiseBox from '@/components/AdvertiseBox.vue'
-	import nuxtStorage from 'nuxt-storage'
-	const localStorage = ref(nuxtStorage.localStorage.getData('auth'))
 </script>
 
 <template>

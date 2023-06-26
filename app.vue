@@ -1,6 +1,5 @@
 <script setup>
 	import { useMenuStore } from '@/stores'
-	import nuxtStorage from 'nuxt-storage'
 	import { useAuthStore } from '~/stores/authStore'
 	const auth = useAuthStore()
 	const menuStore = useMenuStore()
@@ -9,44 +8,13 @@
 		title: 'Nuxt 3 PrimeVue Starter',
 	})
 
-	// onMounted(async () => {
 	await menuStore.initCustomMenuItems()
 
-	if (!nuxtStorage.localStorage.getData('auth')) {
+	if (!localStorage.getItem('auth')) {
 		navigateTo('/')
 	} else {
-		auth.user = nuxtStorage.localStorage.getData('auth')
-		auth.status = { loggedIn: true }
-		// nuxtStorage.sessionStorage.setData('auth', auth.user)
-		sessionStorage.setItem('auth', JSON.stringify(auth.user))
-		navigateTo('/admin')
-	} /*   */
-
-	// })
-	/* 	onMounted(async () => {
-		const {
-			data: menu_data,
-			pending,
-			error,
-			refresh,
-		} = await useFetch(`/content/custommenuitems`, {
-			method: 'get',
-			headers: {
-				authorization: 'not-needed',
-			},
-		})
-		let custommenuitems = []
-
-		menu_data.value.forEach((element) => {
-			custommenuitems.push({
-				label: `${element.content_name}`,
-				icon: 'pi pi-fw pi-bookmark',
-				to: `/content/${element.content_id}`,
-				visible: () => !auth.isLoggedIn,
-			})
-		})
-		sessionStorage.setItem('custommenu', JSON.stringify(custommenuitems))
-	}) */
+		auth.loginAuto()
+	}
 </script>
 
 <template>
