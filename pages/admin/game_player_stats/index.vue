@@ -45,20 +45,6 @@
 	const { $dayjs } = useNuxtApp()
 	const year = ref(parseInt($dayjs().format('YYYY')))
 	const startyear = 1966
-	//
-	// get season after drop down choice
-	//
-	const onSubmit = async function (value) {
-		year.value = value
-		getSeason()
-	}
-	//
-	// get current season on start
-	//
-	onMounted(() => {
-		getSeason()
-	})
-
 	const getSeason = async () => {
 		const url = `/game_player_stats/getseason/${year.value}`
 		const { data, error } = await useFetch(url, {
@@ -76,6 +62,21 @@
 		}
 		stats.value = data.value
 	}
+	getSeason()
+
+	//
+	// get season after drop down choice
+	//
+	const onSubmit = async function (value) {
+		year.value = value
+		getSeason()
+	}
+	//
+	// get current season on start
+	//
+	/* 	onMounted(() => {
+		getSeason()
+	}) */
 
 	//
 	// Renderlist actions
