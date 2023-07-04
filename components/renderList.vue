@@ -17,10 +17,12 @@
 					class="p-datatable-sm p-datatable-generic"
 					responsiveLayout="scroll"
 					:paginator="true"
-					:rows="perPage"
+					:rows="pagesize"
 					paginator-template="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
 					:rows-per-page-options="[10, 20, 50]"
+					:first="first"
 					current-page-report-template="Showing {first} to {last} of {totalRecords}"
+					@page="onPaginate"
 				>
 					<template #empty> No Data Found. </template>
 					<Column v-if="statusable" field="status" header="Use"
@@ -67,6 +69,7 @@
 						</template>
 					</Column>
 				</DataTable>
+				first = {{ first }}
 			</div>
 		</div>
 
@@ -101,9 +104,8 @@
 </template>
 
 <script setup>
-	//
-	// make date functions available
-	//
+	import { usePlacemarkStore } from '@/stores'
+	const placemark = usePlacemarkStore()
 	const { $dayjs } = useNuxtApp()
 	//
 	// Incoming
@@ -128,7 +130,14 @@
 	const datalocal = ref(props.data)
 	//
 	// Initial settings for pagination
-	const perPage = 10
+	//
+	const first = ref(placemark.getPage)
+	//
+	// Save paginator page number
+	const onPaginate = (e) => {
+		first.value = e.rows * e.page
+		placemark.setPage(first.value)
+	}
 	//
 	// Initial settings for dialog
 	//

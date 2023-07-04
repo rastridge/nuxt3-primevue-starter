@@ -10,13 +10,22 @@
 			<div class="text-center m-5">
 				<select-season
 					:startyear="startyear"
+					:currentyear="year"
 					@submitted="onSubmit"
 					class="mb-3"
 				/>
-				<p class="text-2xl">{{ year }}</p>
+				<FormKit
+					type="select"
+					label="Game type"
+					v-model="gametype"
+					:options="[
+						{ label: '15s', value: 1 },
+						{ label: '7s', value: 7 },
+					]"
+				/>
 			</div>
 			<render-list
-				:data="stats"
+				:data="filteredData"
 				:app="app"
 				:statusable="statusable"
 				:editable="editable"
@@ -32,19 +41,39 @@
 </template>
 
 <script setup>
-	const app = 'game_player_stats'
+	import { usePlacemarkStore } from '@/stores'
+	const placemark = usePlacemarkStore()
 	//
 	// initialize renderlist
 	//
 	const { getAccess } = useRenderListAccess()
+	const app = 'game_player_stats'
 	const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
 	const stats = ref([])
+
 	//
-	// Season select action
+	// Initialize year select
 	//
-	const { $dayjs } = useNuxtApp()
-	const year = ref(parseInt($dayjs().format('YYYY')))
 	const startyear = 1966
+	const { $dayjs } = useNuxtApp()
+	const year = ref(placemark.getYear)
+	//
+	// select Game type
+	//
+	const gametype = ref(placemark.getGameTypeId)
+
+	const filteredData = computed(() => {
+		return stats.value.filter((d) => {
+			if (gametype.value === 7) {
+				return d.game_type_id === 7
+			} else {
+				return d.game_type_id !== 7
+			}
+		})
+	})
+	//
+	// get season data
+	//
 	const getSeason = async () => {
 		const url = `/game_player_stats/getseason/${year.value}`
 		const { data, error } = await useFetch(url, {
@@ -64,19 +93,25 @@
 	}
 
 	//
-	// get season after drop down choice
+	// set season after drop down choice
 	//
 	const onSubmit = async function (value) {
 		year.value = value
-		getSeason()
+		placemark.setYear(year.value)
+		await getSeason()
 	}
+
 	//
-	// get current season on start
+	// set gametype after drop down choice
+	//
+	watch(gametype, (newid) => {
+		placemark.setGameTypeId(newid)
+	})
+
+	//
+	// get current season on select season submit
 	//
 	getSeason()
-	/* 	onMounted(() => {
-		getSeason()
-	}) */
 
 	//
 	// Renderlist actions

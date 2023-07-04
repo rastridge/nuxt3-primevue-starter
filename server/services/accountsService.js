@@ -227,12 +227,10 @@ async function addOne(info) {
 
 		await CONN.query('COMMIT')
 		await CONN.end()
-		console.log('END TRANSACTION COMMIT')
 		return { message: msg }
 	} catch (e) {
 		await CONN.query('ROLLBACK')
 		await CONN.end()
-		console.log('END TRANSACTION ROLLBACK')
 		return e
 	}
 }
@@ -352,7 +350,7 @@ async function editOne(info) {
 			// Compose and send individual email
 			//
 
-			sendEmail(
+			/* sendEmail(
 				CONFIG.TO,
 				'Buffalo Rugby Club Member Account Update',
 				'The account for ' +
@@ -362,7 +360,7 @@ async function editOne(info) {
 					'  has been updated ' +
 					' email = ' +
 					lc_account_email
-			)
+			) */
 		} else {
 			msg = ' An account with that email address already exists'
 			sendEmail(CONFIG.TO, 'BRC Member Account Action', msg)
@@ -370,13 +368,10 @@ async function editOne(info) {
 
 		await CONN.query('COMMIT')
 		await CONN.end()
-		console.log('END TRANSACTION COMMIT')
 		return { message: msg }
 	} catch (e) {
 		await CONN.query('ROLLBACK')
 		await CONN.end()
-		console.log('END TRANSACTION ROLLBACK')
-		// return e
 	}
 }
 

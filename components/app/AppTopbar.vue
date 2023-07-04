@@ -1,9 +1,9 @@
 <script setup lang="ts">
 	import { useThemeStore } from '@/stores'
+	const themeStore = useThemeStore()
 
 	const emit = defineEmits(['menuToggle'])
 
-	const themeStore = useThemeStore()
 	const op = ref<any>(null)
 
 	function toggle(event: any) {

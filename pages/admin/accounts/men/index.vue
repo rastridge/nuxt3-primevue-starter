@@ -4,10 +4,27 @@
 			<Title>Accounts List</Title>
 		</Head>
 		<common-header title="Account List" />
+
+		<FormKit
+			type="radio"
+			label="Member Type"
+			v-model="member_type_id"
+			:options="memberTypeOptions"
+			help="Select member type to modify"
+		/>
+
+		<FormKit
+			type="select"
+			label="Last name begins with"
+			v-model="alpha"
+			:options="alphas"
+			help="Select initial letter"
+		/>
+
 		<div v-if="pending" class="text-center text-2xl">Loading ...</div>
 		<div v-else>
 			<render-list
-				:data="accounts"
+				:data="filteredData"
 				:app="app"
 				:statusable="statusable"
 				:editable="editable"
@@ -22,8 +39,16 @@
 </template>
 
 <script setup>
+	import { usePlacemarkStore } from '@/stores'
+	const placemark = usePlacemarkStore()
 	const { getAll, deleteOne, changeStatusOne } = useFetchAll()
+	const { getMemberTypeOptions } = useMembertypes()
 
+	//
+	// initial testing values
+	//
+	const alpha = ref(placemark.getAlpha)
+	const member_type_id = ref(placemark.getMemberTypeId)
 	//
 	// Initialize values for Renderlist
 	//
@@ -35,6 +60,70 @@
 	// Get all accounts
 	//
 	const { data: accounts, pending } = await getAll('accounts')
+
+	//
+	// Filter members
+	//
+	const filteredData = computed(() => {
+		let temp = []
+		// by member type
+		temp = accounts.value.filter(function (d) {
+			return (
+				d.member_type_id === member_type_id.value ||
+				d.member_type2_id === member_type_id.value
+			)
+		})
+		//by initial letter
+		if (alpha.value !== '1') {
+			return temp.filter(function (d) {
+				return d.member_lastname[0].toUpperCase() === alpha.value
+			})
+		}
+		return temp
+	})
+
+	watch(member_type_id, (newid) => {
+		placemark.setMemberTypeId(newid)
+	})
+	watch(alpha, (newalpha) => {
+		placemark.setAlpha(newalpha)
+	})
+	//
+	// Get membertype opyions
+	//
+
+	const memberTypeOptions = await getMemberTypeOptions()
+
+	const alphas = {
+		1: 'All',
+		A: 'A',
+		B: 'B',
+		C: 'C',
+		D: 'D',
+		E: 'E',
+		F: 'F',
+		G: 'G',
+		H: 'H',
+		I: 'I',
+		J: 'J',
+		K: 'K',
+		L: 'L',
+		M: 'M',
+		N: 'N',
+		O: 'O',
+		P: 'P',
+		Q: 'Q',
+		R: 'R',
+		S: 'S',
+		T: 'T',
+		U: 'U',
+		V: 'V',
+		W: 'W',
+		X: 'X',
+		Y: 'Y',
+		Z: 'Z',
+	}
+
 	//
 	// Renderlist actions
 	//

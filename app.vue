@@ -10,6 +10,7 @@
 
 	await menuStore.initCustomMenuItems()
 
+	// stay logged in?
 	if (!localStorage.getItem('auth')) {
 		navigateTo('/')
 	} else {

@@ -237,15 +237,12 @@ async function addOne({
 		)
 		await CONN.query('COMMIT')
 		await CONN.end()
-		console.log('END TRANSACTION COMMIT')
 		return { message: 'ok' }
 	} catch (e) {
 		await CONN.query('ROLLBACK')
 		await CONN.end()
-		console.log('END TRANSACTION ROLLBACK')
 		return { message: e }
 	}
-	return true
 }
 async function deleteOne(id) {
 	const sql = `UPDATE inbrc_contributions SET deleted = 1, deleted_dt= NOW() WHERE contribution_id = ${id}`

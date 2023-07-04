@@ -1,5 +1,6 @@
 <script setup>
 	import { useAlertStore } from '~/stores/alertStore'
+
 	const alert = useAlertStore()
 	const { onSubmitEdit } = useSubmit()
 	const saving = ref(false)
@@ -9,6 +10,7 @@
 	//
 	const route = useRoute()
 	const id = ref(route.params.id)
+
 	//
 	// Accounts form action
 	//

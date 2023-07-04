@@ -11,11 +11,12 @@
 			<div class="text-center m-5">
 				<select-year
 					:startyear="startyear"
+					:currentyear="year"
 					@submitted="onSubmit"
 					class="mb-3"
 				/>
-				<p class="text-2xl">{{ year }}</p>
 			</div>
+
 			<render-list
 				:data="filteredData"
 				:app="app"
@@ -33,6 +34,8 @@
 </template>
 
 <script setup>
+	import { usePlacemarkStore } from '@/stores'
+	const placemark = usePlacemarkStore()
 	const { getAll, deleteOne, changeStatusOne } = useFetchAll()
 
 	//
@@ -40,12 +43,15 @@
 	//
 
 	const { getAccess } = useRenderListAccess()
-	const app = 'contributions'
 	const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
+	const app = 'contributions'
 
-	const startyear = ref(2012)
+	//
+	// Initialize year select
+	//
+	const startyear = 2012
 	const { $dayjs } = useNuxtApp()
-	let year = ref(parseInt($dayjs().format('YYYY')))
+	const year = ref(placemark.getYear)
 
 	//
 	// Get all contributions
@@ -57,6 +63,7 @@
 	//
 	const onSubmit = function (value) {
 		year.value = value
+		placemark.setYear(year.value)
 	}
 
 	const filteredData = computed(() => {

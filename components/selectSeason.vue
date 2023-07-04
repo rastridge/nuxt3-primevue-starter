@@ -20,14 +20,21 @@
 			type: Number,
 			required: true,
 		},
+		currentyear: {
+			type: Number,
+			required: true,
+		},
 	})
-
+	//
+	// Outgoing
+	//
+	const emit = defineEmits(['submitted'])
 	//
 	// Info for dropdown
 	//
 	const { $dayjs } = useNuxtApp()
 	const thisyear = parseInt($dayjs().format('YYYY'))
-	const year = ref(parseInt($dayjs().format('YYYY')))
+	const year = ref(props.currentyear)
 	const seasons = computed(() => {
 		{
 			let temp = []
@@ -41,13 +48,6 @@
 		}
 	})
 
-	// this.$store.commit('pagination/saveyear', value)
-	// this.$store.commit('pagination/savepage', '1')
-
-	//
-	// Outgoing
-	//
-	const emit = defineEmits(['submitted'])
 	//
 	// Watch for dropdown value change
 	//

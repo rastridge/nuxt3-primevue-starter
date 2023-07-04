@@ -13,12 +13,15 @@
 
 <script setup>
 	import Dropdown from 'primevue/dropdown'
-	const { $dayjs } = useNuxtApp()
 	//
 	// Incoming
 	//
 	const props = defineProps({
 		startyear: {
+			type: Number,
+			required: true,
+		},
+		currentyear: {
 			type: Number,
 			required: true,
 		},
@@ -31,7 +34,9 @@
 	//
 	// Info for dropdown
 	//
-	const year = ref($dayjs().format('YYYY'))
+	const { $dayjs } = useNuxtApp()
+	const year = ref(props.currentyear)
+
 	const years = computed(() => {
 		{
 			const years = [] // array of numbers
@@ -43,18 +48,14 @@
 		}
 	})
 	//
-	// Action for dropdown
+	// Watch for dropdown value change
 	//
-
-	// this.$store.commit('pagination/saveyear', value)
-	// this.$store.commit('pagination/savepage', '1')
-
 	watch(year, () => emit('submitted', year.value))
 </script>
 
 <style lang="scss" scoped>
 	.p-dropdown {
-		width: 20rem;
+		width: 10rem;
 	}
 	@media screen and (max-width: 640px) {
 		.p-treeselect {
