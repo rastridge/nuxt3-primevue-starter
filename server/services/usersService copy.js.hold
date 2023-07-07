@@ -118,6 +118,7 @@ async function authenticate({ username, password }) {
 	} else {
 		user = { match: false }
 	}
+	// console.log('IN authenticate user.match = ', user.match)
 	return user
 }
 /***************************************** */
@@ -141,14 +142,9 @@ async function getAll() {
 /*              getOne                     */
 /***************************************** */
 async function getOne(id) {
-	const sql = `SELECT 
-								admin_user_id,
-								admin_user_name,
-								admin_user_email
-							FROM
-								inbrc_admin_users
-							WHERE 
-								admin_user_id = ${id}`
+	const sql = `SELECT *
+								FROM inbrc_admin_users
+								WHERE admin_user_id = ${id}`
 
 	const user = await doDBQuery(sql)
 	const perms = await _getPerms(id)
@@ -212,10 +208,12 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 			let inserts = []
 			inserts.push(lc_admin_user_name, hashedpassword, lc_admin_user_email)
 			sql = mysql.format(sql, inserts)
+			// console.log('INSert INTO inbrc_admin_users sql = ', sql)
 			const [rows, fields] = await conn.execute(sql)
 			user = rows
 			// save id of new user
 			const id = user.insertId
+			// console.log('1 user.insertId = ', user.insertId)
 
 			// initial permissions with view only
 
@@ -232,17 +230,23 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 				sql = mysql.format(sql, inserts)
 
 				await conn.execute(sql)
+				/* console.log(
+					'INSERT INTO inbrc_admin_perms id, p.admin_app_id, p.admin_perm= ',
+					id,
+					p.admin_app_id,
+					p.admin_perm
+				) */
 			}
-			// sendEmail(
-			// 	'ron.astridge@me.com',
-			// 	'Buffalo Rugby Club Admin Account Modification',
-			// 	'An account for user ' +
-			// 		lc_admin_user_name +
-			// 		'  has been created, password = ' +
-			// 		password +
-			// 		' email = ' +
-			// 		lc_admin_user_email
-			// )
+			sendEmail(
+				'ron.astridge@me.com',
+				'Buffalo Rugby Club Admin Account Modification',
+				'An account for user ' +
+					lc_admin_user_name +
+					'  has been created, password = ' +
+					password +
+					' email = ' +
+					lc_admin_user_email
+			)
 		} else {
 			msg =
 				'A user with username ' +
@@ -250,15 +254,15 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 				' or email ' +
 				lc_admin_user_email +
 				' already exists'
-			// sendEmail(
-			// 	'ron.astridge@me.com',
-			// 	'Buffalo Rugby Club Admin Account Modification',
-			// 	'A user with username ' +
-			// 		lc_admin_user_name +
-			// 		' or email ' +
-			// 		lc_admin_user_email +
-			// 		' already exists'
-			// )
+			sendEmail(
+				'ron.astridge@me.com',
+				'Buffalo Rugby Club Admin Account Modification',
+				'A user with username ' +
+					lc_admin_user_name +
+					' or email ' +
+					lc_admin_user_email +
+					' already exists'
+			)
 		}
 
 		await conn.query('COMMIT')
@@ -276,9 +280,14 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 /***************************************** */
 
 async function editOne(info) {
-	const { admin_user_id, admin_user_name, admin_user_email, perms, password } =
-		info
-
+	const {
+		admin_user_id,
+		admin_user_name,
+		admin_user_email,
+		admin_user_pass,
+		perms,
+		password,
+	} = info
 	const conn = await getConnection()
 
 	try {
@@ -290,32 +299,25 @@ async function editOne(info) {
 							FROM inbrc_admin_users
 							WHERE
 								deleted = 0 AND admin_user_id !=  ${admin_user_id}`
+		console.log('sql1= ', sql)
 		const [rows, fields] = await conn.execute(sql)
 		const users = rows
 
 		const lc_admin_username = admin_user_name.toLowerCase()
 		const lc_admin_user_email = admin_user_email.toLowerCase()
 
-		const existing_user = users.find((u) => {
+		let user = users.find((u) => {
 			return (
-				u.admin_user_name === lc_admin_username ||
-				u.admin_user_email === lc_admin_user_email
+				u.admin_user_name == lc_admin_username ||
+				u.admin_user_email == lc_admin_user_email
 			)
 		})
-
 		//
 		// if no other users with proposed username or email
 		//
 		let msg = null
-		if (!existing_user) {
-			// new (add)
-
-			// new (add) or updated (edit) password
-			if (password.length > 0) {
-				const salt = bcrypt.genSaltSync(10)
-				const new_admin_user_pass = bcrypt.hashSync(password, salt)
-
-				sql = `UPDATE inbrc_admin_users
+		if (!user) {
+			sql = `UPDATE inbrc_admin_users
 							SET
 									admin_user_name = ?,
 									admin_user_email = ?,
@@ -324,10 +326,13 @@ async function editOne(info) {
 							WHERE
 									admin_user_id = ?`
 
-				//
-				// If user has reset password
-				//
-				let inserts = []
+			//
+			// If user has reset password
+			//
+			let inserts = []
+			if (password.length > 0) {
+				const salt = bcrypt.genSaltSync(10)
+				const new_admin_user_pass = bcrypt.hashSync(password, salt)
 
 				inserts.push(
 					lc_admin_username,
@@ -335,25 +340,18 @@ async function editOne(info) {
 					new_admin_user_pass,
 					admin_user_id
 				)
-				sql = mysql.format(sql, inserts)
-
-				await conn.execute(sql)
 			} else {
-				// no new password
-				sql = `UPDATE inbrc_admin_users
-							SET
-									admin_user_name = ?,
-									admin_user_email = ?,
-									modified_dt= NOW()
-							WHERE
-									admin_user_id = ?`
-
-				let inserts = []
-				inserts.push(lc_admin_username, lc_admin_user_email, admin_user_id)
-				sql = mysql.format(sql, inserts)
-
-				await conn.execute(sql)
+				inserts.push(
+					lc_admin_username,
+					lc_admin_user_email,
+					admin_user_pass,
+					admin_user_id
+				)
 			}
+
+			sql = mysql.format(sql, inserts)
+			const [rows, fields] = await conn.execute(sql)
+			user = rows
 
 			//
 			// update user perms by deleting records - creating new
@@ -384,14 +382,13 @@ async function editOne(info) {
 			}
 
 			// send email notification
-			//
-			// sendEmail(
-			// 	'ron.astridge@me.com',
-			// 	'BRC Admin Account Modification',
-			// 	'The account for admin user ' +
-			// 		lc_admin_username +
-			// 		'  has been modified'
-			// )
+			sendEmail(
+				'ron.astridge@me.com',
+				'BRC Admin Account Modification',
+				'The account for admin user ' +
+					lc_admin_username +
+					'  has been modified'
+			)
 		} else {
 			msg =
 				'An admin with this username ' +
@@ -399,7 +396,7 @@ async function editOne(info) {
 				' or email ' +
 				lc_admin_user_email +
 				' already exists'
-			// sendEmail('ron.astridge@me.com', 'BRC Member Account Modification', msg)
+			sendEmail('ron.astridge@me.com', 'BRC Member Account Modification', msg)
 		}
 
 		await conn.query('COMMIT')
@@ -438,7 +435,9 @@ async function getApps() {
                 ORDER BY
                     admin_app_name`
 
+	// console.log('in getApps sql = ', sql)
 	const apps = await doDBQuery(sql)
+	// console.log('in getApps after query apps = ', apps)
 
 	return apps
 }
@@ -517,6 +516,7 @@ async function resetRequest({ username }) {
 }
 
 async function resetPassword({ username, password }) {
+	// console.log('IN userservice resetPassword ', username, password)
 	// update user password
 	let sql = `UPDATE inbrc_admin_users
 					SET

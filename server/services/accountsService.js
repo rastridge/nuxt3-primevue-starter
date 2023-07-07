@@ -244,7 +244,7 @@ async function editOne(info) {
 		await CONN.query('START TRANSACTION')
 		console.log('START TRANSACTION')
 
-		// check for existing email in others
+		// check for existing email in other mewmbers
 		let sql = `select *
 							from inbrc_accounts
 							where deleted = 0  AND account_id <> ${info.account_id}`

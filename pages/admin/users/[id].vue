@@ -30,8 +30,6 @@
 		saving.value = true
 		await onSubmitEdit('users', form_state)
 		saving.value = false
-		if (alert.message === null) {
-			navigateTo('/admin/users')
-		}
+		navigateTo('/admin/users')
 	}
 </script>

@@ -45,7 +45,7 @@
 		"c8": "^7.13.0",
 		"histoire": "^0.16.1",
 		"jsdom": "^21.1.1",
-		"nuxt": "3.4.2",
+		"nuxt": "^3.6.1",
 		"sass": "^1.62.1",
 		"typescript": "^5.0.4",
 		"vitest": "^0.30.1"
@@ -63,6 +63,7 @@
 		"dayjs": "^1.11.7",
 		"jsonwebtoken": "^9.0.0",
 		"mysql2": "^3.2.4",
+		"nuxi": "^3.6.1",
 		"nuxt-storage": "^1.2.2",
 		"quill-image-uploader": "^1.2.4",
 		"sweetalert2": "^11.7.5",

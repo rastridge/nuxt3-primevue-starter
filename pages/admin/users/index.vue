@@ -35,7 +35,6 @@
 	const app = 'users'
 	const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
 
-	alert.clear()
 	//
 	// Get all users
 	//

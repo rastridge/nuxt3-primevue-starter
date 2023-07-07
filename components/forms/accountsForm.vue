@@ -8,18 +8,14 @@
 			<span class="visually-hidden">Loading...</span>
 		</div>
 		<div v-else class="form-box">
-			<p v-if="alert.message" class="alert-danger">ERROR{{ alert.message }}</p>
-			<!-- 			<FormKit
-				type="form"
-				#default="{ state }"
-				v-model="state"
-				submit-label="Submit"
-				@submit="submitForm"
-			> -->
+			<p v-if="alert.message" class="alert-danger">
+				ERROR: {{ alert.message }}
+			</p>
 			<FormKit
 				type="form"
+				:config="{ validationVisibility: 'live' }"
 				v-model="state"
-				submit-label="Submit"
+				submit-label="Submit member"
 				@submit="submitForm"
 			>
 				<FormKit
@@ -162,9 +158,6 @@
 					validation="required"
 				/>
 			</FormKit>
-			<p v-if="alert.message !== null" :class="`alert ${alert.type}`">
-				{{ alert.message }}
-			</p>
 			<div class="mb-3">
 				<Button @click="cancelForm"> Cancel </Button>
 			</div>
@@ -177,7 +170,6 @@
 	import '@formkit/themes/genesis'
 	import { useAuthStore } from '~/stores/authStore'
 	import { useAlertStore } from '~/stores/alertStore'
-	import { isWhiteSpaceLike } from 'typescript'
 	const auth = useAuthStore()
 	const alert = useAlertStore()
 	const { $dayjs } = useNuxtApp()
@@ -258,7 +250,9 @@
 	// errors
 	//
 	const errors = computed(() => {
-		return alert.message !== null ? ['Already exists'] : ['']
+		return alert.message !== null
+			? ['Account with this email lready exists']
+			: ['']
 	})
 
 	//

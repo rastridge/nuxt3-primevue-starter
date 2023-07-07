@@ -5,6 +5,7 @@
 		</p>
 		<FormKit
 			type="form"
+			:config="{ validationVisibility: 'live' }"
 			v-model="state"
 			submit-label="Submit Newsletter"
 			@submit="submitForm"

@@ -25,10 +25,11 @@
 				<FormKit
 					type="checkbox"
 					label="Keep me logged in"
-					name="keeploggedin"
-					:value="false"
+					v-model="keeploggedin"
+					:value="true"
 				/>
 				<!-- state.keeploggedin = {{ state.keeploggedin }} -->
+				keeploggedin = {{ keeploggedin }}
 			</FormKit>
 			<div>
 				<nuxt-link to="/resetpassword" active-class="active"
@@ -47,30 +48,10 @@
 	const auth = useAuthStore()
 	const alert = useAlertStore() // used in template
 
+	const keeploggedin = ref(false)
 	const handleSubmit = async (state) => {
 		if (state.username && state.password) {
-			auth.login(state.username, state.password, state.keeploggedin) // pinia auth store
+			auth.login(state.username, state.password, keeploggedin) // pinia auth store
 		}
 	}
 </script>
-
-<style scoped>
-	.formroot {
-		text-align: left;
-		margin-left: 4rem;
-	}
-	[data-invalid] .formkit-inner {
-		border-color: red;
-		box-shadow: 0 0 0 1px red;
-	}
-
-	[data-complete] .formkit-inner {
-		border-color: red;
-		box-shadow: 0 0 0 1px green;
-	}
-	[data-complete] .formkit-inner::after {
-		content: '✅';
-		display: block;
-		padding: 0.5em;
-	}
-</style>

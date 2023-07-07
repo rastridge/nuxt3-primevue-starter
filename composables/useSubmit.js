@@ -9,14 +9,13 @@ const alert = useAlertStore()
 export default function useSubmit() {
 	const auth = useAuthStore()
 	const onSubmitEdit = async function (app, form_state) {
-		const { data, pending, error } = await useFetch(`/${app}/editone`, {
+		const { data, error } = await useFetch(`/${app}/editone`, {
 			method: 'post',
 			body: form_state,
 			headers: {
 				authorization: auth.user.token,
 			},
 		})
-		alert.clear()
 		if (error.value) {
 			throw createError({
 				...error.value,
@@ -37,7 +36,6 @@ export default function useSubmit() {
 			},
 		})
 
-		alert.clear()
 		if (error.value) {
 			throw createError({
 				...error.value,

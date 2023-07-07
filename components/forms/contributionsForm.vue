@@ -9,6 +9,7 @@
 
 		<FormKit
 			type="form"
+			:config="{ validationVisibility: 'live' }"
 			name="contribution"
 			:value="contribution_data"
 			submit-label="Submit"

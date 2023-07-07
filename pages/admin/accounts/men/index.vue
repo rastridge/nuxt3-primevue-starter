@@ -4,7 +4,14 @@
 			<Title>Accounts List</Title>
 		</Head>
 		<common-header title="Account List" />
-
+		<div v-if="addable" class="text-center m-5">
+			<Button
+				class="p-button-sm"
+				label="Add new"
+				@click="navigateTo(`/admin/${app}/add`)"
+			>
+			</Button>
+		</div>
 		<FormKit
 			type="radio"
 			label="Member Type"
@@ -40,6 +47,8 @@
 
 <script setup>
 	import { usePlacemarkStore } from '@/stores'
+	import { useAlertStore } from '~/stores/alertStore'
+	const alert = useAlertStore()
 	const placemark = usePlacemarkStore()
 	const { getAll, deleteOne, changeStatusOne } = useFetchAll()
 	const { getMemberTypeOptions } = useMembertypes()

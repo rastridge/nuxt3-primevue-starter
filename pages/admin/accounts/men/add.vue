@@ -8,7 +8,9 @@
 	// Accounts form action
 	//
 	const onSubmit = async function (form_state) {
+		saving.value = true
 		await onSubmitAdd('accounts', form_state)
+		saving.value = false
 		if (alert.message === null) {
 			navigateTo(`/admin/accounts/men`)
 		}

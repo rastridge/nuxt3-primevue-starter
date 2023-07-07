@@ -6,6 +6,7 @@
 		<FormKit
 			type="form"
 			v-model="state"
+			:config="{ validationVisibility: 'live' }"
 			submit-label="Submit"
 			@submit="submitForm"
 		>
