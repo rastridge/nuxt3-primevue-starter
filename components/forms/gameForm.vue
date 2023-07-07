@@ -1,36 +1,8 @@
 <template>
 	<div>
-		<div v-if="pending">Loading game...</div>
-		<div v-else-if="error">{{ error.message }}</div>
-		<!-- 		<div v-else>
-			<p>game = {{ game }}</p>
-		</div> -->
-		<div v-if="pending2">Loading players...</div>
-		<div v-else-if="error2">{{ error2.message }}</div>
-		<div v-else>
-			<!-- <p>Players = {{ players }}</p> -->
-		</div>
-		<div v-if="pending3">Loading gametypes...</div>
-		<div v-else-if="error3">{{ error3.message }}</div>
-		<div v-else>
-			<!-- <p>Gametypes = {{ gametypes }}</p> -->
-		</div>
-		<div v-if="pending4">Loading players suggestions...</div>
-		<div v-else-if="error4">{{ error4.message }}</div>
-		<!-- 		<div v-else>
-			<p>Suggestions = {{ suggestions }}</p>
-		</div> -->
-		<div v-if="pending5">Loading opponent suggestions...</div>
-		<div v-else-if="error5">{{ error5.message }}</div>
-		<div v-else>
-			<!-- <p>Opponent suggestions = {{ suggestions_opponents }}</p> -->
-		</div>
-		<div v-if="pending6">Loading previous games...</div>
-		<div v-else-if="error6">{{ error6.message }}</div>
-		<div v-else>
-			<!-- <p>Previous games = {{ previousgames }}</p> -->
-		</div>
-		<div class="formroot">
+		<p v-if="!state"><ProgressSpinner /> Loading</p>
+
+		<div v-else class="formroot">
 			<Button @click.prevent="cancelForm()"> Cancel </Button>
 
 			<FormKit
@@ -121,10 +93,7 @@
 			<Button @click.prevent="cancelForm()" style="margin: 1rem">
 				Cancel
 			</Button>
-			<p v-if="saving" style="font-size: 2rem; margin: 1rem">
-				Saving . . .
-				<i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-			</p>
+
 			<div v-if="props.id === 0 || $dayjs().isBefore(dayjs(state.date))">
 				<!-- Select previous game for autofill -->
 				<label for="reset"
@@ -162,7 +131,10 @@
 			</div>
 
 			<!-- ------------ players table ------------------------- -->
-			<table style="white-space: nowrap; width: 100%; border-style: none">
+			<table
+				v-if="players"
+				style="white-space: nowrap; width: 100%; border-style: none"
+			>
 				<tr>
 					<th>Pos</th>
 					<th>Player</th>
@@ -371,7 +343,7 @@
 		const {
 			data: g,
 			error,
-			pending,
+			pending: pending_game,
 		} = await useFetch(`/game_player_stats/${props.id}`, {
 			method: 'get',
 			headers: {
@@ -393,7 +365,7 @@
 		const {
 			data: p,
 			error: error2,
-			pending: pending2,
+			pending: pending_players,
 		} = await useFetch(`/game_player_stats/players/${props.id}`, {
 			method: 'get',
 			headers: {

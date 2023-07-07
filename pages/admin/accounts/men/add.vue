@@ -10,7 +10,7 @@
 	const onSubmit = async function (form_state) {
 		saving.value = true
 		await onSubmitAdd('accounts', form_state)
-		saving.value = false
+		saving.value = true
 		if (alert.message === null) {
 			navigateTo(`/admin/accounts/men`)
 		}
@@ -23,9 +23,12 @@
 			<Title>Add Account</Title>
 		</Head>
 		<common-header title="Add account" />
-		<p v-if="saving" class="text-center text-2xl">Saving ...</p>
-		<div v-else>
-			<accounts-form @submitted="onSubmit" />
-		</div>
+		<p v-if="saving" class="text-center text-2xl">
+			<ProgressSpinner /> Saving ...
+		</p>
+		<accounts-form @submitted="onSubmit" />
+		<p v-if="saving" class="text-center text-2xl">
+			<ProgressSpinner /> Saving ...
+		</p>
 	</div>
 </template>

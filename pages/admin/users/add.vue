@@ -4,10 +4,11 @@
 			<Title>Add User</Title>
 		</Head>
 		<common-header title="Add User" />
-		<p v-if="saving" class="text-center text-2xl">Saving ...</p>
-		<div v-else>
-			<user-form @submitted="onSubmit" />
-		</div>
+		<p v-if="saving" class="text-center text-2xl">
+			<ProgressSpinner /> Saving ...
+		</p>
+		<user-form @submitted="onSubmit" />
+		<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
 	</div>
 </template>
 

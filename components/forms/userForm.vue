@@ -1,8 +1,6 @@
 <template>
 	<div>
-		<div v-if="!apps_data" class="spinner-border text-primary" role="status">
-			<span class="visually-hidden">Loading...</span>
-		</div>
+		<p v-if="!apps_data"><ProgressSpinner /> Loading</p>
 		<div v-else>
 			<div>
 				<Button

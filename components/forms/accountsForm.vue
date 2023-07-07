@@ -1,12 +1,8 @@
 <template>
 	<div>
-		<div
-			v-if="!memberTypeOptions && !memberAdminTypeOptions"
-			class="spinner-border text-primary"
-			role="status"
-		>
-			<span class="visually-hidden">Loading...</span>
-		</div>
+		<p v-if="!memberTypeOptions || !memberAdminTypeOptions || !state">
+			<ProgressSpinner /> Loading
+		</p>
 		<div v-else class="form-box">
 			<p v-if="alert.message" class="alert-danger">
 				ERROR: {{ alert.message }}
