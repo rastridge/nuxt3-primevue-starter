@@ -161,7 +161,7 @@
 			</div>
 
 			<div class="layout-main-container">
-				<div class="layout-main">
+				<div class="layout-main card">
 					<slot />
 				</div>
 				<AppFooter />

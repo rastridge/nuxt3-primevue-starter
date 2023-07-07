@@ -184,17 +184,6 @@ export function useNavigationMenu() {
 				visible: () => !auth.isLoggedIn,
 			},
 			{
-				label: 'Templates',
-				items: [
-					{
-						label: 'Blueprint',
-						icon: 'pi pi-fw pi-user-edit',
-						to: '/templates/blueprint',
-					},
-				],
-				visible: () => !auth.isLoggedIn,
-			},
-			{
 				label: 'Menu Hierarchy',
 				icon: 'pi pi-fw pi-search',
 				items: [
