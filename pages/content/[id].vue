@@ -34,7 +34,3 @@
 		'img width="100%"'
 	)
 </script>
-
-<style>
-	@import '~/assets/css/quill-adjust.css';
-</style>

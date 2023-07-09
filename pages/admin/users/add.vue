@@ -23,6 +23,7 @@
 	// Users form action
 	//
 	const onSubmit = async function (form_state) {
+		alert.clear()
 		saving.value = true
 		await onSubmitAdd('users', form_state)
 		saving.value = false

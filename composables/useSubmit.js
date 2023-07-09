@@ -23,6 +23,8 @@ export default function useSubmit() {
 			})
 		} else {
 			if (data.value.message) {
+				// message if email exists
+
 				alert.error(data.value.message)
 			}
 		}
@@ -43,6 +45,7 @@ export default function useSubmit() {
 			})
 		} else {
 			if (data.value.message) {
+				// message if email exists
 				alert.error(data.value.message)
 			}
 		}

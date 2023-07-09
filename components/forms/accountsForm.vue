@@ -247,7 +247,7 @@
 	//
 	const errors = computed(() => {
 		return alert.message !== null
-			? ['Account with this email lready exists']
+			? ['Account with this email already exists']
 			: ['']
 	})
 
@@ -266,12 +266,3 @@
 		})
 	})
 </script>
-
-<style scoped>
-	.alert-danger {
-		color: red;
-	}
-	.formkit-input {
-		color: white;
-	}
-</style>

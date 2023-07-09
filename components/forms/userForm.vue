@@ -283,14 +283,3 @@
 		navigateTo('/admin/users')
 	}
 </script>
-
-<style scoped>
-	.alert-danger {
-		color: red;
-	}
-	.xcentered {
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-	}
-</style>

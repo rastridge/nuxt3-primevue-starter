@@ -15,9 +15,10 @@
 	// Accounts form action
 	//
 	const onSubmit = async function (form_state) {
+		alert.clear()
 		saving.value = true
 		await onSubmitEdit('accounts', form_state)
-		saving.value = true
+		saving.value = false
 		if (alert.message === null) {
 			navigateTo(`/admin/accounts/men`)
 		}
