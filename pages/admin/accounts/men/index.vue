@@ -4,6 +4,7 @@
 			<Title>Accounts List</Title>
 		</Head>
 		<common-header title="Account List" />
+		<p v-if="pending"><ProgressSpinner /> Loading ...</p>
 		<div v-if="addable" class="text-center m-5">
 			<Button
 				class="p-button-sm"

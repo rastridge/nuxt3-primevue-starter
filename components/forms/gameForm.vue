@@ -2,9 +2,7 @@
 	<div>
 		<p v-if="!state"><ProgressSpinner /> Loading</p>
 
-		<div v-else class="formroot">
-			<Button @click.prevent="cancelForm()"> Cancel </Button>
-
+		<div v-else>
 			<FormKit
 				type="form"
 				:config="{ validationVisibility: 'live' }"
@@ -13,27 +11,30 @@
 				@submit="submitForm(state)"
 			>
 				<!-- opponent input-->
-				<div v-if="!props.id" style="margin-top: 1rem; margin-bottom: 1rem">
-					<h5>Find opponent</h5>
-					<AutoComplete
-						v-model="selectedOpponent"
-						optionLabel="opponent_name"
-						:suggestions="filteredOpponents"
-						@complete="search_opponents"
-						@item-select="setOpponent"
-					/>
-					<br />
-					<p>
-						If the opponent for this game can not be found in the existing
-						opponents list, you must first create the opponent<br />
-						<Button
-							class="p-button-sm"
-							label="Create Opponent"
-							@click="navigateTo('/admin/opponents/add')"
-						>
-						</Button>
-					</p>
-				</div>
+
+				<Card if="!props.id" style="width: 30em; margin-bottom: 1rem">
+					<template #title> Find opponent</template>
+					<template #content>
+						<AutoComplete
+							v-model="selectedOpponent"
+							optionLabel="opponent_name"
+							:suggestions="filteredOpponents"
+							@complete="search_opponents"
+							@item-select="setOpponent"
+						/>
+						<br />
+						<p>
+							If the opponent for this game can not be found in the existing
+							opponents list, you must first create the opponent<br />
+							<Button
+								class="p-button-sm"
+								label="Create Opponent"
+								@click="navigateTo('/admin/opponents/add')"
+							>
+							</Button>
+						</p>
+					</template>
+				</Card>
 
 				<FormKit label="Opponent" name="opponent_name" type="text" disabled />
 
@@ -579,23 +580,3 @@
 		navigateTo('/admin/game_player_stats') // needs to be / for self register
 	}
 </script>
-
-<style scoped>
-	.formroot {
-		text-align: left;
-	}
-	[data-invalid] .formkit-inner {
-		border-color: red;
-		box-shadow: 0 0 0 1px red;
-	}
-
-	[data-complete] .formkit-inner {
-		border-color: red;
-		box-shadow: 0 0 0 1px green;
-	}
-	[data-complete] .formkit-inner::after {
-		content: '✅';
-		display: block;
-		padding: 0.5em;
-	}
-</style>

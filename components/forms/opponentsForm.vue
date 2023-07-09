@@ -1,5 +1,5 @@
 <template>
-	<div class="form-box">
+	<div>
 		<FormKit
 			type="form"
 			:config="{ validationVisibility: 'live' }"

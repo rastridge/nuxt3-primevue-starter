@@ -15,15 +15,18 @@
 			submit-label="Submit"
 			@submit="submitForm"
 		>
-			<div v-if="!props.id">
-				<AutoComplete
-					v-model="selectedItem"
-					optionLabel="title"
-					:suggestions="filteredNames"
-					@complete="search"
-					@item-select="getPrevious"
-				/>
-			</div>
+			<Card if="!props.id" style="width: 20em; margin-bottom: 1rem">
+				<template #title> Contributor</template>
+				<template #content>
+					<AutoComplete
+						v-model="selectedItem"
+						optionLabel="title"
+						:suggestions="filteredNames"
+						@complete="search"
+						@item-select="getPrevious"
+					/>
+				</template>
+			</Card>
 
 			<FormKit
 				type="date"

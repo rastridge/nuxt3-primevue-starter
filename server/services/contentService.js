@@ -114,8 +114,6 @@ async function editOne(item) {
 }
 
 async function addOne(item) {
-	console.log('IN addOne item = ', item)
-
 	let sql = `INSERT INTO inbrc_content
 				SET
 				content_name = ?,

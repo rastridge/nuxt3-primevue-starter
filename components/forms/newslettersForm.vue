@@ -1,5 +1,5 @@
 <template>
-	<div class="form-box">
+	<div>
 		<p v-if="id">
 			Current version of newsletter was opened {{ newsletter_opened_cnt }} times
 		</p>

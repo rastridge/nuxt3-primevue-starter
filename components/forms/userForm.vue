@@ -4,13 +4,19 @@
 		<div v-else>
 			<div>
 				<Button
-					class="p-button-sm mb-4"
+					class="p-button mb-4"
 					style="display: block; margin-left: auto; margin-right: auto"
 					@click="submitForm(state)"
 				>
-					Submit
+					Submit new user
 				</Button>
-
+				<Button
+					class="p-button mb-4"
+					style="display: block; margin-left: auto; margin-right: auto"
+					@click="cancelForm"
+				>
+					Cancel
+				</Button>
 				<div
 					style="
 						display: block;
@@ -30,8 +36,6 @@
 						class="w-full"
 					/>
 					<p v-if="username_required" class="alert-danger">Required</p>
-					<p>username_required = {{ username_required }}</p>
-
 					<label for="admin_user_email">Email</label>
 					<InputText
 						id="admin_user_email"
@@ -40,16 +44,9 @@
 						class="w-full"
 					/>
 					<p v-if="email_required" class="alert-danger">Required</p>
-					<p>email_required = {{ email_required }}</p>
-
 					<div v-if="!addForm">
-						<input
-							id="reset"
-							v-model="reset"
-							type="checkbox"
-							@input="resetPassword()"
-						/>
-						<label for="reset">Change password</label>
+						<Checkbox v-model="reset" :binary="true" />
+						<label> Change password</label>
 					</div>
 					<br />
 
@@ -139,21 +136,20 @@
 						</tbody>
 					</table>
 				</div>
-				<div>
-					<Button
-						class="m-1"
-						style="display: block; margin-left: auto; margin-right: auto"
-						@click="cancelForm"
-					>
-						Cancel </Button
-					><br />
-					<Button
-						@click="submitForm(state)"
-						style="display: block; margin-left: auto; margin-right: auto"
-					>
-						Submit
-					</Button>
-				</div>
+				<Button
+					class="p-button m-4"
+					style="display: block; margin-left: auto; margin-right: auto"
+					@click="submitForm(state)"
+				>
+					Submit new user
+				</Button>
+				<Button
+					class="p-button"
+					style="display: block; margin-left: auto; margin-right: auto"
+					@click="cancelForm"
+				>
+					Cancel
+				</Button>
 			</div>
 		</div>
 	</div>

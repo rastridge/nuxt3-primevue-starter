@@ -96,7 +96,7 @@ export default defineNuxtConfig({
 		'@sfxcode/formkit-primevue/dist/sass/formkit-prime-inputs.scss',
 		'@sfxcode/formkit-primevue/dist/sass/formkit-primevue.scss',
 	],
-	/* 	googleFonts: {
+	googleFonts: {
 		prefetch: true,
 		families: {
 			Roboto: true,
@@ -107,13 +107,13 @@ export default defineNuxtConfig({
 				ital: [100],
 			},
 		},
-	}, */
-	googleFonts: {
+	},
+	/* googleFonts: {
 		prefetch: true,
 		families: {
 			Lora: true,
 		},
-	},
+	}, */
 	pinia: {
 		autoImports: [
 			// automatically imports `defineStore`

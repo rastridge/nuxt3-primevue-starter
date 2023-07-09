@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+// import { defineStore } from 'pinia'
 import { useAlertStore } from '~/stores/alertStore'
 
 export const useAuthStore = defineStore('auth', {
