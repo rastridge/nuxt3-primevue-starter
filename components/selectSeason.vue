@@ -1,17 +1,19 @@
 <template>
 	<div>
+		<ProgressSpinner />Loading
+
 		<Dropdown
 			v-model="year"
 			:options="seasons"
 			optionLabel="season"
 			optionValue="year"
-			placeholder="Select a Different Season"
 		/>
 	</div>
 </template>
 
 <script setup>
-	import Dropdown from 'primevue/dropdown'
+	import ProgressSpinner from 'primevue/progressspinner'
+
 	//
 	// Incoming
 	//

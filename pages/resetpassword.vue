@@ -28,8 +28,11 @@
 						</FormKit>
 
 						<div class="mb-3">
-							<Button class="p-button-danger" @click="cancelForm()">
-								Cancel
+							<Button
+								class="p-button-danger"
+								label="Cancel"
+								@click="cancelForm()"
+							>
 							</Button>
 						</div>
 					</div>

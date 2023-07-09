@@ -31,7 +31,7 @@
 				validation="required"
 			/>
 		</FormKit>
-		<Button class="m-1" @click="cancelForm()"> Cancel </Button>
+		<Button class="m-1" label="Cancel" @click="cancelForm()"> </Button>
 	</div>
 </template>
 

@@ -1,13 +1,5 @@
 <template>
 	<div>
-		<ProgressSpinner
-			:pt="{
-				spinner: { style: { animationDuration: '2s' } },
-				circle: {
-					style: { stroke: '#F59E0B', strokeWidth: 3, animation: 'none' },
-				},
-			}"
-		/>
 		<p>Admin user name is {{ auth.user.admin_user_name }}</p>
 		<!-- <p>Admin user token is {{ auth.user.token }}</p> -->
 		<p>Admin user is logged in {{ auth.isLoggedIn }}</p>

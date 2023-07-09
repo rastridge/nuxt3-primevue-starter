@@ -91,8 +91,7 @@
 				<FormKit label="Pts against" name="ptsAgn" type="text" />
 			</FormKit>
 
-			<Button @click.prevent="cancelForm()" style="margin: 1rem">
-				Cancel
+			<Button label="Cancel" @click.prevent="cancelForm()" style="margin: 1rem">
 			</Button>
 
 			<div v-if="props.id === 0 || $dayjs().isBefore(dayjs(state.date))">

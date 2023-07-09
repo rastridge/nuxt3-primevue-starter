@@ -37,7 +37,6 @@ export default defineNuxtConfig({
 	},
 	modules: [
 		'@formkit/nuxt',
-		'@sfxcode/nuxt-primevue',
 		'@unocss/nuxt',
 		'@pinia/nuxt',
 		'@nuxtjs/i18n',
@@ -92,10 +91,10 @@ export default defineNuxtConfig({
 	},
 	css: [
 		'primevue/resources/primevue.css',
+		'primevue/resources/themes/lara-light-blue/theme.css',
 		'primeicons/primeicons.css',
-		'@sfxcode/formkit-primevue/dist/sass/formkit-prime-inputs.scss',
-		'@sfxcode/formkit-primevue/dist/sass/formkit-primevue.scss',
 	],
+
 	googleFonts: {
 		prefetch: true,
 		families: {

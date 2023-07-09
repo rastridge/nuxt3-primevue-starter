@@ -6,16 +6,16 @@
 				<Button
 					class="p-button mb-4"
 					style="display: block; margin-left: auto; margin-right: auto"
+					label="Submit new user"
 					@click="submitForm(state)"
 				>
-					Submit new user
 				</Button>
 				<Button
 					class="p-button mb-4"
+					label="Cancel"
 					style="display: block; margin-left: auto; margin-right: auto"
 					@click="cancelForm"
 				>
-					Cancel
 				</Button>
 				<div
 					style="
@@ -139,16 +139,16 @@
 				<Button
 					class="p-button m-4"
 					style="display: block; margin-left: auto; margin-right: auto"
+					label="Submit new user"
 					@click="submitForm(state)"
 				>
-					Submit new user
 				</Button>
 				<Button
 					class="p-button"
 					style="display: block; margin-left: auto; margin-right: auto"
+					label="Cancel"
 					@click="cancelForm"
 				>
-					Cancel
 				</Button>
 			</div>
 		</div>

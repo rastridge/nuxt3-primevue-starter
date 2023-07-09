@@ -2,7 +2,6 @@
 
 Build your VUE.js App with Nuxt3. First Class PrimeVUE support. Validation by Formkit.
 
-
 [![CI](https://github.com/sfxcode/nuxt3-primevue-starter/actions/workflows/main.yml/badge.svg)](https://github.com/sfxcode/nuxt3-primevue-starter/actions/workflows/main.yml)
 
 THX to [antfu / Vitesse Nuxt3](https://github.com/antfu/vitesse-nuxt3) for starter code
@@ -23,13 +22,11 @@ THX to [antfu / Vitesse Nuxt3](https://github.com/antfu/vitesse-nuxt3) for start
 - [Pinia](https://pinia.esm.dev/) - intuitive, type safe, light and flexible Store for Vue.
 - [VueUse](https://github.com/vueuse/vueuse) - collection of useful composition APIs.
 - [FormKit](https://formkit.com/) - Validation
-- [PrimeVue](https://github.com/sfxcode/nuxt-primevue) - PrimeVue Components and Services, PrimeVue Form Validation by [formkit-primevue](https://github.com/sfxcode/formkit-primevue)
+<!-- - [PrimeVue](https://github.com/sfxcode/nuxt-primevue) - PrimeVue Components and Services, PrimeVue Form Validation by [formkit-primevue](https://github.com/sfxcode/formkit-primevue) -->
 - [UnoCSS](https://github.com/antfu/unocss) - the instant on-demand atomic CSS engine.
 - [Content](https://content.nuxtjs.org) - parses .md, .yml, .csv and .json files
 - [I18n](https://v8.i18n.nuxtjs.org) - Integration with [Vue I18n](https://vue-i18n.intlify.dev/)
 - [Histoire](https://histoire.dev/?ref=madewithvuejs.com) (Storybook like Component Viewer)
-
-
 
 ## Variations
 
@@ -41,13 +38,13 @@ Vite Primevue Starter Template
 
 [App on Netlify](https://vite-primevue-starter.netlify.app/)
 
-* Pages, Layouts, and other NUXT like features by VITE Plugins
-* UnoCSS
-* Markdown
-* CachedPiniaStore
-* i18n
-* Validation
-* ...
+- Pages, Layouts, and other NUXT like features by VITE Plugins
+- UnoCSS
+- Markdown
+- CachedPiniaStore
+- i18n
+- Validation
+- ...
 
 ## Project setup and usage
 

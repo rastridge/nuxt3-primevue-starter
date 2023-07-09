@@ -54,8 +54,8 @@
 </template>
 
 <script setup>
-	import Dialog from 'primevue/dialog'
-	import Card from 'primevue/card'
+	// import Dialog from 'primevue/dialog'
+	// import Card from 'primevue/card'
 	const { $dayjs } = useNuxtApp()
 	//
 	// Dialog initialization - display news item

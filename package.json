@@ -31,7 +31,6 @@
 		"@nuxtjs/google-fonts": "^3.0.0",
 		"@nuxtjs/i18n": "8.0.0-beta.11",
 		"@pinia/nuxt": "^0.4.9",
-		"@sfxcode/nuxt-primevue": "^1.1.2",
 		"@tiptap/extension-highlight": "^2.0.3",
 		"@tiptap/extension-text-align": "^2.0.3",
 		"@tiptap/extension-text-style": "^2.0.3",
@@ -57,6 +56,7 @@
 		}
 	},
 	"dependencies": {
+		"@formkit/nuxt": "^0.17.4",
 		"@vueup/vue-quill": "^1.1.1",
 		"bcrypt": "^5.1.0",
 		"country-region-data": "^2.7.0",
@@ -65,6 +65,8 @@
 		"mysql2": "^3.2.4",
 		"nuxi": "^3.6.1",
 		"nuxt-storage": "^1.2.2",
+		"primeicons": "^6.0.1",
+		"primevue": "^3.29.2",
 		"quill-image-uploader": "^1.2.4",
 		"sweetalert2": "^11.7.5",
 		"twilio": "^4.11.0"

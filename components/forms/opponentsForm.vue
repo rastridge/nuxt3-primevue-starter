@@ -52,7 +52,7 @@
 				validation="required"
 			/>
 		</FormKit>
-		<Button @click="cancelForm()"> Cancel </Button>
+		<Button label="Cancel" @click="cancelForm()"> </Button>
 	</div>
 	<!-- </div> -->
 </template>

@@ -129,27 +129,6 @@ export function useNavigationMenu() {
 				visible: () => auth.isLoggedIn,
 			},
 			{
-				label: 'PrimeVue',
-				items: [
-					{
-						label: 'DataTable',
-						icon: 'pi pi-fw pi-table',
-						to: '/prime/datatable',
-					},
-					{
-						label: 'Messages',
-						icon: 'pi pi-fw pi-user-edit',
-						to: '/prime/messages',
-					},
-					{
-						label: 'Validation',
-						icon: 'pi pi-fw pi-user-edit',
-						to: '/prime/validation',
-					},
-				],
-				visible: () => !auth.isLoggedIn,
-			},
-			{
 				label: 'UI',
 				items: [
 					{ label: 'UnoCSS', icon: 'pi pi-fw pi-user-edit', to: '/ui/uno' },

@@ -155,7 +155,7 @@
 				/>
 			</FormKit>
 			<div class="mb-3">
-				<Button @click="cancelForm"> Cancel </Button>
+				<Button label="Cancel" @click="cancelForm"> </Button>
 			</div>
 		</div>
 	</div>
@@ -164,6 +164,7 @@
 <script setup>
 	import { getNode } from '@formkit/core'
 	import '@formkit/themes/genesis'
+	import ProgressSpinner from 'primevue/progressspinner'
 	import { useAuthStore } from '~/stores/authStore'
 	import { useAlertStore } from '~/stores/alertStore'
 	const auth = useAuthStore()
