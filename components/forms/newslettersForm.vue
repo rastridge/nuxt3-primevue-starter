@@ -54,7 +54,7 @@
 				@changeState="changeState"
 			></input-body>
 		</FormKit>
-		<Button class="m-1" @click.prevent="cancelForm()"> Cancel </Button>
+		<Button class="m-1" label="Cancel" @click.prevent="cancelForm()"> </Button>
 	</div>
 </template>
 
