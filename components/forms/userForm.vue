@@ -6,7 +6,7 @@
 				<Button
 					class="p-button mb-4"
 					style="display: block; margin-left: auto; margin-right: auto"
-					label="Submit new user"
+					label="Submit user"
 					@click="submitForm(state)"
 				>
 				</Button>
@@ -139,7 +139,7 @@
 				<Button
 					class="p-button m-4"
 					style="display: block; margin-left: auto; margin-right: auto"
-					label="Submit new user"
+					label="Submit user"
 					@click="submitForm(state)"
 				>
 				</Button>

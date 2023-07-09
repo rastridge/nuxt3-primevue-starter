@@ -12,9 +12,9 @@
 <template>
 	<div>
 		<Head>
-			<Title> Add Video {{ id }}</Title>
+			<Title> Add Video</Title>
 		</Head>
 		<common-header title="Add Video" />
-		<videos-form :id="id" @submitted="onSubmit" />
+		<videos-form @submitted="onSubmit" />
 	</div>
 </template>

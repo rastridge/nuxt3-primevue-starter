@@ -4,7 +4,9 @@
 			<Title>Stats Admin</Title>
 		</Head>
 		<common-header :title="app" />
-		<div v-if="pending" class="text-center text-2xl">Loading ...</div>
+		<div v-if="!stats" class="text-center text-2xl">
+			<ProgressSpinner /> Loading ...
+		</div>
 		<div v-else>
 			<!--Select season -->
 			<div class="text-center m-5">
@@ -14,15 +16,18 @@
 					@submitted="onSubmit"
 					class="mb-3"
 				/>
-				<FormKit
-					type="select"
-					label="Game type"
-					v-model="gametype"
-					:options="[
-						{ label: '15s', value: 1 },
-						{ label: '7s', value: 7 },
-					]"
-				/>
+
+				<div style="display: block; width: 100px; margin: auto">
+					<FormKit
+						type="select"
+						label="Game type"
+						v-model="gametype"
+						:options="[
+							{ label: '15s', value: 1 },
+							{ label: '7s', value: 7 },
+						]"
+					/>
+				</div>
 			</div>
 			<render-list
 				:data="filteredData"
@@ -34,7 +39,6 @@
 				:viewable="viewable"
 				@changeStatus="changeStatus"
 				@deleteItem="deleteItem"
-				@addItem="addItem"
 			/>
 		</div>
 	</div>

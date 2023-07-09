@@ -4,8 +4,9 @@
 			<Title>Contributions Admin</Title>
 		</Head>
 		<common-header :title="app" />
-		<span v-if="error" class="text-danger">ERROR: {{ error }}</span>
-		<div v-if="pending" class="text-center text-2xl">Loading ...</div>
+		<div v-if="!contributions" class="text-center text-2xl">
+			<ProgressSpinner /> Loading ...
+		</div>
 		<div v-else>
 			<!--Select year -->
 			<div class="text-center m-5">
@@ -27,7 +28,6 @@
 				:viewable="viewable"
 				@changeStatus="changeStatus"
 				@deleteItem="deleteItem"
-				@addItem="addItem"
 			/>
 		</div>
 	</div>

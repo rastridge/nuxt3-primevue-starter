@@ -1,7 +1,5 @@
 <template>
 	<div>
-		<ProgressSpinner />Loading
-
 		<Dropdown
 			v-model="year"
 			:options="seasons"
@@ -12,8 +10,6 @@
 </template>
 
 <script setup>
-	import ProgressSpinner from 'primevue/progressspinner'
-
 	//
 	// Incoming
 	//

@@ -12,9 +12,9 @@
 <template>
 	<div>
 		<Head>
-			<Title> Add Opponent {{ id }}</Title>
+			<Title> Add Opponent</Title>
 		</Head>
 		<common-header title="Add Opponent" />
-		<opponents-form :id="id" @submitted="onSubmit" />
+		<opponents-form @submitted="onSubmit" />
 	</div>
 </template>

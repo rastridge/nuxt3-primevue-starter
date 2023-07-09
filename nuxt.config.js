@@ -86,7 +86,7 @@ export default defineNuxtConfig({
 	},
 	primevue: {
 		config: {
-			ripple: true,
+			// ripple: true,
 		},
 	},
 	css: [

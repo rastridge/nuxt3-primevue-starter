@@ -11,40 +11,35 @@
 				@submit="submitForm(state)"
 			>
 				<!-- opponent input-->
-
-				<Card if="!props.id" style="width: 30em; margin-bottom: 1rem">
-					<template #title> Find opponent</template>
-					<template #content>
-						<AutoComplete
-							v-model="selectedOpponent"
-							optionLabel="opponent_name"
-							:suggestions="filteredOpponents"
-							@complete="search_opponents"
-							@item-select="setOpponent"
-						/>
-						<br />
-						<p>
-							If the opponent for this game can not be found in the existing
-							opponents list, you must first create the opponent<br />
-							<Button
-								class="p-button-sm"
-								label="Create Opponent"
-								@click="navigateTo('/admin/opponents/add')"
-							>
-							</Button>
-						</p>
-					</template>
-				</Card>
-
+				<div v-if="!props.id">
+					<Card style="width: 30em; margin-bottom: 1rem">
+						<template #title> Find opponent</template>
+						<template #content>
+							<AutoComplete
+								v-model="selectedOpponent"
+								optionLabel="opponent_name"
+								:suggestions="filteredOpponents"
+								@complete="search_opponents"
+								@item-select="setOpponent"
+							/>
+							<br />
+							<p>
+								If the opponent for this game can not be found in the existing
+								opponents list, you must first create the opponent<br />
+								<Button
+									class="p-button-sm"
+									label="Create Opponent"
+									@click="navigateTo('/admin/opponents/add')"
+								>
+								</Button>
+							</p>
+						</template>
+					</Card>
+				</div>
 				<FormKit label="Opponent" name="opponent_name" type="text" disabled />
 
 				<!-- referee input-->
-				<FormKit
-					label="Referee"
-					name="referee"
-					type="text"
-					validation="required"
-				/>
+				<FormKit label="Referee" name="referee" type="text" />
 				<!-- venue input-->
 				<FormKit label="Venue" name="venue" type="text" validation="required" />
 
