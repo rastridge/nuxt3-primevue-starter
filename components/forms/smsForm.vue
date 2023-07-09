@@ -1,5 +1,5 @@
 <template>
-	<div class="form-box">
+	<div>
 		<p v-if="id">
 			Current version of this SMS was sent {{ sms_opened_cnt }} times
 		</p>
