@@ -177,12 +177,3 @@
 	])
 	const loading = ref(true)
 </script>
-
-<style scoped>
-	table,
-	th,
-	td {
-		padding: 0.5rem;
-		font-size: small;
-	}
-</style>
