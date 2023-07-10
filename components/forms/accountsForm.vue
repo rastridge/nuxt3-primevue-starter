@@ -154,9 +154,7 @@
 					validation="required"
 				/>
 			</FormKit>
-			<div class="mb-3">
-				<Button label="Cancel" @click="cancelForm"> </Button>
-			</div>
+			<Button class="mb-3 center" label="Cancel" @click="cancelForm"> </Button>
 		</div>
 	</div>
 </template>

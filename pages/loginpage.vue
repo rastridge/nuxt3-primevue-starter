@@ -4,7 +4,7 @@
 			{{ alert.message }}
 		</div>
 
-		<div v-if="!auth.isLoggedIn" class="form-box">
+		<div v-if="!auth.isLoggedIn">
 			<h3 class="headline">Login Admin Users</h3>
 
 			<FormKit type="form" submit_label="Login" @submit="handleSubmit">
@@ -23,10 +23,10 @@
 				>
 				</FormKit>
 
-				<Checkbox v-model="keeploggedin" :binary="true" />
-				<label> Keep me logged in</label>
-
-				<p>keeploggedin = {{ keeploggedin }}</p>
+				<div class="" mb-2>
+					<Checkbox v-model="keeploggedin" :binary="true" />
+					<label> Keep me logged in</label>
+				</div>
 			</FormKit>
 			<div>
 				<nuxt-link to="/resetpassword" active-class="active"

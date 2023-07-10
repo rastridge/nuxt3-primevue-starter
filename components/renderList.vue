@@ -69,7 +69,6 @@
 						</template>
 					</Column>
 				</DataTable>
-				first = {{ first }}
 			</div>
 		</div>
 

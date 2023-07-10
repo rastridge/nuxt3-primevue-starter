@@ -1,0 +1,59 @@
+// _myadditions.scss
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+.alert-danger {
+	margin: auto;
+	padding: 0.5rem;
+	background-color: white;
+	color: red;
+	width: 75%;
+	border: 1px solid red;
+	border-radius: 10px;
+}
+.alert-success {
+	margin: auto;
+	padding: 0.5rem;
+	background-color: white;
+	color: yellow;
+	width: 75%;
+	border: 1px solid yellow;
+	border-radius: 10px;
+}
+.alert-info {
+	margin: auto;
+	padding: 0.5rem;
+	background-color: white;
+	color: green;
+	width: 75%;
+	border: 1px solid green;
+	border-radius: 10px;
+}
+
+[data-invalid] .formkit-inner {
+	border-color: red;
+	box-shadow: 0 0 0 1px red;
+}
+
+[data-complete] .formkit-inner {
+	border-color: green;
+	box-shadow: 0 0 0 1px green;
+}
+[data-complete] .formkit-inner::after {
+	content: '✅';
+	display: block;
+	padding: 0.5em;
+}
+
+.ql-align-center {
+	text-align: center;
+}
+.ql-align-right {
+	text-align: right;
+}
+.ql-align-left {
+	text-align: left;
+}

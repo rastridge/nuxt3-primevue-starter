@@ -137,18 +137,12 @@
 					</table>
 				</div>
 				<Button
-					class="p-button m-4"
-					style="display: block; margin-left: auto; margin-right: auto"
+					class="p-button m-4 center"
 					label="Submit user"
 					@click="submitForm(state)"
 				>
 				</Button>
-				<Button
-					class="p-button"
-					style="display: block; margin-left: auto; margin-right: auto"
-					label="Cancel"
-					@click="cancelForm"
-				>
+				<Button class="p-button center" label="Cancel" @click="cancelForm">
 				</Button>
 			</div>
 		</div>

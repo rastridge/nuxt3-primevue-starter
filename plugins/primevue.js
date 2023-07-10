@@ -2,6 +2,7 @@ import PrimeVue from 'primevue/config'
 import AutoComplete from 'primevue/autocomplete'
 import Button from 'primevue/button'
 import Card from 'primevue/card'
+import Checkbox from 'primevue/checkbox'
 import DataTable from 'primevue/datatable'
 import Dialog from 'primevue/dialog'
 import Dropdown from 'primevue/dropdown'
@@ -23,6 +24,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 	nuxtApp.vueApp.component('Button', Button)
 	nuxtApp.vueApp.component('Button', Button)
 	nuxtApp.vueApp.component('Card', Card)
+	nuxtApp.vueApp.component('Checkbox', Checkbox)
 	nuxtApp.vueApp.component('Column', Column)
 	nuxtApp.vueApp.component('DataTable', DataTable)
 	nuxtApp.vueApp.component('Dialog', Dialog)

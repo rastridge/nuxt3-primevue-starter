@@ -5,30 +5,32 @@
 		</Head>
 		<common-header title="Account List" />
 		<p v-if="pending"><ProgressSpinner /> Loading ...</p>
-		<div v-if="addable" class="text-center m-5">
-			<Button
-				class="p-button-sm"
-				label="Add new"
-				@click="navigateTo(`/admin/${app}/add`)"
-			>
-			</Button>
+
+		<div class="text-center mb-2">
+			<Dropdown
+				v-model="member_type_id"
+				:options="memberTypeOptions"
+				optionLabel="label"
+				optionValue="value"
+				placeholder="Select a member type"
+			/>
 		</div>
-		<FormKit
-			type="radio"
-			label="Member Type"
-			v-model="member_type_id"
-			:options="memberTypeOptions"
-			help="Select member type to modify"
-		/>
-
-		<FormKit
-			type="select"
-			label="Last name begins with"
-			v-model="alpha"
-			:options="alphas"
-			help="Select initial letter"
-		/>
-
+		<div style="width: 175px" class="center mb-2">
+			<!-- <Dropdown
+				v-model="alpha"
+				:options="alphas"
+				optionLabel="label"
+				optionValue="value"
+				placeholder="Select initial letter"
+			/> -->
+			<FormKit
+				type="select"
+				label="Last name begins with"
+				v-model="alpha"
+				:options="alphas"
+				help="Select initial letter"
+			/>
+		</div>
 		<div v-if="pending" class="text-center text-2xl">Loading ...</div>
 		<div v-else>
 			<render-list
