@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-	import '@formkit/themes/genesis'
+	// import '@formkit/themes/genesis'
 	import { QuillEditor } from '@vueup/vue-quill'
 	import ImageUploader from 'quill-image-uploader'
 	import { useAuthStore } from '~/stores/authStore'

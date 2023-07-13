@@ -54,28 +54,46 @@ async function getAll() {
 
 async function getShow() {
 	const sql = `SELECT
-								a.account_id,
-								a.member_firstname,
-								a.member_lastname,
-								CONCAT( a.member_firstname, ' ', a.member_lastname ) as name,
-								a.member_position,
-								a.member_year,
-								a.member_prev_club,
-								a.member_wall_of_fame_year,
-								a.member_type_id,
-								mt.member_type
+									a.account_id,
+									a.member_firstname,
+									a.member_lastname,
+									CONCAT(
+											a.member_firstname,
+											' ',
+											a.member_lastname
+									) AS NAME,
+									a.member_position,
+									a.member_year,
+									a.member_prev_club,
+									a.member_wall_of_fame_year,
+									a.member_type_id,
+									mt.member_type,
+									(
+									SELECT
+											COUNT(p.player_id)
+									FROM
+											inbrc_stats_player p,
+											inbrc_accounts ac,
+											inbrc_stats_games g
+									WHERE
+											ac.account_id = a.account_id AND p.player_id = a.account_id AND p.game_id = g.game_id AND g.game_type_id <> 8 AND g.game_type_id <> 7
+							) AS fifteensct,
+							(
+									SELECT
+											COUNT(p.player_id)
+									FROM
+											inbrc_stats_player p,
+											inbrc_accounts ac,
+											inbrc_stats_games g
+									WHERE
+											ac.account_id = a.account_id AND p.player_id = a.account_id AND p.game_id = g.game_id AND g.game_type_id <> 8 AND g.game_type_id = 7 AND g.game_type_id <> 8
+							) AS sevensct
 							FROM
-								inbrc_accounts a,
-								inbrc_member_types mt
+									inbrc_accounts a,
+									inbrc_member_types mt
 							WHERE
-								a.member_type_id NOT IN ('9','13')
-								AND
-								a.STATUS = 1 
-								AND 
-								a.deleted = 0 
-								AND 
-								a.member_type_id = mt.member_type_id
-							ORDER BY member_lastname ASC`
+									a.member_type_id NOT IN('9', '13') AND a.STATUS = 1 AND a.deleted = 0 AND a.member_type_id = mt.member_type_id  
+							ORDER BY a.member_lastname ASC`
 
 	const accounts = await doDBQuery(sql)
 	return accounts

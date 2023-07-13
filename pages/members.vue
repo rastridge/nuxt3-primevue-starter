@@ -9,13 +9,14 @@
 				v-model:filters="filters"
 				:globalFilterFields="['member_type']"
 				:class="'p-datatable-sm'"
-				tableStyle="width: 40rem; font-family: Lora"
+				stripedRows
 				filterDisplay="row"
 				paginator
 				:rows="20"
 				:rowsPerPageOptions="[5, 10, 20, 50]"
 				paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
 				currentPageReportTemplate="{first} to {last} of {totalRecords}"
+				selectionMode="single"
 				@rowExpand="onRowExpand"
 			>
 				<template #empty> No members found. </template>
@@ -79,24 +80,24 @@
 							<tr>
 								<th>Previous club</th>
 								<th>Position</th>
-								<th>15s Games Recorded</th>
-								<th>7s Games Recorded</th>
-								<th>WOF Year</th>
+								<th>15s Games</th>
+								<th>7s Games</th>
+								<th>WOF</th>
 							</tr>
 							<tr>
-								<td>
+								<td style="width: 25%">
 									{{ slotProps.data.member_prev_club }}
 								</td>
-								<td>
+								<td style="width: 20%">
 									{{ slotProps.data.member_position }}
 								</td>
-								<td>
-									{{ gamecount }}
+								<td style="width: 20%">
+									{{ slotProps.data.fifteensct }}
 								</td>
-								<td>
-									{{ gamecount7s }}
+								<td style="width: 20%">
+									{{ slotProps.data.sevensct }}
 								</td>
-								<td>
+								<td style="width: 10%">
 									{{ slotProps.data.member_wall_of_fame_year }}
 								</td>
 							</tr>
@@ -128,33 +129,9 @@
 		},
 	})
 
-	const onRowExpand = async (event) => {
-		//
-		// Get gaemcount
-		//
-		const { data: gmcnt } = await useFetch(
-			`/game_player_stats/getgamecount/?gametype=1&account_id=${event.data.account_id}`,
-			{
-				method: 'get',
-				headers: {
-					authorization: 'not-needed',
-				},
-			}
-		)
-		gamecount.value = gmcnt.value
-		// toast.add({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
+	// const  checkAccountId = (id) => id === 1
 
-		const { data: gmcnt7s } = await useFetch(
-			`/game_player_stats/getgamecount/?gametype=7&account_id=${event.data.account_id}`,
-			{
-				method: 'get',
-				headers: {
-					authorization: 'not-needed',
-				},
-			}
-		)
-		gamecount7s.value = gmcnt7s.value
-	}
+	const onRowExpand = async (event) => {}
 	//
 	// filter value criteria
 	//

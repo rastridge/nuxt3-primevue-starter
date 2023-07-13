@@ -7,11 +7,13 @@
 	<div style="height: 800px" class="splash">
 		<div class="surface-0 text-center">
 			<div class="mb-3 font-bold text-4xl">
-				<span class="text-white-600">Buffalo Rugby Club</span>
+				<span class="text-blue-600">Buffalo Rugby Club</span>
 			</div>
-			<h2 class="text-2xl text-white pb-6">
-				Home Field Delaware Park | Home Base Brawler's Deli
-			</h2>
+			<div class="text-2xl pb-6">
+				<span class="text-white-600">
+					Home Field Delaware Park | Home Base Brawler's Deli
+				</span>
+			</div>
 			<div class="grid grid-cols-2 lg:grid-cols-3 gap-2">
 				<AdvertiseBox
 					header="TipTap"
