@@ -61,11 +61,10 @@ export default function useEmail() {
 												.ql-align-center {	text-align: center;	}
 												.ql-align-justify {	text-align: justify;}
 												.ql-align-right {	text-align: right;}
+
 												.ql-indent-1,
 												.ql-indent-2,
 												.ql-indent-3 {
-													background: #f9f9f9;
-													border-left: 10px solid #ccc;
 													margin: 1.5em 10px;
 													padding: 0.5em 10px;
 												}
