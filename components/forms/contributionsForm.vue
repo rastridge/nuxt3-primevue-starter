@@ -1,21 +1,10 @@
 <template>
 	<div class="form-box">
-		<!-- <p v-if="suggestions">suggestions = {{ suggestions }}</p> -->
-		<!-- <p v-if="items">items = {{ items }}</p> -->
-
 		<h5 v-if="props.id" class="text-left">
-			Contributor {{ contribution_data.contribution_name }}
+			Contributor {{ state.contribution_name }}
 		</h5>
-
-		<FormKit
-			type="form"
-			:config="{ validationVisibility: 'live' }"
-			name="contribution"
-			:value="contribution_data"
-			submit-label="Submit"
-			@submit="submitForm"
-		>
-			<Card if="!props.id" style="width: 20em; margin-bottom: 1rem">
+		<div v-else>
+			<Card style="width: 20em; margin-bottom: 1rem">
 				<template #title> Contributor</template>
 				<template #content>
 					<AutoComplete
@@ -27,7 +16,14 @@
 					/>
 				</template>
 			</Card>
-
+		</div>
+		<FormKit
+			type="form"
+			:config="{ validationVisibility: 'live' }"
+			v-model="state"
+			submit-label="Submit"
+			@submit="submitForm"
+		>
 			<FormKit
 				type="date"
 				label="Contribution Date"
@@ -46,23 +42,24 @@
 				type="checkbox"
 				label="Show Name"
 				name="contribution_showName"
-				value="true"
+				value="1"
 			/>
 
 			<FormKit
 				type="checkbox"
 				label="Show Amount"
 				name="contribution_showAmount"
+				value="1"
 			/>
 			<div v-if="previous">
 				<h3>Previous Donations</h3>
 				<table>
 					<tbody>
-						<tr v-for="(contribution_data, index) in previous" :key="index">
-							<td>{{ contribution_data.name }}</td>
-							<td>{{ contribution_data.contribution_amount }}</td>
+						<tr v-for="(items, index) in previous" :key="index">
+							<td>{{ items.name }}</td>
+							<td>{{ items.contribution_amount }}</td>
 							<td>
-								{{ $dayjs(contribution_data.dt).format('MMM DD YYYY') }}
+								{{ $dayjs(items.dt).format('MMM DD YYYY') }}
 							</td>
 						</tr>
 					</tbody>
@@ -98,8 +95,7 @@
 		id: { Number, default: 0 },
 	})
 
-	// Form field values
-	let contribution_data = {}
+	const state = ref({})
 
 	// Add form
 	//
@@ -108,6 +104,7 @@
 	const suggestions = ref([])
 	const selectedItem = ref('')
 	const filteredNames = ref([])
+
 	const previous = ref(null)
 
 	const search = (event) => {
@@ -154,10 +151,12 @@
 			}
 		)
 		suggestions.value = data.value
-
-		contribution_data.contribution_date = $dayjs().format('YYYY-MM-DD')
-		contribution_data.showName = 1
-		contribution_data.showAmount = 1
+		//
+		// initialize add form
+		//
+		state.value.contribution_date = $dayjs().format('YYYY-MM-DD')
+		state.value.contribution_showName = true
+		state.value.contribution_showAmount = true
 	} else {
 		//
 		// edit
@@ -172,11 +171,17 @@
 				},
 			}
 		)
+		state.value = data.value
 		// Adjust for local time and Format for Formkit calendar? ??
-		data.value.contribution_date = $dayjs(data.value.contribution_date).format(
+		state.value.contribution_date = $dayjs(data.value.contribution_date).format(
 			'YYYY-MM-DD'
 		)
-		contribution_data = data.value
+		state.value.contribution_showName = data.value.contribution_showName
+			? true
+			: false
+		state.value.contribution_showAmount = data.value.contribution_showAmount
+			? true
+			: false
 	}
 
 	//

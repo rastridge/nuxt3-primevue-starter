@@ -89,7 +89,6 @@ async function getOne(id) {
 }
 
 async function editOne(item) {
-	console.log('item = ', item)
 	let sql = `UPDATE inbrc_content
 							SET
 								content_name = ?,

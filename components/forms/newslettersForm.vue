@@ -38,16 +38,6 @@
 				@click="toggle"
 			/>
 
-			<!-- <div class="editor">
-				<quill-editor
-					label="Content"
-					contentType="html"
-					v-model:content="state.newsletter_body_html"
-					toolbar="full"
-					:modules="modules"
-				></quill-editor>
-			</div> -->
-
 			<h4>Content</h4>
 			<input-body
 				:field="state.newsletter_body_html"
@@ -60,9 +50,7 @@
 
 <script setup>
 	import '@formkit/themes/genesis'
-	// import { QuillEditor } from '@vueup/vue-quill'
-	// import ImageUploader from 'quill-image-uploader'
-	// import BlotFormatter from 'quill-blot-formatter'
+
 	import { useAuthStore } from '~/stores/authStore'
 	const auth = useAuthStore()
 	//
