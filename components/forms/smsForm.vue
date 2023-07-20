@@ -27,7 +27,7 @@
 			<FormKit
 				label="SMS message"
 				name="sms_body_text"
-				type="text"
+				type="textarea"
 				validation="required"
 			/>
 		</FormKit>

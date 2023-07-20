@@ -39,6 +39,7 @@ export default defineNuxtConfig({
 		'@formkit/nuxt',
 		'@unocss/nuxt',
 		'@pinia/nuxt',
+		'@nuxt/image',
 		'@nuxtjs/i18n',
 		'@nuxt/content',
 		'@vueuse/nuxt',

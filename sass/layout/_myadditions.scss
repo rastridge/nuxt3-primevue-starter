@@ -61,14 +61,22 @@
 .ql-indent-2,
 .ql-indent-3 {
 	background: transparent;
-	margin: 1.5em 10px;
-	padding: 0.5em 10px;
+	margin: 1rem;
+	padding-left: 2rem;
 }
-.img-fluid {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+.ql-font-serif {
+	font-family: serif;
 }
+.ql-size-huge {
+	font-size: xx-large;
+}
+.ql-size-large {
+	font-size: xx-large;
+}
+.ql-size-small {
+	font-size: small;
+}
+
 .splash {
 	background-image: url('/imgs/2019_nyrc.jpg');
 	-webkit-background-size: cover;

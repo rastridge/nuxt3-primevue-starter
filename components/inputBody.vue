@@ -9,6 +9,20 @@
 				@textChange="changeState()"
 			></quill-editor>
 		</div>
+
+		<!-- Modal -->
+		<Dialog
+			v-model:visible="displayModal"
+			:breakpoints="{ '960px': '75vw', '640px': '90vw' }"
+			:style="{ width: '50vw' }"
+		>
+			<template #header>
+				<div class="my-dialog-header">
+					<h3>Processing file</h3>
+				</div></template
+			>
+			<ProgressBar mode="indeterminate" style="height: 6px"></ProgressBar>
+		</Dialog>
 	</div>
 </template>
 
@@ -41,7 +55,16 @@
 	const changeState = () => {
 		emit('changeState', localfield)
 	}
-
+	//
+	// progress modal
+	//
+	const displayModal = ref(false)
+	const openProgressModal = () => {
+		displayModal.value = true
+	}
+	const closeProgressModal = () => {
+		displayModal.value = false
+	}
 	//
 	// quill modules
 	//
@@ -51,7 +74,7 @@
 			upload: async (file) => {
 				const formData = new FormData()
 				formData.append('file', file)
-
+				openProgressModal()
 				// upload to media.my-test-site.net
 				// Find server code in folder Nuxt3-brc-media-api
 				const res = await fetch(
@@ -66,6 +89,7 @@
 				)
 
 				const data = await res.json()
+				closeProgressModal()
 				return data.imageUrl
 			},
 		},

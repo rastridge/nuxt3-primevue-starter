@@ -63,7 +63,7 @@
 </template>
 
 <script setup>
-	import '@formkit/themes/genesis'
+	// import '@formkit/themes/genesis'
 	import { useAuthStore } from '~/stores/authStore'
 	const auth = useAuthStore()
 

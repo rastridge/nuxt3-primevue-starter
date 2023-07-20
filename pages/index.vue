@@ -12,7 +12,7 @@
 				>
 			</div>
 			<div class="md:text-2xl pb-6">
-				<span class="text-white-600">
+				<span style="color: white">
 					Home Field Delaware Park | Home Base Brawler's Deli
 				</span>
 			</div>

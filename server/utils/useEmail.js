@@ -18,74 +18,83 @@ export default function useEmail() {
 											<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 											<style>
 											html {
-															font-size: 12px;
-															@media screen and (min-width: 576px) {
-																font-size: 14px;
-															}
-															@media screen and (min-width: 768px) {
-																font-size: 16px;
-															}
-															@media screen and (min-width: 1200px) {
-																font-size: 18px;
-															}
-														}
-												.nl-container {	background-color: #FFF;
-																				width: 100%;
-																				padding-top: 2rem;
-																				padding-bottom: 2rem;
-																			}
-												.nl-banner { width: 100%;
-																			padding-top: 0.5rem;
-																			padding-bottom: 0.5rem;
-																			color: #FFF;
-																			background-color: #00D;
-																			font-family: Verdana, Geneva, sans-serif;
-																			font-weight: bold;
-																			font-size: 1rem;
-																			text-align: center;
-																		}
-												.nl-content {
-																			width: 80%;
-																			padding: 1rem;
-																			font-size: 1.5rem;
-																		}
-												.nl-footer { font-size: 1rem;
-																			padding: 1rem;
-																		}
-												@media screen and (min-width: 576px) {
-													.nl-banner {
-														padding-top: 1rem;
-														padding-bottom: 1rem;
-														font-size: 2rem;
+													font-size: 12px;
+													@media screen and (min-width: 576px) {
+														font-size: 14px;
+													}
+													@media screen and (min-width: 768px) {
+														font-size: 16px;
+													}
+													@media screen and (min-width: 1200px) {
+														font-size: 18px;
+													}
 												}
-												.ql-align-center {	text-align: center;	}
-												.ql-align-justify {	text-align: justify;}
-												.ql-align-right {	text-align: right;}
+											.nl-container {	
+												background-color: #C6C6C6;
+												width: 90%;
+												padding: 25px;
+											}
+											.nl-banner, .nl-footer { 
+												width: 100%;
+												padding: 0.5rem;
+												color: #FFF;
+												background-color: #00D;
+												font-family: Verdana, Geneva, sans-serif;
+												font-weight: bold;
+												text-align: center;
+											}
+											@media screen and (min-width: 576px) {
+												.nl-banner, .nl-footer { 
+													font-size: 1.5rem;
+												}													
+											}
+											@media screen and (min-width: 768px) {
+												.nl-banner, .nl-footer { 
+													font-size: 2rem;
+												}													
+											}
+											.ql-indent-1,
+											.ql-indent-2,
+											.ql-indent-3 {
+												margin: 10px;
+												padding: 0.5rem;
+												padding-left: 2rem;
+											}
+											.ql-align-center {	text-align: center;	}
+											.ql-align-justify {	text-align: justify;}
+											.ql-align-right {	text-align: right;}
+											.ql-font-serif {
+												font-family: serif;
+											}
+											.ql-size-huge {
+												font-size: xx-large;
+											}
+											.ql-size-large {
+												font-size: xx-large;
+											}
+											.ql-size-small {
+												font-size: small;
+											}
+											.img-fluid {
+												display: block;
+												margin-left: auto;
+												margin-right: auto;
+											}
 
-												.ql-indent-1,
-												.ql-indent-2,
-												.ql-indent-3 {
-													margin: 1.5em 10px;
-													padding: 0.5em 10px;
-												}
+										</style>
+										</head>
+										<body>
+											<div class='nl-container'>
+												<div class='nl-banner'>
+													<h3>Buffalo Rugby<br>Newsletter</h3>
+												</div>`
 
-												.img-fluid {
-													display: block;
-													margin-left: auto;
-													margin-right: auto;
-												}
-											</style>
-											</head>
-											<body>
-												<div class='nl-container'>
-													<div class='nl-banner'>
-														<h3>Buffalo Rugby</h1>
-														<h3>Newsletter</h1>
-													</div>`
-
-			const NEWSLETTER_END_STYLES = `</div> <!-- container -->
-																</body>
-																</html>`
+			const NEWSLETTER_END_STYLES = `<div class="nl-footer">
+												&nbsp;
+												</div>
+											</div> <!-- container -->
+										</body>
+									</html>`
 
 			// const TRACKINGPIXEL = `<img src="/newsletters/track?account_id=${recipient.account_id}&newsletter_id=${newsletter_id}" height="1" width="1" alt="" />`
 			// const TRACKINGPIXEL = ''
@@ -161,7 +170,7 @@ export default function useEmail() {
 		;(function myLoop(i) {
 			setTimeout(function () {
 				//
-				console.log(' IN myLoop i, rec_cnt = ', i, rec_cnt)
+				// console.log(' IN myLoop i, rec_cnt = ', i, rec_cnt)
 				const email = composeEmail(
 					recipientss[i - 1],
 					newsletter_body_html,

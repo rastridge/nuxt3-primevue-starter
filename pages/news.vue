@@ -8,7 +8,7 @@
 			<Card
 				v-for="item in news"
 				:key="item.news_id"
-				class="mycard shadow-7 m-2 p-2 cursor-pointer"
+				class="shadow-7 m-2 p-2 cursor-pointer"
 			>
 				<template #title>
 					<!-- Adjust for local time and Format for Primevue calendar -->
@@ -33,14 +33,14 @@
 			:style="{ width: '60vw' }"
 		>
 			<template #header>
-				<div class="my-dialog-header">
+				<div>
 					<h3>{{ selectedItem.news_title }}</h3>
 				</div></template
 			>
 			<div v-html="selectedItem.news_article"></div>
 
 			<template #footer>
-				<div class="my-dialog-footer">
+				<div>
 					<Button
 						label="Return"
 						@click="closeModal"
@@ -54,8 +54,6 @@
 </template>
 
 <script setup>
-	// import Dialog from 'primevue/dialog'
-	// import Card from 'primevue/card'
 	const { $dayjs } = useNuxtApp()
 	//
 	// Dialog initialization - display news item
@@ -87,23 +85,3 @@
 		},
 	})
 </script>
-<style>
-	.p-dialog {
-		background-color: gray;
-	}
-	.my-dialog-header {
-		width: 100%;
-		padding: 1rem;
-	}
-	.mycard {
-		min-width: 20rem;
-		min-height: 100px;
-		border-radius: 1rem;
-		background-color: rgba(255, 255, 255, 0.4);
-	}
-	@media screen and (max-width: 640px) {
-		.mycard {
-			width: 100%;
-		}
-	}
-</style>

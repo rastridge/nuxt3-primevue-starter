@@ -11,6 +11,7 @@ import ColumnGroup from 'primevue/columngroup' // optional
 import Row from 'primevue/row' // optional
 import InputText from 'primevue/inputtext'
 import OverlayPanel from 'primevue/overlaypanel'
+import ProgressBar from 'primevue/progressbar'
 import ProgressSpinner from 'primevue/progressspinner'
 import RadioButton from 'primevue/radiobutton'
 import Textarea from 'primevue/textarea'
@@ -32,6 +33,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 	nuxtApp.vueApp.component('InputText', InputText)
 	nuxtApp.vueApp.component('OverlayPanel', OverlayPanel)
 	nuxtApp.vueApp.component('ProgressSpinner', ProgressSpinner)
+	nuxtApp.vueApp.component('ProgressBar', ProgressBar)
 	nuxtApp.vueApp.component('RadioButton', RadioButton)
 	nuxtApp.vueApp.component('Textarea', Textarea)
 	nuxtApp.vueApp.component('Toast', Toast)
