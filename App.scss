@@ -1,2 +1,10 @@
-@import "sass/layout/layout";
-@import "sass/app/main";
+@import 'sass/layout/layout';
+@import 'sass/app/main';
+.formkit-input,
+.formkit-input[disabled] {
+	color: var(--text-color);
+}
+
+.p-inputtext {
+	color: var(--text-color);
+}

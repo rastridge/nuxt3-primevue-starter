@@ -34,8 +34,6 @@
 </template>
 
 <script setup>
-	import '@formkit/themes/genesis'
-
 	const route = useRoute()
 	const password = ref('')
 	const password_confirm = ref('')

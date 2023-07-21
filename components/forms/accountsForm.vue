@@ -161,7 +161,6 @@
 
 <script setup>
 	import { getNode } from '@formkit/core'
-	import '@formkit/themes/genesis'
 	import ProgressSpinner from 'primevue/progressspinner'
 	import { useAuthStore } from '~/stores/authStore'
 	import { useAlertStore } from '~/stores/alertStore'

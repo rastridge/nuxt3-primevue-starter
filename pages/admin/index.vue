@@ -25,8 +25,3 @@
 	const auth = useAuthStore()
 	const sess = JSON.parse(sessionStorage.getItem('auth'))
 </script>
-<style>
-	.formkit-input {
-		background-color: rgba(255, 255, 255, 0.75);
-	}
-</style>

@@ -78,8 +78,6 @@
 </template>
 
 <script setup>
-	// Used by multiple components
-	import '@formkit/themes/genesis'
 	// import { getNode } from '@formkit/core'
 	import { useAuthStore } from '~/stores/authStore'
 	const auth = useAuthStore()

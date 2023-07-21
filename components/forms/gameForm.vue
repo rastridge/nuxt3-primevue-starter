@@ -220,7 +220,6 @@
 
 <script setup>
 	import dayjs from 'dayjs'
-	import '@formkit/themes/genesis'
 
 	import { useAuthStore } from '~/stores/authStore'
 	const auth = useAuthStore()
@@ -574,3 +573,10 @@
 		navigateTo('/admin/game_player_stats') // needs to be / for self register
 	}
 </script>
+
+<!-- <style>
+	.p-inputtext {
+		color: var(--text-color);
+	}
+</style>
+ -->

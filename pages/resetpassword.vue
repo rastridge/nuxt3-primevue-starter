@@ -43,8 +43,6 @@
 </template>
 
 <script setup>
-	import '@formkit/themes/genesis'
-
 	// initialize formkit state
 	const username = ref('')
 
