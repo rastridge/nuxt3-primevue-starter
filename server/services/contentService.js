@@ -55,9 +55,7 @@ async function getCustomMenuItems() {
 									content_order != 0
 							ORDER BY
 									content_order ASC`
-	// console.log('IN custommenuitems sql = ', sql)
 	const content = await doDBQuery(sql)
-	// console.log('IN custommenuitems content = ', content)
 
 	return content
 }
@@ -81,7 +79,6 @@ async function getOne(id) {
                     deleted = 0
                     AND
                     content_id = ${id}`
-	// console.log('IN getone sql = ', sql)
 
 	const content = await doDBQuery(sql)
 

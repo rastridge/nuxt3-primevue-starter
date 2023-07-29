@@ -235,11 +235,8 @@ async function sendNewsletter({
 //
 //
 async function getOne(id) {
-	// console.log('get one id= ', id)
-
 	const sql = `select * from inbrc_newsletters where newsletter_id = ` + id
 	const newsletter = await doDBQuery(sql)
-	// console.log(newsletter[0])
 	return newsletter[0]
 }
 
@@ -298,11 +295,9 @@ async function trackNewsletter(query) {
 		sql = mysql.format(sql, inserts)
 		await conn.execute(sql)
 
-		console.log('COMMIT')
 		await conn.query('COMMIT')
 		await conn.end()
 	} catch (e) {
-		console.log('ROLLBACK e = ', e)
 		await conn.query('ROLLBACK')
 		await conn.end()
 		return 'Error in sql'

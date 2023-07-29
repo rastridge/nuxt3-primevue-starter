@@ -263,12 +263,10 @@ async function addOne({ admin_user_name, password, admin_user_email, perms }) {
 
 		await conn.query('COMMIT')
 		await conn.end()
-		console.log('userservice addOne COMMIT')
 		return { message: msg }
 	} catch (e) {
 		await conn.query('ROLLBACK')
 		await conn.end()
-		console.log('userservice addOne ROLLBACK')
 	}
 }
 /***************************************** */
@@ -404,12 +402,10 @@ async function editOne(info) {
 
 		await conn.query('COMMIT')
 		await conn.end()
-		console.log('COMMIT')
 		return { message: msg }
 	} catch (e) {
 		await conn.query('ROLLBACK')
 		await conn.end()
-		console.log('ROLLBACK')
 	}
 }
 /***************************************** */

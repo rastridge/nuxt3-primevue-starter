@@ -111,7 +111,6 @@
 	// form handlers
 	//
 	const submitForm = (state) => {
-		// console.log('In submitform state.event_title = ', state.event_title)
 		emit('submitted', state)
 	}
 

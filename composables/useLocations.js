@@ -23,7 +23,6 @@ export default function useLocations() {
 					let n = {}
 					n.label = allCountries[i][2][k][0]
 					n.value = allCountries[i][2][k][1]
-					// console.log('n, i = ', n, i)
 					regions.push(n)
 				}
 				break

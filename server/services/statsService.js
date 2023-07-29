@@ -489,7 +489,6 @@ async function getPlayers(id) {
 }
 
 async function getGameCount(gametype, account_id) {
-	console.log('IN getGameCount gametype, account_id = ', gametype, account_id)
 	let FILTER = ''
 	if (gametype == '7') {
 		FILTER = ' = 7'
@@ -725,22 +724,9 @@ async function addOne({
 		sql = mysql.format(sql, inserts)
 		const [rows, fields] = await conn.execute(sql)
 		const game_id = rows.insertId
-		// console.log('IN addone game_id = ', game_id)
 
 		// add records for 23 players
 		for (let i = 0; i < 23; i++) {
-			/* 			console.log(
-				'IN players.for ',
-				'i = ',
-				i,
-				' new game id = ',
-				game_id,
-				' player[i].position_id = ',
-				players[i].position_id,
-
-				' player[i].player_id = ',
-				players[i].player_id
-			) */
 			sql = `INSERT INTO inbrc_stats_player SET
 									game_id = ${game_id},
 									position_id = ?,
@@ -833,18 +819,10 @@ async function editOne({
 			game_id
 		)
 		sql = mysql.format(sql, inserts)
-		// console.log('IN editOne1 sql = ', sql)
 		await conn.execute(sql)
 
 		// update records for 23 players
 		for (let i = 0; i < 23; i++) {
-			/* 			console.log('IN players.for ', 'i = ', i, ' game id = ', game_id)
-			console.log(
-				' position_id = ',
-				players[i].position_id,
-				' player_id = ',
-				players[i].player_id
-			) */
 			sql = `UPDATE inbrc_stats_player SET
 					
 					player_id = ?,
@@ -876,7 +854,6 @@ async function editOne({
 			)
 
 			sql = mysql.format(sql, inserts)
-			// console.log('IN players.for sql = ', sql)
 			await conn.execute(sql)
 		}
 		await conn.query('COMMIT')

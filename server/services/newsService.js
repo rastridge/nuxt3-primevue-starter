@@ -109,10 +109,7 @@ async function addOne({
 		news_release_dt,
 		news_expire_dt
 	)
-	console.log('inserts ', inserts)
-
 	const news = await doDBQuery(sql, inserts)
-
 	return news
 }
 

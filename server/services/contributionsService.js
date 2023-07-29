@@ -191,7 +191,6 @@ async function addOne({
 	const CONN = await getConnection()
 	try {
 		await CONN.query('START TRANSACTION')
-		console.log('START contribution TRANSACTION')
 
 		let sql = `INSERT INTO inbrc_contributions SET
 		account_id = ?,

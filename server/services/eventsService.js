@@ -56,7 +56,6 @@ async function getAllCurrent() {
                 ORDER BY dt ASC`
 
 	const events = await doDBQuery(sql)
-	console.log(events)
 	return events
 }
 
@@ -119,8 +118,6 @@ async function addOne({
 		release_dt,
 		expire_dt
 	)
-	console.log('event_title ', event_title)
-	// console.log('inserts ', inserts)
 
 	const events = await doDBQuery(sql, inserts)
 	return events

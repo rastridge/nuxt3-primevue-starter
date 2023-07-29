@@ -155,8 +155,6 @@ export default function useEmail() {
 
 			post_req.write(post_data)
 			post_req.end()
-
-			// console.log(' IN sendMail end ')
 		}
 
 		//
@@ -169,8 +167,6 @@ export default function useEmail() {
 
 		;(function myLoop(i) {
 			setTimeout(function () {
-				//
-				// console.log(' IN myLoop i, rec_cnt = ', i, rec_cnt)
 				const email = composeEmail(
 					recipientss[i - 1],
 					newsletter_body_html,

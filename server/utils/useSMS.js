@@ -12,9 +12,7 @@ export default function useSMS() {
 				body: sms_body_text,
 				// statusCallback: `/sms/MessageStatus`,
 			})
-			.then(function (res) {
-				console.log('IN sendOneSMS text body = ', res.body)
-			})
+			.then(function (res) {})
 			.catch(function (err) {
 				console.log(err)
 			})

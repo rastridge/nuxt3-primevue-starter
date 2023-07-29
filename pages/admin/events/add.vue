@@ -9,11 +9,8 @@
 	//
 	const onSubmit = async function (form_state) {
 		saving.value = true
-		// console.log('In onSubmit form_state= ', form_state)
-
 		await onSubmitAdd('events', form_state)
 		saving.value = false
-
 		navigateTo(`/admin/events`)
 	}
 </script>

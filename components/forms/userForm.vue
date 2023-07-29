@@ -237,18 +237,6 @@
 
 	const submitForm = (form) => {
 		let ok = false
-		// alert.clear()
-		console.log(
-			!reset.value,
-			!addForm,
-			!username_required.value,
-			!email_required.value,
-			!password_required.value,
-			match.value
-		)
-		// console.log(
-		// 	!reset.value && !addForm && username_required && email_required
-		// )
 		if (
 			!reset.value &&
 			!addForm &&
@@ -266,7 +254,6 @@
 		) {
 			ok = true
 		}
-		console.log('ok= ', ok)
 		if (ok) {
 			emit('submitted', form)
 		} else {

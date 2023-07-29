@@ -115,7 +115,6 @@ async function addOne(info) {
 	try {
 		const CONN = await getConnection()
 		await CONN.query('START TRANSACTION')
-		console.log('START TRANSACTION')
 
 		// check for existing email
 		let sql = `select *
@@ -234,7 +233,6 @@ async function addOne(info) {
 			)
 		} else {
 			msg = 'An account with email ' + lc_account_email + ' already exists'
-			console.log('EXISTS ', msg)
 
 			sendEmail(
 				'ron.astridge@me.com',
@@ -260,7 +258,6 @@ async function editOne(info) {
 	const CONN = await getConnection()
 	try {
 		await CONN.query('START TRANSACTION')
-		console.log('START TRANSACTION')
 
 		// check for existing email in other mewmbers
 		let sql = `select *
