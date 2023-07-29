@@ -21,6 +21,7 @@
 			>
 				<template #empty> No members found. </template>
 				<template #loading> Loading Membership data. Please wait. </template>
+
 				<Column header="Expand" expander style="width: 5rem" />
 				<Column
 					header="Name"
@@ -72,8 +73,9 @@
 							:showClear="true"
 							style="width: 10rem"
 						>
-						</Dropdown> </template
-				></Column>
+						</Dropdown>
+					</template>
+				</Column>
 				<template #expansion="slotProps">
 					<div class="p-3">
 						<table>

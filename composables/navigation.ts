@@ -44,6 +44,11 @@ export function useNavigationMenu() {
 						to: '/news',
 					},
 					{
+						label: 'Events',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/events',
+					},
+					{
 						label: 'Members',
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/members',
@@ -82,6 +87,12 @@ export function useNavigationMenu() {
 						icon: 'pi pi-fw pi-user-edit',
 						to: '/admin/news',
 						visible: () => checkPerm('news') > 0,
+					},
+					{
+						label: 'Events',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/events',
+						visible: () => checkPerm('events') > 0,
 					},
 					{
 						label: 'Newsletters',

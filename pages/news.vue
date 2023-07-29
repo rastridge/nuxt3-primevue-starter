@@ -85,3 +85,12 @@
 		},
 	})
 </script>
+
+<style scoped>
+	.card-container::v-deep .p-card {
+		padding: 1rem;
+		margin-top: 1rem;
+		box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.12),
+			0px 4px 5px rgba(0, 0, 0, 0.14), 0px 2px 4px -1px rgba(0, 0, 0, 0.2);
+	}
+</style>

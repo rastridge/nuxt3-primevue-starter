@@ -90,7 +90,7 @@ async function addOne({
 	news_release_dt,
 	news_expire_dt,
 }) {
-	var sql = `INSERT INTO inbrc_news SET
+	const sql = `INSERT INTO inbrc_news SET
 								news_title = ?,
 								news_synop = ?,
 								news_article = ?,
@@ -100,7 +100,7 @@ async function addOne({
 								created_dt = NOW(),
 								modified_dt= NOW()`
 
-	var inserts = []
+	let inserts = []
 	inserts.push(
 		news_title,
 		news_synop,
@@ -108,6 +108,41 @@ async function addOne({
 		news_event_dt,
 		news_release_dt,
 		news_expire_dt
+	)
+	console.log('inserts ', inserts)
+
+	const news = await doDBQuery(sql, inserts)
+
+	return news
+}
+
+async function editOne({
+	id,
+	news_title,
+	news_synop,
+	news_article,
+	news_event_dt,
+	news_release_dt,
+	news_expire_dt,
+}) {
+	const sql = `UPDATE inbrc_news SET
+								news_title = ?,
+								news_synop = ?,
+								news_article = ?,
+								news_event_dt = ?,
+								news_release_dt = ?,
+								news_expire_dt = ?,
+								modified_dt= NOW()
+							WHERE news_id = ?`
+	let inserts = []
+	inserts.push(
+		news_title,
+		news_synop,
+		news_article,
+		news_event_dt,
+		news_release_dt,
+		news_expire_dt,
+		id
 	)
 	const news = await doDBQuery(sql, inserts)
 
@@ -124,39 +159,6 @@ async function deleteOne(id) {
 async function changeStatus({ id, status }) {
 	const sql = `UPDATE inbrc_news SET status = ${status} WHERE news_id = ${id}`
 	const news = await doDBQuery(sql)
-
-	return news
-}
-
-async function editOne({
-	id,
-	news_title,
-	news_synop,
-	news_article,
-	news_event_dt,
-	news_release_dt,
-	news_expire_dt,
-}) {
-	var sql = `UPDATE inbrc_news SET
-								news_title = ?,
-								news_synop = ?,
-								news_article = ?,
-								news_event_dt = ?,
-								news_release_dt = ?,
-								news_expire_dt = ?,
-								modified_dt= NOW()
-							WHERE news_id = ?`
-	var inserts = []
-	inserts.push(
-		news_title,
-		news_synop,
-		news_article,
-		news_event_dt,
-		news_release_dt,
-		news_expire_dt,
-		id
-	)
-	const news = await doDBQuery(sql, inserts)
 
 	return news
 }
