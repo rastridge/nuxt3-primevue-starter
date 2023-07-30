@@ -6,7 +6,7 @@
 	const menuStore = useMenuStore()
 
 	useHead({
-		title: 'Nuxt 3 PrimeVue Starter',
+		title: 'Nuxt 3 Buffalo Rugby',
 	})
 
 	//
