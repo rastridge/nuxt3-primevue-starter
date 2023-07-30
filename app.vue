@@ -9,6 +9,8 @@
 		title: 'Nuxt 3 PrimeVue Starter',
 	})
 
+	//
+	// get custom menu items
 	await menuStore.initCustomMenuItems()
 
 	// stay logged in?
