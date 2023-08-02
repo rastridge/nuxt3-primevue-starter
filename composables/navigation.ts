@@ -63,6 +63,11 @@ export function useNavigationMenu() {
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/members',
 					},
+					{
+						label: 'Schedule',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/schedule',
+					},
 				],
 				visible: () => !auth.isLoggedIn,
 			},

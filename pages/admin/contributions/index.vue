@@ -50,7 +50,7 @@
 	// Initialize year select
 	//
 	const startyear = 2012
-	const { $dayjs } = useNuxtApp()
+	// const { $dayjs } = useNuxtApp()
 	const year = ref(placemark.getYear)
 
 	//
