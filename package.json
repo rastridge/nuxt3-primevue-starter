@@ -66,6 +66,7 @@
 		"mysql2": "^3.2.4",
 		"nuxi": "^3.6.1",
 		"nuxt-storage": "^1.2.2",
+		"primeflex": "^3.3.1",
 		"primeicons": "^6.0.1",
 		"primevue": "^3.29.2",
 		"quill-image-uploader": "^1.2.4",

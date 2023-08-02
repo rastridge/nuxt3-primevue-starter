@@ -2,13 +2,12 @@
 	<div>
 		<!-- <div class="card"> -->
 		<Common-header title="Current News" />
-		<div
-			class="flex flex-wrap card-container align-items-center justify-content-center"
-		>
+		<div class="flex flex-wrap align-items-center justify-content-center">
 			<Card
 				v-for="item in news"
 				:key="item.news_id"
-				class="shadow-7 m-2 p-2 cursor-pointer"
+				style="width: 320px"
+				class="shadow-6 m-2 p-2"
 			>
 				<template #title>
 					<!-- Adjust for local time and Format for Primevue calendar -->
@@ -85,12 +84,3 @@
 		},
 	})
 </script>
-
-<style scoped>
-	.card-container::v-deep .p-card {
-		padding: 1rem;
-		margin-top: 1rem;
-		box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.12),
-			0px 4px 5px rgba(0, 0, 0, 0.14), 0px 2px 4px -1px rgba(0, 0, 0, 0.2);
-	}
-</style>

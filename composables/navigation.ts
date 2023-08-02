@@ -49,6 +49,11 @@ export function useNavigationMenu() {
 						to: '/events',
 					},
 					{
+						label: 'Payments',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/payments',
+					},
+					{
 						label: 'Members',
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/members',
@@ -77,6 +82,18 @@ export function useNavigationMenu() {
 						visible: () => checkPerm('content') > 0,
 					},
 					{
+						label: 'Contributions',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/contributions',
+						visible: () => checkPerm('contributions') > 0,
+					},
+					{
+						label: 'Events',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/events',
+						visible: () => checkPerm('events') > 0,
+					},
+					{
 						label: 'Members Men',
 						icon: 'pi pi-fw pi-user-edit',
 						to: '/admin/accounts/men',
@@ -89,16 +106,22 @@ export function useNavigationMenu() {
 						visible: () => checkPerm('news') > 0,
 					},
 					{
-						label: 'Events',
-						icon: 'pi pi-fw pi-user-edit',
-						to: '/admin/events',
-						visible: () => checkPerm('events') > 0,
-					},
-					{
 						label: 'Newsletters',
 						icon: 'pi pi-fw pi-user-edit',
 						to: '/admin/newsletters',
 						visible: () => checkPerm('newsletters') > 0,
+					},
+					{
+						label: 'Opponents',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/opponents',
+						visible: () => checkPerm('opponents') > 0,
+					},
+					{
+						label: 'Payments',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/payments',
+						visible: () => checkPerm('payments') > 0,
 					},
 					{
 						label: 'Texts',
@@ -107,22 +130,10 @@ export function useNavigationMenu() {
 						visible: () => checkPerm('sms') > 0,
 					},
 					{
-						label: 'Contributions',
-						icon: 'pi pi-fw pi-user-edit',
-						to: '/admin/contributions',
-						visible: () => checkPerm('contributions') > 0,
-					},
-					{
 						label: 'Stats',
 						icon: 'pi pi-fw pi-user-edit',
 						to: '/admin/game_player_stats',
 						visible: () => checkPerm('game_player_stats') > 0,
-					},
-					{
-						label: 'Opponents',
-						icon: 'pi pi-fw pi-user-edit',
-						to: '/admin/opponents',
-						visible: () => checkPerm('opponents') > 0,
 					},
 					{
 						label: 'Videos',

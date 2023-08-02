@@ -4,19 +4,44 @@
 
 <template>
 	<!-- <div style="background-image: url('/imgs/2019_nyrc.jpg'); height: 800px"> -->
-	<div style="height: 800px" class="splash">
-		<div class="surface-0 text-center">
-			<div class="mb-3 font-bold sm:text-2xl md:text-4xl lg:text-6xl">
-				<span class="text-blue-900" style="text-shadow: 2px 2px 5px white"
-					>Buffalo Rugby Club</span
+	<div
+		class="bg-no-repeat bg-cover bg-center w-full pt-4"
+		style="min-height: 900px; background-image: url('/imgs/2019_nyrc.jpg')"
+	>
+		<!-- <p
+			class="text-center text-blue-900 font-bold text-3xl md:text-4xl lg:text-6xl uppercase"
+			style="text-shadow: 2px 2px 6px rgb(233, 233, 233)"
+		>
+			Buffalo Rugby Club
+		</p> -->
+
+		<div class="card bg-transparent w-full">
+			<div class="flex justify-content-center flex-col md:flex-row">
+				<div
+					class="flex align-items-center justify-content-center text-3xl md:text-4xl lg:text-6xl uppercase font-bold text-red-900"
+					style="text-shadow: 2px 2px 6px rgb(233, 233, 233)"
 				>
+					Buffalo
+				</div>
+				<div class="flex align-items-center justify-content-center">
+					<nuxt-img
+						sizes="sm:100px md:150px lg:300px"
+						src="/imgs/bflo_blue.png"
+					/>
+				</div>
+
+				<div
+					class="flex align-items-center justify-content-center text-3xl md:text-4xl lg:text-6xl uppercase font-bold text-red-900"
+					style="text-shadow: 2px 2px 6px rgb(233, 233, 233)"
+				>
+					Rugby
+				</div>
 			</div>
-			<div class="md:text-2xl pb-6">
-				<span style="color: white">
-					Home Field Delaware Park | Home Base Brawler's Deli
-				</span>
-			</div>
-			<div class="grid grid-cols-2 lg:grid-cols-3 gap-2">
+		</div>
+		<p class="text-center text-xl md:text-2xl text-white">
+			Home Field Delaware Park | Home Base Brawler's Deli
+		</p>
+		<!-- <p>class="grid grid-cols-2 lg:grid-cols-3 gap-2">
 				<AdvertiseBox
 					header="TipTap"
 					icon="prime-check-circle"
@@ -39,7 +64,7 @@
 					Interactive Component Playgrounds
 				</AdvertiseBox>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 

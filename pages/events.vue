@@ -3,8 +3,8 @@
 		<div class="center-content">
 			<common-header title="Events" />
 		</div>
-		<div class="card-container">
-			<Card v-for="item in events" :key="item.id">
+		<div>
+			<Card v-for="item in events" :key="item.id" class="shadow-6 m-2 p-2">
 				<template #header>
 					{{ $dayjs(item.dt).format('MMM D, YYYY HH:mm a') }}</template
 				>
@@ -37,11 +37,11 @@
 	})
 </script>
 
-<style scoped>
+<!-- <style scoped>
 	.card-container::v-deep .p-card {
 		padding: 1rem;
 		margin-top: 1rem;
 		box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.12),
 			0px 4px 5px rgba(0, 0, 0, 0.14), 0px 2px 4px -1px rgba(0, 0, 0, 0.2);
 	}
-</style>
+</style> -->
