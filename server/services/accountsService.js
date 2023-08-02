@@ -10,6 +10,7 @@ export const accountsService = {
 	getOne,
 	addOne,
 	editOne,
+	getOfficers,
 	getSuggestions,
 	changeStatus,
 	deleteOne,
@@ -388,6 +389,32 @@ async function editOne(info) {
 		await CONN.query('ROLLBACK')
 		await CONN.end()
 	}
+}
+
+async function getOfficers() {
+	const sql = `SELECT
+									a.account_id,
+									account_id as id,
+									account_email,
+									CONCAT(member_firstname," ", member_lastname) as title,
+									account_addr_phone as phone,
+									g.member_admin_type as office,
+									h.member_admin_type as office2
+								FROM
+									inbrc_accounts a,
+									inbrc_member_admin_types h,
+									inbrc_member_admin_types g
+								WHERE
+									a.member_admin_type_id = g.member_admin_type_id
+									AND a.member_admin_type2_id = h.member_admin_type_id
+									AND ((a.member_admin_type_id > 0) OR (a.member_admin_type2_id > 0 ))
+									AND a.deleted = 0
+									AND a.STATUS = 1
+								ORDER BY
+									a.member_admin_type_id`
+
+	const officers = await doDBQuery(sql)
+	return officers
 }
 
 async function getSuggestions() {

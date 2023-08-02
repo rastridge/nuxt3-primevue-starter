@@ -54,6 +54,11 @@ export function useNavigationMenu() {
 						to: '/payments',
 					},
 					{
+						label: 'Officers',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/officers',
+					},
+					{
 						label: 'Members',
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/members',
