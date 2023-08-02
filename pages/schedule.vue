@@ -1,7 +1,7 @@
 <template>
 	<div id="events">
 		<div class="center-content">
-			<common-header title="Schedule" />
+			<common-header title="Game Schedule" />
 		</div>
 
 		<!--Select season -->
@@ -26,6 +26,7 @@
 			/>
 		</div>
 
+		<!-- <DataView :value="season"> -->
 		<DataView :value="filteredData">
 			<template #list="slotProps">
 				<div class="col-12">
@@ -66,8 +67,8 @@
 		}
 		return data.value
 	}
-
-	season.value = getSeason(year.value)
+	// initial value
+	season.value = await getSeason(year.value)
 
 	const onSubmit = async function (value) {
 		year.value = value

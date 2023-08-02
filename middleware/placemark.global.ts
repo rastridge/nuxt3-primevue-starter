@@ -5,6 +5,9 @@ export default defineNuxtRouteMiddleware((to, from) => {
 	const appfrom = from.path.split('/')[2]
 
 	const placemark = usePlacemarkStore()
+	// non-admin schedule page
+	placemark.initYear()
+
 	if (to.path.slice(0, 6) === '/admin' && appto !== appfrom) {
 		placemark.setPage(0)
 		placemark.setAlpha('1')
