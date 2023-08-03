@@ -30,7 +30,37 @@
 		<DataView :value="filteredData">
 			<template #list="slotProps">
 				<div class="col-12">
-					<span class="font-semibold">{{ slotProps.data.title }}</span>
+					<div
+						class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4"
+					>
+						<div
+							class="flex flex-column align-items-center sm:align-items-start gap-3"
+						>
+							<div class="text-2xl font-bold text-900">
+								{{ slotProps.data.title }}
+							</div>
+							<div>
+								{{ slotProps.data.occasion }} -
+								{{ getGameLevelCode(slotProps.data) }} Team
+							</div>
+
+							<div class="flex align-items-center gap-3">
+								<span class="flex align-items-center gap-2">
+									<span class="font-semibold">{{
+										slotProps.data.game_type
+									}}</span>
+								</span>
+							</div>
+						</div>
+						<div
+							class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2"
+						>
+							<span class="text-2xl font-semibold">
+								{{ getResultCode(slotProps.data) }} &nbsp;&nbsp;&nbsp;
+								{{ slotProps.data.ptsFor }} - {{ slotProps.data.ptsAgn }}</span
+							>
+						</div>
+					</div>
 				</div>
 			</template>
 		</DataView>
@@ -40,6 +70,7 @@
 <script setup>
 	import { usePlacemarkStore } from '@/stores'
 	const { $dayjs } = useNuxtApp()
+	const { getGameLevelCode, getResultCode } = useGames()
 
 	const placemark = usePlacemarkStore()
 	const startyear = 2004
