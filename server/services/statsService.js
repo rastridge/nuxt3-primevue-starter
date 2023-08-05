@@ -417,41 +417,41 @@ async function getAdjacent(direction) {
 
 async function getRosterStats() {
 	const sql = `SELECT
-					IF(
-						MONTH(g.date) > 7 AND MONTH(date) <= 12,
-						YEAR(g.date),
-						YEAR(g.date) - 1
-					) AS yr,
-					COUNT(g.game_id) AS ct_games,
-					SUM(IF(p.registered >= 15, 1, 0)) AS ct_atleastfifteen,
-					SUM(
-							IF(
-									p.registered > 0 AND p.registered < 15,
-									1,
-									0
-							)
-					) AS ct_partial,
-					SUM(IF(p.registered = 0, 1, 0)) AS ct_none
-				FROM
-					inbrc_stats_games g
-				INNER JOIN(
-					SELECT
-							game_id,
-							SUM(IF(player_id > 0, 1, 0)) AS registered
-					FROM
-						inbrc_stats_player
-					GROUP BY
-							game_id
-				) p
-				ON
-					p.game_id = g.game_id
-				WHERE
-					g.game_type_id <> 7 AND g.deleted = 0 AND g.status = 1
-				GROUP BY
-					yr
-				ORDER BY
-					yr
-				DESC`
+								IF(
+									MONTH(g.date) > 7 AND MONTH(date) <= 12,
+									YEAR(g.date),
+									YEAR(g.date) - 1
+								) AS yr,
+								COUNT(g.game_id) AS ct_games,
+								SUM(IF(p.registered >= 15, 1, 0)) AS ct_atleastfifteen,
+								SUM(
+										IF(
+												p.registered > 0 AND p.registered < 15,
+												1,
+												0
+										)
+								) AS ct_partial,
+								SUM(IF(p.registered = 0, 1, 0)) AS ct_none
+							FROM
+								inbrc_stats_games g
+							INNER JOIN(
+								SELECT
+										game_id,
+										SUM(IF(player_id > 0, 1, 0)) AS registered
+								FROM
+									inbrc_stats_player
+								GROUP BY
+										game_id
+							) p
+							ON
+								p.game_id = g.game_id
+							WHERE
+								g.game_type_id <> 7 AND g.deleted = 0 AND g.status = 1
+							GROUP BY
+								yr
+							ORDER BY
+								yr
+							DESC`
 
 	const roster_count = await doDBQuery(sql)
 	return roster_count

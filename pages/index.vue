@@ -3,18 +3,10 @@
 </script>
 
 <template>
-	<!-- <div style="background-image: url('/imgs/2019_nyrc.jpg'); height: 800px"> -->
 	<div
 		class="bg-no-repeat bg-cover bg-center w-full pt-4"
 		style="min-height: 900px; background-image: url('/imgs/2019_nyrc.jpg')"
 	>
-		<!-- <p
-			class="text-center text-blue-900 font-bold text-3xl md:text-4xl lg:text-6xl uppercase"
-			style="text-shadow: 2px 2px 6px rgb(233, 233, 233)"
-		>
-			Buffalo Rugby Club
-		</p> -->
-
 		<div class="card bg-transparent w-full">
 			<div class="flex justify-content-center flex-col md:flex-row">
 				<div

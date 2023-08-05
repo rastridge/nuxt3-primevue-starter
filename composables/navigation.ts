@@ -33,6 +33,11 @@ export function useNavigationMenu() {
 						to: '/loginpage',
 						visible: () => !auth.isLoggedIn,
 					},
+					{
+						label: 'chart',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/chart',
+					},
 				],
 			},
 			{

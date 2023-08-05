@@ -27,7 +27,7 @@
 		</div>
 
 		<!-- <DataView :value="season"> -->
-		<DataView :value="filteredData">
+		<DataView :value="filteredData" paginator :rows="5">
 			<template #list="slotProps">
 				<div class="col-12">
 					<div
@@ -64,6 +64,7 @@
 				</div>
 			</template>
 		</DataView>
+		<roster-chart />
 	</div>
 </template>
 
@@ -73,7 +74,7 @@
 	const { getGameLevelCode, getResultCode } = useGames()
 
 	const placemark = usePlacemarkStore()
-	const startyear = 2004
+	const startyear = 1966
 	const year = ref(placemark.getYear)
 
 	//
