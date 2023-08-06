@@ -1,7 +1,7 @@
-const { $dayjs } = useNuxtApp()
-
 export default function useGames() {
 	function getGameLevelCode(stat) {
+		const { $dayjs } = useNuxtApp()
+
 		const Year = parseInt($dayjs(stat.date).format('YYYY'))
 		let level = ''
 		if (stat.game_type_id === 1 || stat.game_type_id === 2) {

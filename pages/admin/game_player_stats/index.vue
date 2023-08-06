@@ -29,6 +29,7 @@
 					/>
 				</div>
 			</div>
+
 			<render-list
 				:data="filteredData"
 				:app="app"
@@ -59,7 +60,6 @@
 	// Initialize year select
 	//
 	const startyear = 1966
-	const { $dayjs } = useNuxtApp()
 	const year = ref(placemark.getYear)
 	//
 	// select Game type
@@ -92,8 +92,9 @@
 				...error.value,
 				statusMessage: `Could not get data from ${url}`,
 			})
+		} else {
+			stats.value = data.value
 		}
-		stats.value = data.value
 	}
 
 	//

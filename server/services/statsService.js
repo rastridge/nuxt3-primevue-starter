@@ -21,14 +21,14 @@ export const statsService = {
 	getTeamStatsTotal,
 	getPlayers,
 	getHistory,
-	getHistoryOneTeamTotals,
+	getHistoryTotals,
 	getHistoryStreaks,
 	getHistoryCurrentStreak,
 	deleteOne,
 	changeStatus,
 }
 
-async function getHistoryOneTeamTotals(id) {
+async function getHistoryTotals(id) {
 	const sql = `SELECT
 								COUNT(game_id) as game_count,
 								SUM(IF(ptsFor>ptsAgn,1,0)) as wins,

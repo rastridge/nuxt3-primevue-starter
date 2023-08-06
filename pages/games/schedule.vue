@@ -36,29 +36,54 @@
 						<div
 							class="flex flex-column align-items-center sm:align-items-start gap-3"
 						>
-							<div class="text-2xl font-bold text-900">
-								{{ slotProps.data.title }}
-							</div>
-							<div>
+							<span class="text-2xl font-bold text-900">
+								<a href="#" @click.prevent="showGame(slotProps.data.id)">
+									{{ slotProps.data.title }}
+								</a>
+							</span>
+							<span>
 								{{ slotProps.data.occasion }} -
 								{{ getGameLevelCode(slotProps.data) }} Team
-							</div>
+							</span>
 
 							<div class="flex align-items-center gap-3">
-								<span class="flex align-items-center gap-2">
+								<div class="flex align-items-center gap-2">
 									<span class="font-semibold">{{
 										slotProps.data.game_type
 									}}</span>
-								</span>
+								</div>
 							</div>
 						</div>
+
 						<div
 							class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2"
 						>
-							<span class="text-2xl font-semibold">
-								{{ getResultCode(slotProps.data) }} &nbsp;&nbsp;&nbsp;
-								{{ slotProps.data.ptsFor }} - {{ slotProps.data.ptsAgn }}</span
-							>
+							<div class="flex align-items-center gap-3">
+								<div class="flex align-items-center gap-2">
+									<span class="text-2xl font-semibold">
+										{{ getResultCode(slotProps.data) }} &nbsp;&nbsp;&nbsp;
+										{{ slotProps.data.ptsFor }} -
+										{{ slotProps.data.ptsAgn }}</span
+									>
+								</div>
+							</div>
+							<div class="flex align-items-center gap-3">
+								<div class="flex align-items-center gap-2">
+									<span class="text-sm">
+										<a
+											href="#"
+											@click.prevent="showHistory(slotProps.data.opponent_id)"
+										>
+											Show history {{ slotProps.data.opponent_id }}
+										</a>
+
+										<!-- 										<nuxt-link
+											to="`/games/history/${slotProps.data.opponent_id}""
+											>Show history
+										</nuxt-link> -->
+									</span>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -70,13 +95,18 @@
 
 <script setup>
 	import { usePlacemarkStore } from '@/stores'
-	const { $dayjs } = useNuxtApp()
+	const placemark = usePlacemarkStore()
 	const { getGameLevelCode, getResultCode } = useGames()
 
-	const placemark = usePlacemarkStore()
+	//
+	// Initialize year select
+	//
 	const startyear = 1966
 	const year = ref(placemark.getYear)
-
+	//
+	// select Game type
+	//
+	const gametype = ref(placemark.getGameTypeId)
 	//
 	// get / set season data
 	//
@@ -99,7 +129,6 @@
 		}
 		return data.value
 	}
-	// initial value
 	season.value = await getSeason(year.value)
 
 	const onSubmit = async function (value) {
@@ -109,9 +138,11 @@
 	}
 
 	//
-	// select Game type
+	// set gametype after drop down choice
 	//
-	const gametype = ref(placemark.getGameTypeId)
+	watch(gametype, (newid) => {
+		placemark.setGameTypeId(newid)
+	})
 
 	const filteredData = computed(() => {
 		return season.value.filter((d) => {
@@ -122,4 +153,15 @@
 			}
 		})
 	})
+
+	const showGame = (id) => {
+		// placemark.setYear(year.value)
+		navigateTo(`/games/game/${id}`)
+	}
+	const showHistory = (id) => {
+		// console.log('id =========== ', id)
+		// placemark.setYear(year.value)
+		navigateTo(`/games/history/${id}`)
+		// navigateTo(`/games/game/${id}`)
+	}
 </script>

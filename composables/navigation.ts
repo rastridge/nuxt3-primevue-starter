@@ -71,7 +71,7 @@ export function useNavigationMenu() {
 					{
 						label: 'Schedule',
 						icon: 'pi pi-fw pi-bookmark',
-						to: '/schedule',
+						to: '/games/schedule',
 					},
 				],
 				visible: () => !auth.isLoggedIn,
