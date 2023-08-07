@@ -44,9 +44,27 @@
 </template>
 
 <script setup>
+	const historytotals = ref()
 	const props = defineProps({
-		historytotals: { type: Object, required: true },
+		opponent_id: { type: String, required: true },
 	})
+
+	const url = `/game_player_stats/totals/${props.opponent_id}`
+	const { data, error } = await useFetch(url, {
+		method: 'get',
+		headers: {
+			// authorization: auth.user.token,
+			authorization: 'not-needed',
+		},
+	})
+	if (error.value) {
+		throw createError({
+			...error.value,
+			statusMessage: `Could not get data from ${url}`,
+		})
+	} else {
+		historytotals.value = data.value
+	}
 </script>
 
 <style scoped>

@@ -27,7 +27,13 @@
 		</div>
 
 		<!-- <DataView :value="season"> -->
-		<DataView :value="filteredData" paginator :rows="5">
+		<DataView
+			:value="filteredData"
+			paginator
+			:rows="5"
+			:first="first"
+			@page="onPaginate"
+		>
 			<template #list="slotProps">
 				<div class="col-12">
 					<div
@@ -107,6 +113,15 @@
 	// select Game type
 	//
 	const gametype = ref(placemark.getGameTypeId)
+
+	//
+	// Initial settings for pagination
+	//
+	const first = ref(placemark.getPage)
+	const onPaginate = (e) => {
+		first.value = e.rows * e.page
+		placemark.setPage(first.value)
+	}
 	//
 	// get / set season data
 	//
@@ -155,13 +170,11 @@
 	})
 
 	const showGame = (id) => {
-		// placemark.setYear(year.value)
+		placemark.setYear(year.value)
 		navigateTo(`/games/game/${id}`)
 	}
 	const showHistory = (id) => {
-		// console.log('id =========== ', id)
-		// placemark.setYear(year.value)
+		placemark.setYear(year.value)
 		navigateTo(`/games/history/${id}`)
-		// navigateTo(`/games/game/${id}`)
 	}
 </script>

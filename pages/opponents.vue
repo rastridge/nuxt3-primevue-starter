@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<Common-header title="Members" />
+		<Common-header title="Opponents" />
 		<div class="card">
 			<DataTable
 				v-model:expandedRows="expandedRows"
-				:value="members"
-				dataKey="account_id"
+				:value="opponents"
+				dataKey="opponent_id"
 				v-model:filters="filters"
-				:globalFilterFields="['member_type']"
+				:globalFilterFields="['opponent_type']"
 				:class="'p-datatable-sm'"
 				stripedRows
 				filterDisplay="row"
@@ -19,18 +19,18 @@
 				selectionMode="single"
 				@rowExpand="onRowExpand"
 			>
-				<template #empty> No members found. </template>
-				<template #loading> Loading Membership data. Please wait. </template>
+				<template #empty> No opponents found. </template>
+				<template #loading> Loading opponents data. Please wait. </template>
 
 				<Column header="Expand" expander style="width: 5rem" />
 				<Column
 					header="Name"
-					field="NAME"
+					field="opponent_name"
 					:showFilterMenu="false"
 					style="width: 20rem"
 				>
 					<template #body="{ data }">
-						{{ data.member_firstname }} {{ data.member_lastname }}
+						{{ data.opponent_name }}
 					</template>
 					<template #filter="{ filterModel, filterCallback }">
 						<InputText
@@ -43,8 +43,8 @@
 					</template>
 				</Column>
 				<Column
-					field="member_year"
-					header="Year Joined"
+					field="opponent_location"
+					header="Location"
 					:showFilterMenu="false"
 					sortable
 					style="width: 20rem"
@@ -55,55 +55,32 @@
 							type="text"
 							@input="filterCallback()"
 							class="p-column-filter"
-							placeholder="Search by year"
+							placeholder="Search by location"
 						/>
 					</template>
 				</Column>
 				<Column
-					field="member_type"
-					header="Member Type"
+					field="opponent_type"
+					header="Opponent Type"
 					:showFilterMenu="false"
 				>
 					<template #filter="{ filterModel, filterCallback }">
 						<Dropdown
 							v-model="filterModel.value"
 							@change="filterCallback()"
-							:options="member_types"
-							placeholder="Search by member type"
+							:options="opponent_types"
 							:showClear="true"
 							style="width: 10rem"
 						>
 						</Dropdown>
 					</template>
 				</Column>
+
 				<template #expansion="slotProps">
 					<div class="p-3">
-						<table>
-							<tr>
-								<th>Previous club</th>
-								<th>Position</th>
-								<th>15s Games</th>
-								<th>7s Games</th>
-								<th>WOF</th>
-							</tr>
-							<tr>
-								<td style="width: 25%">
-									{{ slotProps.data.member_prev_club }}
-								</td>
-								<td style="width: 20%">
-									{{ slotProps.data.member_position }}
-								</td>
-								<td style="width: 20%">
-									{{ slotProps.data.fifteensct }}
-								</td>
-								<td style="width: 20%">
-									{{ slotProps.data.sevensct }}
-								</td>
-								<td style="width: 10%">
-									{{ slotProps.data.member_wall_of_fame_year }}
-								</td>
-							</tr>
-						</table>
+						<display-history :opponent_id="slotProps.data.opponent_id" />
+						<display-records :opponent_id="slotProps.data.opponent_id" />
+						<display-streaks :opponent_id="slotProps.data.opponent_id" />
 					</div>
 				</template>
 			</DataTable>
@@ -114,43 +91,30 @@
 <script setup>
 	import { FilterMatchMode } from 'primevue/api'
 	const expandedRows = ref([])
-
 	//
-	// Get current news
+	// Get opponents
 	//
 	const {
-		data: members,
+		data: opponents,
 		pending,
 		error,
 		refresh,
-	} = await useFetch('/accounts/getshow', {
+	} = await useFetch('/opponents/getall', {
 		method: 'get',
 		headers: {
 			authorization: 'not-needed',
 		},
 	})
 
-	// const  checkAccountId = (id) => id === 1
-
 	const onRowExpand = async (event) => {}
 	//
 	// filter value criteria
 	//
 	const filters = ref({
-		NAME: { value: null, matchMode: FilterMatchMode.CONTAINS },
-		member_type: { value: null, matchMode: FilterMatchMode.EQUALS },
-		member_year: { value: null, matchMode: FilterMatchMode.EQUALS },
+		opponent_name: { value: null, matchMode: FilterMatchMode.CONTAINS },
+		opponent_type: { value: null, matchMode: FilterMatchMode.EQUALS },
+		opponent_location: { value: null, matchMode: FilterMatchMode.CONTAINS },
 	})
 
-	const member_types = ref([
-		'Alumni',
-		'Active',
-		'Other',
-		'Ad_Astra',
-		'Development',
-		'Special',
-		'Sponsor',
-		'Flag',
-		'Flag Pending',
-	])
+	const opponent_types = ref(['men', 'college', 'oldboys'])
 </script>

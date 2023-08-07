@@ -17,21 +17,20 @@
 </template>
 
 <script setup>
+	useHead({
+		title: 'Buffalo Rugby Club Game',
+	})
 	//
 	// Get account id to edit
 	//
 	const route = useRoute()
 	const id = ref(route.params.id)
-	console.log('IN game id =========== ', id)
 
 	const players = ref([])
 	const game = ref({})
 	const playersLoaded = ref(false)
 	const infoLoaded = ref(false)
 
-	useHead({
-		title: 'Buffalo Rugby Club Game',
-	})
 	onMounted(() => {
 		getOne(id.value) // get game info
 		// setGame(game.value)

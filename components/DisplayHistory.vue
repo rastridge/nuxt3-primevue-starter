@@ -31,10 +31,28 @@
 <script setup>
 	const { $dayjs } = useNuxtApp()
 	const { getGameLevelCode, getResultCode } = useGames()
+	const history = ref([])
 
 	const props = defineProps({
-		history: { type: Array, required: true },
+		opponent_id: { type: String, required: true },
 	})
+
+	const url = `/game_player_stats/history/${props.opponent_id}`
+	const { data, error } = await useFetch(url, {
+		method: 'get',
+		headers: {
+			// authorization: auth.user.token,
+			authorization: 'not-needed',
+		},
+	})
+	if (error.value) {
+		throw createError({
+			...error.value,
+			statusMessage: `Could not get data from ${url}`,
+		})
+	} else {
+		history.value = data.value
+	}
 </script>
 
 <style scoped>

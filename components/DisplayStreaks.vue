@@ -1,6 +1,6 @@
 <template>
 	<div class="historystreaks">
-		<h3>Win Steaks</h3>
+		<h3>Streaks</h3>
 		<table class="nowrap">
 			<tr>
 				<td>&nbsp;</td>
@@ -20,7 +20,24 @@
 </template>
 
 <script setup>
+	const historystreaks = ref({})
 	const props = defineProps({
-		historystreaks: { type: Object, required: true },
+		opponent_id: { type: String, required: true },
 	})
+	const url = `/game_player_stats/streaks/${props.opponent_id}`
+	const { data, error } = await useFetch(url, {
+		method: 'get',
+		headers: {
+			// authorization: auth.user.token,
+			authorization: 'not-needed',
+		},
+	})
+	if (error.value) {
+		throw createError({
+			...error.value,
+			statusMessage: `Could not get data from ${url}`,
+		})
+	} else {
+		historystreaks.value = data.value
+	}
 </script>

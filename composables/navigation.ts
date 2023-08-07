@@ -73,6 +73,11 @@ export function useNavigationMenu() {
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/games/schedule',
 					},
+					{
+						label: 'Opponents',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/opponents',
+					},
 				],
 				visible: () => !auth.isLoggedIn,
 			},
