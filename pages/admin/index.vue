@@ -1,9 +1,8 @@
 <template>
 	<div>
-		<nuxt-img
-			sizes="sm:320px md:480px lg:600px"
-			src="/imgs/2023_old_blue_dannish.jpg"
-		/>
+		<div>
+			<img src="/imgs/2023_old_blue_dannish.jpg" style="width: 320px" />
+		</div>
 		<p>Admin user name is {{ auth.user.admin_user_name }}</p>
 		<!-- <p>Admin user token is {{ auth.user.token }}</p> -->
 		<p>Admin user is logged in {{ auth.isLoggedIn }}</p>

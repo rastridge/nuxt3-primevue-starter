@@ -16,10 +16,7 @@
 					Buffalo
 				</div>
 				<div class="flex align-items-center justify-content-center">
-					<nuxt-img
-						sizes="sm:100px md:150px lg:300px"
-						src="/imgs/bflo_blue.png"
-					/>
+					<img src="/imgs/bflo_blue.png" class="w-6rem md:w-8rem xl:w-16rem" />
 				</div>
 
 				<div
