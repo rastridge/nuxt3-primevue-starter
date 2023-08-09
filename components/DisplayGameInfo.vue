@@ -1,12 +1,11 @@
 <template>
 	<div id="gameInfo">
+		<h6 class="m-2 text-xl">
+			{{ item.opponent_name }} - {{ item.opponent_id }} -
+			{{ $dayjs(item.date).format('MMMM DD, YYYY @ ddd h:mm A') }}
+		</h6>
 		<table class="nowrap">
 			<tbody>
-				<tr>
-					<td>
-						Game date - {{ $dayjs(item.date).format('MMM D YYYY ddd h:mm a') }}
-					</td>
-				</tr>
 				<tr>
 					<td>
 						Game level -

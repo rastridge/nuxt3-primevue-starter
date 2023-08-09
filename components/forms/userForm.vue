@@ -10,6 +10,8 @@
 					@click="submitForm(state)"
 				>
 				</Button>
+				<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
+
 				<Button
 					class="p-button mb-4"
 					label="Cancel"
@@ -142,6 +144,9 @@
 					@click="submitForm(state)"
 				>
 				</Button>
+
+				<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
+
 				<Button class="p-button center" label="Cancel" @click="cancelForm">
 				</Button>
 			</div>
@@ -154,6 +159,7 @@
 	import { useAlertStore } from '~/stores/alertStore'
 	const auth = useAuthStore()
 	const alert = useAlertStore()
+	const saving = ref(false)
 
 	//
 	// Incoming
@@ -255,6 +261,8 @@
 			ok = true
 		}
 		if (ok) {
+			saving.value = true
+
 			emit('submitted', form)
 		} else {
 			alert.error('Incomplete form')

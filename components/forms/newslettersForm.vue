@@ -44,6 +44,8 @@
 				@changeState="changeState"
 			></input-body>
 		</FormKit>
+		<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
+
 		<Button class="m-1" label="Cancel" @click.prevent="cancelForm()"> </Button>
 	</div>
 </template>
@@ -51,8 +53,10 @@
 <script setup>
 	import { useAuthStore } from '~/stores/authStore'
 	const auth = useAuthStore()
+	const saving = ref(false)
+
 	//
-	// Incoming id
+	// Incoming i
 	//
 	const props = defineProps({
 		id: { Number, default: 0 },
@@ -117,6 +121,7 @@
 	// form handlers
 	//
 	const submitForm = (state) => {
+		saving.value = true
 		emit('submitted', state)
 	}
 

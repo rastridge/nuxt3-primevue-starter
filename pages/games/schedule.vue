@@ -37,58 +37,80 @@
 			<template #list="slotProps">
 				<div class="col-12">
 					<div
-						class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4"
+						class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4 m-2 p-2 border-dotted border-black"
 					>
 						<div
-							class="flex flex-column align-items-center sm:align-items-start gap-3"
+							class="flex flex-column align-items-center sm:align-items-start gap-2 border-soli border-blue w-3"
 						>
-							<span class="text-2xl font-bold text-900">
-								<a href="#" @click.prevent="showGame(slotProps.data.id)">
-									{{ slotProps.data.title }}
-								</a>
-							</span>
-							<span>
-								{{ slotProps.data.occasion }} -
-								{{ getGameLevelCode(slotProps.data) }} Team
-							</span>
+							<div class="flex align-items-center border-soli border-yellow">
+								<span class="text-xl font-bold text-900">
+									{{
+										$dayjs(slotProps.data.date).format('MMMM D @ h:mm A')
+									}}</span
+								>
+							</div>
 
-							<div class="flex align-items-center gap-3">
-								<div class="flex align-items-center gap-2">
-									<span class="font-semibold">{{
-										slotProps.data.game_type
-									}}</span>
-								</div>
+							<div class="flex align-items-center border-soli border-yellow">
+								<span class="font-semibold"
+									>{{ getGameLevelCode(slotProps.data) }} Side
+								</span>
+							</div>
+
+							<div class="flex align-items-center border-soli border-yellow">
+								<span class="font-semibold">{{
+									slotProps.data.game_type
+								}}</span>
 							</div>
 						</div>
 
 						<div
-							class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2"
+							class="flex flex-row justify-content-between align-items-center gap-2 border-soli border-blue w-6"
 						>
-							<div class="flex align-items-center gap-3">
-								<div class="flex align-items-center gap-2">
-									<span class="text-2xl font-semibold">
-										{{ getResultCode(slotProps.data) }} &nbsp;&nbsp;&nbsp;
-										{{ slotProps.data.ptsFor }} -
-										{{ slotProps.data.ptsAgn }}</span
-									>
-								</div>
+							<div class="flex align-items-center border-soli border-yellow">
+								<span class="text-3xl font-bold">
+									<a href="#" @click.prevent="showGame(slotProps.data.game_id)">
+										{{ slotProps.data.title }}</a
+									></span
+								>
 							</div>
-							<div class="flex align-items-center gap-3">
-								<div class="flex align-items-center gap-2">
-									<span class="text-sm">
-										<a
-											href="#"
-											@click.prevent="showHistory(slotProps.data.opponent_id)"
-										>
-											Show history {{ slotProps.data.opponent_id }}
-										</a>
+							<div class="flex align-items-center border-soli border-yellow">
+								<span class="text-2xl font-semibold">
+									{{ getResultCode(slotProps.data) }} &nbsp;&nbsp;&nbsp;
+									{{ slotProps.data.ptsFor }} -
+									{{ slotProps.data.ptsAgn }}</span
+								>
+							</div>
+						</div>
 
-										<!-- 										<nuxt-link
+						<div
+							class="flex flex-column align-items-center sm:align-items-start gap-2 border-soli border-blue w-3"
+						>
+							<div
+								class="flex align-items-center gap-3 border-soli border-yellow"
+							>
+								<span class="text-xl font-semibold">{{
+									slotProps.data.venue
+								}}</span>
+							</div>
+							<div class="flex align-items-center border-soli border-yellow">
+								<span>
+									{{ slotProps.data.occasion }}
+								</span>
+							</div>
+							<div class="flex align-items-center border-soli border-yellow">
+								<span class="text-sm">
+									<a
+										href="#"
+										@click.prevent="showHistory(slotProps.data.opponent_id)"
+									>
+										Show history {{ slotProps.data.opponent_id }}
+									</a>
+
+									<!-- 										<nuxt-link
 											to="`/games/history/${slotProps.data.opponent_id}""
 											>Show history
 										</nuxt-link> -->
-									</span>
-								</div>
+								</span>
 							</div>
 						</div>
 					</div>
@@ -101,6 +123,9 @@
 
 <script setup>
 	import { usePlacemarkStore } from '@/stores'
+	import dayjs from 'dayjs'
+	const { $dayjs } = useNuxtApp()
+
 	const placemark = usePlacemarkStore()
 	const { getGameLevelCode, getResultCode } = useGames()
 
@@ -118,6 +143,7 @@
 	// Initial settings for pagination
 	//
 	const first = ref(placemark.getPage)
+
 	const onPaginate = (e) => {
 		first.value = e.rows * e.page
 		placemark.setPage(first.value)
@@ -142,6 +168,8 @@
 				statusMessage: `Could not get data from ${url}`,
 			})
 		}
+		// const d = $dayjs(season.value.date)
+		// data.value.date = d.format('YYYY')
 		return data.value
 	}
 	season.value = await getSeason(year.value)

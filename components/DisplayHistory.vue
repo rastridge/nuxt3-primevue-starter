@@ -1,8 +1,7 @@
 <template>
 	<div class="history">
 		<div v-if="history">
-			<h3>{{ history[0].opponent_name }}</h3>
-			<h3>Games</h3>
+			<p class="text-lg">Games</p>
 
 			<table>
 				<tbody class="text-sm">

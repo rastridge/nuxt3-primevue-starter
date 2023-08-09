@@ -1,5 +1,5 @@
-<script setup lang="ts">
-	import AdvertiseBox from '@/components/AdvertiseBox.vue'
+<script setup>
+	import bfloblue from '~/assets/imgs/bflo_blue.png'
 </script>
 
 <template>
@@ -16,7 +16,7 @@
 					Buffalo
 				</div>
 				<div class="flex align-items-center justify-content-center">
-					<img src="/imgs/bflo_blue.png" class="w-6rem md:w-8rem xl:w-16rem" />
+					<img :src="bfloblue" class="w-6rem md:w-8rem xl:w-16rem" />
 				</div>
 
 				<div
@@ -30,30 +30,6 @@
 		<p class="text-center text-xl md:text-2xl text-white">
 			Home Field Delaware Park | Home Base Brawler's Deli
 		</p>
-		<!-- <p>class="grid grid-cols-2 lg:grid-cols-3 gap-2">
-				<AdvertiseBox
-					header="TipTap"
-					icon="prime-check-circle"
-					color="green-600"
-				>
-					TipTap Editor Demo
-				</AdvertiseBox>
-				<AdvertiseBox
-					header="Vitest"
-					icon="prime-check-circle"
-					color="blue-600"
-				>
-					Testing with Vitest
-				</AdvertiseBox>
-				<AdvertiseBox
-					header="Histoire"
-					icon="prime-check-circle"
-					color="green-600"
-				>
-					Interactive Component Playgrounds
-				</AdvertiseBox>
-			</div>
-		</div> -->
 	</div>
 </template>
 

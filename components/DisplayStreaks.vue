@@ -1,6 +1,6 @@
 <template>
 	<div class="historystreaks">
-		<h3>Streaks</h3>
+		<p class="text-lg mt-1">Streaks</p>
 		<table class="nowrap">
 			<tr>
 				<td>&nbsp;</td>

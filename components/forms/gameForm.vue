@@ -45,8 +45,8 @@
 
 				<!-- Date input-->
 				<FormKit type="date" label="Date" name="date" validation="required" />
-				<!-- Time input-->
 
+				<!-- Time input-->
 				<FormKit type="time" label="Time" name="time" validation="required" />
 
 				<!-- Game Type input-->
@@ -85,6 +85,8 @@
 				<!-- points against input-->
 				<FormKit label="Pts against" name="ptsAgn" type="text" />
 			</FormKit>
+
+			<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
 
 			<Button label="Cancel" @click.prevent="cancelForm()" style="margin: 1rem">
 			</Button>
@@ -224,6 +226,7 @@
 	import { useAuthStore } from '~/stores/authStore'
 	const auth = useAuthStore()
 	const { $dayjs } = useNuxtApp()
+	const saving = ref(false)
 	//
 	// Outgoing
 	//
@@ -237,7 +240,6 @@
 
 	// Reactive variables
 	const showReplaceDialog = ref(false)
-	const saving = ref(false)
 	const gametypes = ref([])
 	const players = ref([])
 	let state = ref({})
@@ -345,11 +347,13 @@
 			},
 		})
 		state.value = g.value
+
+		// Adjustments
 		// why?
 		const d = $dayjs(g.value.date)
-		// Adjustments
 		state.value.date = d.format('YYYY-MM-DD')
 		state.value.time = d.format('HH:mm:ss')
+
 		// needs to be carried over because its not used in the form
 		state.value.opponent_id = g.value.opponent_id
 
@@ -551,7 +555,6 @@
 	// form handlers
 	//
 	const submitForm = (state) => {
-		saving.value = true
 		selectedPlayers.value.forEach((value, index, array) => {
 			players.value[index].player_id = value.account_id
 			players.value[index].pfn = value.member_firstname
@@ -567,6 +570,8 @@
 
 		state.players = players.value
 		state.date = state.date + 'T' + state.time + ':00.000Z'
+
+		saving.value = true
 		emit('submitted', state)
 	}
 	const cancelForm = () => {

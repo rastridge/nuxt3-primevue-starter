@@ -76,6 +76,7 @@ async function getOne(id) {
 								event_title as title,
 								event_description,
 								event_location,
+								event_dt,
 								event_dt as dt,
 								expire_dt,
 								release_dt

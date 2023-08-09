@@ -58,6 +58,8 @@
 				validation="required"
 			/>
 		</FormKit>
+		<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
+
 		<Button label="Cancel" @click.prevent="cancelForm()"> </Button>
 	</div>
 </template>
@@ -65,6 +67,7 @@
 <script setup>
 	import { useAuthStore } from '~/stores/authStore'
 	const auth = useAuthStore()
+	const saving = ref(false)
 
 	const { $dayjs } = useNuxtApp()
 	//
@@ -138,6 +141,7 @@
 	// form handlers
 	//
 	const submitForm = (state) => {
+		saving.value = true
 		emit('submitted', state)
 	}
 

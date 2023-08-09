@@ -154,6 +154,8 @@
 					validation="required"
 				/>
 			</FormKit>
+			<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
+
 			<Button class="mb-3 center" label="Cancel" @click="cancelForm"> </Button>
 		</div>
 	</div>
@@ -169,6 +171,8 @@
 	const { $dayjs } = useNuxtApp()
 	const { getCountries, setRegions } = useLocations()
 	const { getMemberAdminTypeOptions, getMemberTypeOptions } = useMembertypes()
+	const saving = ref(false)
+
 	//
 	// Outgoing
 	//
@@ -235,6 +239,8 @@
 	// form handlers
 	//
 	const submitForm = (state) => {
+		saving.value = true
+
 		emit('submitted', state)
 	}
 	const cancelForm = () => {

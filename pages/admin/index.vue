@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div>
-			<img src="/imgs/2023_old_blue_dannish.jpg" style="width: 320px" />
+			<img :src="oldblue" style="width: 320px" />
 		</div>
 		<p>Admin user name is {{ auth.user.admin_user_name }}</p>
 		<!-- <p>Admin user token is {{ auth.user.token }}</p> -->
@@ -23,6 +23,7 @@
 <script setup>
 	import { useAuthStore } from '~/stores/authStore'
 	import { usePlacemarkStore } from '@/stores'
+	import oldblue from '~/assets/imgs/2023_old_blue_dannish.jpg'
 	const placemark = usePlacemarkStore()
 	const auth = useAuthStore()
 	const sess = JSON.parse(sessionStorage.getItem('auth'))
