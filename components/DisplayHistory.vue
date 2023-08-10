@@ -1,6 +1,10 @@
 <template>
 	<div class="history">
 		<div v-if="history">
+			<h6 class="m-2 text-xl">
+				{{ history[0].opponent_name }} -
+				{{ $dayjs(history[0].date).format('MMMM DD, YYYY @ ddd h:mm A') }}
+			</h6>
 			<p class="text-lg">Games</p>
 
 			<table>

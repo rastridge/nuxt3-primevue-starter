@@ -1,7 +1,7 @@
 <template>
 	<div id="gameInfo">
 		<h6 class="m-2 text-xl">
-			{{ item.opponent_name }} - {{ item.opponent_id }} -
+			{{ item.opponent_name }} -
 			{{ $dayjs(item.date).format('MMMM DD, YYYY @ ddd h:mm A') }}
 		</h6>
 		<table class="nowrap">

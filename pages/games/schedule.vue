@@ -67,11 +67,13 @@
 							class="flex flex-row justify-content-between align-items-center gap-2 border-soli border-blue w-6"
 						>
 							<div class="flex align-items-center border-soli border-yellow">
-								<span class="text-3xl font-bold">
-									<a href="#" @click.prevent="showGame(slotProps.data.game_id)">
-										{{ slotProps.data.title }}</a
-									></span
+								<Button
+									:label="slotProps.data.title"
+									text
+									class="text-3xl font-bold"
+									@click.prevent="showGame(slotProps.data.game_id)"
 								>
+								</Button>
 							</div>
 							<div class="flex align-items-center border-soli border-yellow">
 								<span class="text-2xl font-semibold">
@@ -98,19 +100,12 @@
 								</span>
 							</div>
 							<div class="flex align-items-center border-soli border-yellow">
-								<span class="text-sm">
-									<a
-										href="#"
-										@click.prevent="showHistory(slotProps.data.opponent_id)"
-									>
-										Show history {{ slotProps.data.opponent_id }}
-									</a>
-
-									<!-- 										<nuxt-link
-											to="`/games/history/${slotProps.data.opponent_id}""
-											>Show history
-										</nuxt-link> -->
-								</span>
+								<Button
+									label="Show history"
+									text
+									@click.prevent="showHistory(slotProps.data.opponent_id)"
+								>
+								</Button>
 							</div>
 						</div>
 					</div>
