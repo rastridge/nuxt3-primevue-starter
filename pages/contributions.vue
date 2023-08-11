@@ -2,9 +2,6 @@
 	<div id="contributions">
 		<div class="center-content">
 			<common-header title="Contributions" />
-			<!-- contributions[0] = {{ contributions[0] }} year = {{ year }} -->
-			<!-- contribution_date =
-			{{ $dayjs(contributions[0].contribution_date).format('ll') }} -->
 			<!-- Paypal-->
 			<form action="https://www.paypal.com/donate" method="post" target="_top">
 				<input type="hidden" name="hosted_button_id" value="EH2TSRTGPZVPY" />
@@ -126,19 +123,15 @@
 
 	// initial values
 	const year = ref(2023)
-	// const contributions = ref(getYearContributiions(year.value))
 	const contributions = ref([])
 	contributions.value = getYearContributiions(year.value)
-	// onMounted(() => {
-	// 	contributions.value = getYearContributiions(year.value)
-	// })
+
 	//
 	// Select year action
 	//
 	const startyear = 2010
 	// get year contributions
 	const onSubmit = (value) => {
-		console.log(value)
 		year.value = value
 		contributions.value = getYearContributiions(year.value)
 	}
