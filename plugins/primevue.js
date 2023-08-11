@@ -25,7 +25,6 @@ export default defineNuxtPlugin((nuxtApp) => {
 	nuxtApp.vueApp.use(ToastService)
 	nuxtApp.vueApp.component('AutoComplete', AutoComplete)
 	nuxtApp.vueApp.component('Button', Button)
-	nuxtApp.vueApp.component('Button', Button)
 	nuxtApp.vueApp.component('Card', Card)
 	nuxtApp.vueApp.component('Chart', Chart)
 	nuxtApp.vueApp.component('Checkbox', Checkbox)

@@ -14,6 +14,7 @@ export default function useCustomPages() {
 				statusMessage: `Could not get data from /content/custommenuitems`,
 			})
 		}
+
 		const items = [
 			{
 				label: 'News',

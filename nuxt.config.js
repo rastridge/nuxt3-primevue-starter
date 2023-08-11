@@ -37,28 +37,20 @@ export default defineNuxtConfig({
 	},
 	modules: [
 		'@formkit/nuxt',
-		'@unocss/nuxt',
 		'@pinia/nuxt',
 		'@nuxt/image',
 		'@nuxtjs/i18n',
-		'@nuxt/content',
 		'@vueuse/nuxt',
 	],
 	buildModules: ['@nuxtjs/google-fonts'],
-	components: ['~/components/forms', '~/components'],
+	components: ['~/components/forms', '~/components/displays', '~/components'],
 
 	dayjs: {
 		locales: ['en'],
 		defaultLocale: 'en',
 		defaultTimeZone: 'America/New_York',
 	},
-	content: {
-		highlight: {
-			theme: 'one-dark-pro',
-			preload: ['json', 'js', 'ts', 'html', 'css', 'vue'],
-		},
-		// Options
-	},
+
 	i18n: {
 		lazy: true,
 		langDir: 'locales',
@@ -71,20 +63,7 @@ export default defineNuxtConfig({
 
 		vueI18n: './vue-i18n.options.ts',
 	},
-	unocss: {
-		uno: true,
-		attributify: true,
-		preflight: false,
-		icons: {
-			scale: 1.2,
-		},
-		shortcuts: [
-			[
-				'btn',
-				'px-4 py-1 rounded inline-block bg-teal-600 text-white cursor-pointer hover:bg-teal-700 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50',
-			],
-		],
-	},
+
 	primevue: {
 		config: {
 			// ripple: true,
@@ -109,12 +88,7 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-	/* googleFonts: {
-		prefetch: true,
-		families: {
-			Lora: true,
-		},
-	}, */
+
 	pinia: {
 		autoImports: [
 			// automatically imports `defineStore`

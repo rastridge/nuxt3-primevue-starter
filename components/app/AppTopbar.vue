@@ -34,7 +34,7 @@
 			<i class="pi pi-bars" />
 		</button>
 
-		<button
+		<!-- <button
 			v-styleclass="{
 				selector: '@next',
 				enterClass: 'hidden',
@@ -46,7 +46,7 @@
 			class="p-link layout-topbar-menu-button layout-topbar-button"
 		>
 			<i class="pi pi-ellipsis-v" />
-		</button>
+		</button> -->
 
 		<ul class="layout-topbar-menu hidden lg:flex origin-top">
 			<li>

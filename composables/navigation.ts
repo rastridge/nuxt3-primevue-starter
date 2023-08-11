@@ -33,11 +33,6 @@ export function useNavigationMenu() {
 						to: '/loginpage',
 						visible: () => !auth.isLoggedIn,
 					},
-					{
-						label: 'chart',
-						icon: 'pi pi-fw pi-bookmark',
-						to: '/chart',
-					},
 				],
 			},
 			{
@@ -77,6 +72,11 @@ export function useNavigationMenu() {
 						label: 'Opponents',
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/opponents',
+					},
+					{
+						label: 'Contributions',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/contributions',
 					},
 				],
 				visible: () => !auth.isLoggedIn,
@@ -170,38 +170,10 @@ export function useNavigationMenu() {
 				],
 				visible: () => auth.isLoggedIn,
 			},
-			{
-				label: 'UI',
-				items: [
-					{ label: 'UnoCSS', icon: 'pi pi-fw pi-user-edit', to: '/ui/uno' },
-					{ label: 'Icons', icon: 'pi pi-fw pi-user-edit', to: '/ui/icons' },
-					{ label: 'TipTap', icon: 'pi pi-fw pi-user-edit', to: '/ui/tiptap' },
-				],
-				visible: () => !auth.isLoggedIn,
-			},
-			{
-				label: 'Content',
-				items: [
-					{
-						label: 'Markdown',
-						icon: 'pi pi-fw pi-user-edit',
-						to: '/cms/markdown',
-					},
-					{
-						label: 'Component',
-						icon: 'pi pi-fw pi-user-edit',
-						to: '/cms/component',
-					},
-				],
-				visible: () => !auth.isLoggedIn,
-			},
+
 			{
 				label: 'Pages',
-				items: [
-					{ label: 'Stores', icon: 'pi pi-fw pi-database', to: '/stores' },
-					{ label: 'Server', icon: 'pi pi-fw pi-database', to: '/server' },
-					{ label: 'I18n', icon: 'pi pi-fw pi-database', to: '/i18n' },
-				],
+				items: [{ label: 'I18n', icon: 'pi pi-fw pi-database', to: '/i18n' }],
 				visible: () => !auth.isLoggedIn,
 			},
 		]
