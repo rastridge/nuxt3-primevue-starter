@@ -20,7 +20,7 @@
 		<Head>
 			<Title>Edit custom page {{ id }}</Title>
 		</Head>
-		<common-header title="Edit custom page" />
+		<admin-header title="Edit custom page" />
 		<content-form :id="id" @submitted="onSubmit" />
 	</div>
 </template>

@@ -3,7 +3,7 @@
 		<Head>
 			<Title>Edit User {{ id }}</Title>
 		</Head>
-		<common-header title="Edit users" />
+		<admin-header title="Edit users" />
 		<user-form :id="id" @submitted="onSubmit" />
 	</div>
 </template>

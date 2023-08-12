@@ -6,8 +6,12 @@
 			optionLabel="label"
 			optionValue="value"
 			placeholder="Select a Different Year"
+			:pt="{
+				root: { class: 'w-full md:w-14rem' },
+				item: { class: 'text-xl' },
+				input: { class: 'md:text-xl  font-semibold' },
+			}"
 		/>
-		<!-- year = {{ year }} years = {{ years }} -->
 	</div>
 </template>
 
@@ -51,14 +55,3 @@
 	//
 	watch(year, () => emit('submitted', year.value))
 </script>
-
-<style lang="scss" scoped>
-	.p-dropdown {
-		width: 10rem;
-	}
-	@media screen and (max-width: 640px) {
-		.p-treeselect {
-			width: 100%;
-		}
-	}
-</style>

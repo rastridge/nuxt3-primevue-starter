@@ -22,7 +22,7 @@
 		<Head>
 			<Title>Edit game {{ id }}</Title>
 		</Head>
-		<common-header title="Edit game" />
+		<admin-header title="Edit game" />
 		<game-form :id="id" @submitted="onSubmit" />
 	</div>
 </template>

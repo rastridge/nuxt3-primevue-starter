@@ -36,7 +36,7 @@
 				<DataTable
 					:value="contributions"
 					class="p-datatable-sm"
-					tableStyle="min-width: 50rem"
+					tableStyle="width: 400px"
 					scrollable
 					scrollHeight="400px"
 					dataKey="contribution_id"
@@ -58,7 +58,12 @@
 							</div>
 						</template>
 					</Column>
-					<Column field="member_lastname" header="Contributor" frozen>
+					<Column
+						field="member_lastname"
+						header="Contributor"
+						frozen
+						style="white-space: nowrap"
+					>
 						<template #body="slotProps">
 							<div>
 								{{
@@ -93,9 +98,73 @@
 							</div>
 						</template>
 					</Column>
-					<Column field="contribution_comment" header="Comment">{{
-						slotProps.data.contribution_comment
-					}}</Column>
+					<Column
+						field="contribution_comment"
+						header="Comment"
+						style="white-space: nowrap"
+						>{{ slotProps.data.contribution_comment }}</Column
+					>
+				</DataTable>
+			</div>
+			<div class="card w-full">
+				<h4>The Need</h4>
+				<p>
+					We need a committed active playing membership of about 50 to be
+					successful. The Club is actively welcoming players from local
+					colleges, from the local high school programs as well as walk-ons.
+					Most of the new recruits are younger, seeking jobs or under-employed.
+					Paying the $300 annual dues and travel expenses to away games is a
+					difficult prospect for many of the kids.
+				</p>
+				<p>
+					Over the last two years the Alumni Scholarship Program has helped
+					about 8 players per year with the expenses of playing top level rugby.
+					Under-employed and unemployed players were invited to sign contracts
+					which promise they will pay half their annual dues up front, work as
+					needed at club functions and attend practices regularly. At the end of
+					the season, if the conditions are met the club submits a bill to the
+					alumni fund for amount of the second dues installment and a percentage
+					of the travel expenses (van rental, room, gas, etc). Approximately
+					$6000 alumni dollars have be spent supporting this Program over the
+					last three years.
+				</p>
+				<hr />
+				<p>
+					Buffalo Rugby Club Old Boys Alumni Fund<br />
+					The Buffalo Rugby Club is a Tax Exempt 501c3 Organization. Your
+					contributions are tax deductible.<br />
+					&nbsp;
+				</p>
+			</div>
+			<div class="card" style="width: 400px">
+				<h3>Top Contributors</h3>
+				<DataTable
+					:value="topcontributors"
+					class="p-datatable-sm"
+					tableStyle="width: 320px"
+					scrollable
+					scrollHeight="400px"
+					dataKey="contribution_id"
+				>
+					<template #empty> No contributions found for this year </template>
+					<template #loading>
+						Loading contributions data. Please wait.
+					</template>
+
+					<Column field="Name" header="Contributor" frozen>
+						<template #body="slotProps">
+							<div>
+								{{
+									slotProps.data.showName ? slotProps.data.Name : 'Anonymous'
+								}}
+							</div>
+						</template>
+					</Column>
+					<Column field="Total" header="" frozen>
+						<template #body="slotProps">
+							<div>${{ slotProps.data.Total }}</div>
+						</template>
+					</Column>
 				</DataTable>
 			</div>
 		</div>
@@ -120,6 +189,23 @@
 		)
 		contributions.value = data.value
 	}
+
+	const getTopContributors = async () => {
+		const { data, pending, error, refresh } = await useFetch(
+			`/contributions/top`,
+			{
+				method: 'get',
+				headers: {
+					authorization: 'not-needed',
+				},
+			}
+		)
+		topcontributors.value = data.value
+	}
+
+	// topcontributors values
+	const topcontributors = ref([])
+	topcontributors.value = getTopContributors()
 
 	// initial values
 	const year = ref(2023)

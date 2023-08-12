@@ -40,7 +40,7 @@
 		<Head>
 			<Title>Edit SMS {{ id }}</Title>
 		</Head>
-		<common-header title="Edit SMS" />
+		<admin-header title="Edit SMS" />
 		<sms-form :id="id" @submitted="onSubmit" />
 	</div>
 </template>

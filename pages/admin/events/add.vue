@@ -17,7 +17,7 @@
 		<Head>
 			<Title>Add events Item</Title>
 		</Head>
-		<common-header title="Add event" />
+		<admin-header title="Add event" />
 		<events-form @submitted="onSubmit" />
 	</div>
 </template>

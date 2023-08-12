@@ -34,7 +34,7 @@
 		<Head>
 			<Title>Add SMS</Title>
 		</Head>
-		<common-header title="Add SMS" />
+		<admin-header title="Add SMS" />
 		<sms-form @submitted="onSubmit" />
 	</div>
 </template>

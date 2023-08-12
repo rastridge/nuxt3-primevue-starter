@@ -14,7 +14,7 @@
 		<Head>
 			<Title> Add Opponent</Title>
 		</Head>
-		<common-header title="Add Opponent" />
+		<admin-header title="Add Opponent" />
 		<opponents-form @submitted="onSubmit" />
 	</div>
 </template>

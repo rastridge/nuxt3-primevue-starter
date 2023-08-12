@@ -23,7 +23,7 @@
 		<Head>
 			<Title>Edit News Item {{ id }}</Title>
 		</Head>
-		<common-header title="Edit News Item" />
+		<admin-header title="Edit News Item" />
 		<news-form :id="id" @submitted="onSubmit" />
 	</div>
 </template>

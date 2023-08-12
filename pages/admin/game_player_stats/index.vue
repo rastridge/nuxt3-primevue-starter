@@ -3,7 +3,7 @@
 		<Head>
 			<Title>Stats Admin</Title>
 		</Head>
-		<common-header :title="app" />
+		<admin-header :title="app" />
 		<div v-if="!stats" class="text-center text-2xl">
 			<ProgressSpinner /> Loading ...
 		</div>
@@ -17,17 +17,10 @@
 					class="mb-3"
 				/>
 
-				<div style="display: block; width: 100px; margin: auto">
-					<FormKit
-						type="select"
-						label="Game type"
-						v-model="gametype"
-						:options="[
-							{ label: '15s', value: 1 },
-							{ label: '7s', value: 7 },
-						]"
-					/>
-				</div>
+				<select-game-type
+					:currenttype="gametype"
+					@submitted="onSubmitGameType"
+				/>
 			</div>
 
 			<render-list
@@ -105,13 +98,13 @@
 		placemark.setYear(year.value)
 		await getSeason()
 	}
-
 	//
 	// set gametype after drop down choice
 	//
-	watch(gametype, (newid) => {
-		placemark.setGameTypeId(newid)
-	})
+	const onSubmitGameType = async function (value) {
+		gametype.value = value
+		placemark.setGameTypeId(gametype.value)
+	}
 
 	//
 	// get current season on select season submit

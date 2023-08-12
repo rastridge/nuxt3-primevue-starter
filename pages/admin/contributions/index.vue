@@ -3,7 +3,7 @@
 		<Head>
 			<Title>Contributions Admin</Title>
 		</Head>
-		<common-header :title="app" />
+		<admin-header :title="app" />
 		<div v-if="!contributions" class="text-center text-2xl">
 			<ProgressSpinner /> Loading ...
 		</div>
@@ -37,6 +37,7 @@
 	import { usePlacemarkStore } from '@/stores'
 	const placemark = usePlacemarkStore()
 	const { getAll, deleteOne, changeStatusOne } = useFetchAll()
+	const { $dayjs } = useNuxtApp()
 
 	//
 	// Initialize values for Renderlist and Select Year

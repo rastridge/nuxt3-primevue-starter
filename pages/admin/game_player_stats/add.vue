@@ -16,7 +16,7 @@
 		<Head>
 			<Title>Add Game</Title>
 		</Head>
-		<common-header title="Add Game" />
+		<admin-header title="Add Game" />
 		<game-form @submitted="onSubmit" />
 	</div>
 </template>

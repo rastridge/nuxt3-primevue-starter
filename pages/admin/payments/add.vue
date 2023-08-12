@@ -17,7 +17,7 @@
 		<Head>
 			<Title>Add payment</Title>
 		</Head>
-		<common-header title="Add payment" />
+		<admin-header title="Add payment" />
 		<payments-form @submitted="onSubmit" />
 	</div>
 </template>

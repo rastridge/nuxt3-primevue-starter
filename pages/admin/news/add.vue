@@ -17,7 +17,7 @@
 		<Head>
 			<Title>Add News Item</Title>
 		</Head>
-		<common-header title="Add News item" />
+		<admin-header title="Add News item" />
 		<news-form @submitted="onSubmit" />
 	</div>
 </template>

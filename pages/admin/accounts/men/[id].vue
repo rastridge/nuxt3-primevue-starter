@@ -27,8 +27,7 @@
 		<Head>
 			<Title>Edit Account {{ id }}</Title>
 		</Head>
-		<common-header title="Edit account" />
-
+		<admin-header title="Edit account" />
 		<accounts-form :id="id" @submitted="onSubmit" />
 	</div>
 </template>

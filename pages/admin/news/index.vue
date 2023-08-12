@@ -3,7 +3,7 @@
 		<Head>
 			<Title>News Items Admin</Title>
 		</Head>
-		<common-header title="News Items Admin" />
+		<admin-header :title="app" />
 
 		<div v-if="pending" class="text-center text-2xl">Loading ...</div>
 		<div v-else>

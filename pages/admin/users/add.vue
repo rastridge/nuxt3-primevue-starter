@@ -3,7 +3,7 @@
 		<Head>
 			<Title>Add User</Title>
 		</Head>
-		<common-header title="Add User" />
+		<admin-header title="Add User" />
 		<user-form @submitted="onSubmit" />
 	</div>
 </template>

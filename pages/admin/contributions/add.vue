@@ -20,7 +20,7 @@
 		<Head>
 			<Title>Add Contribution {{ id }}</Title>
 		</Head>
-		<common-header title="Add Contribution" />
+		<admin-header title="Add Contribution" />
 		<contributions-form :id="id" @submitted="onSubmit" />
 	</div>
 </template>

@@ -3,7 +3,7 @@
 		<Head>
 			<Title>Newsletters List</Title>
 		</Head>
-		<common-header title="Newsletters List" />
+		<admin-header :title="app" />
 		<div v-if="pending" class="text-center text-2xl">Loading ...</div>
 		<div v-else>
 			<div class="text-center m-5">

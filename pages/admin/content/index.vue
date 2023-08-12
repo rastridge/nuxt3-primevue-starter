@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<Head>
-			<Title>Custom pages List</Title>
+			<Title>{{ app }} List</Title>
 		</Head>
-		<common-header title="Custom pages List" />
+		<admin-header :title="app" />
 
 		<div v-if="pending" class="text-center text-2xl">Loading ...</div>
 		<div v-else>

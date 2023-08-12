@@ -37,7 +37,7 @@
 		<Head>
 			<Title>Add Newsletter</Title>
 		</Head>
-		<common-header title="Add Newsletter" />
+		<admin-header title="Add Newsletter" />
 		<newsletters-form @submitted="onSubmit" />
 		<!-- <newsletters-form @submitted="onSendSave" /> -->
 	</div>

@@ -12,9 +12,10 @@
 				@submitted="onSubmit"
 				class="mb-3"
 			/>
-		</div>
 
-		<div style="display: block; width: 100px; margin: auto">
+			<select-game-type :currenttype="gametype" @submitted="onSubmitGameType" />
+		</div>
+		<!-- <div style="display: block; width: 100px; margin: auto">
 			<FormKit
 				type="select"
 				label="Game type"
@@ -24,7 +25,7 @@
 					{ label: '7s', value: 7 },
 				]"
 			/>
-		</div>
+		</div> -->
 
 		<!-- <DataView :value="season"> -->
 		<DataView
@@ -169,18 +170,20 @@
 	}
 	season.value = await getSeason(year.value)
 
-	const onSubmit = async function (value) {
+	const onSubmit = async (value) => {
 		year.value = value
 		placemark.setYear(year.value)
 		season.value = await getSeason(year.value)
 	}
 
+	const onSubmitGameType = (value) => {
+		gametype.value = value
+		placemark.setGameTypeId(value)
+	}
+
 	//
 	// set gametype after drop down choice
 	//
-	watch(gametype, (newid) => {
-		placemark.setGameTypeId(newid)
-	})
 
 	const filteredData = computed(() => {
 		return season.value.filter((d) => {

@@ -3,7 +3,7 @@
 		<Head>
 			<Title>SMS List</Title>
 		</Head>
-		<common-header title="SMS List" />
+		<admin-header :title="app" />
 		<div v-if="pending" class="text-center text-2xl">Loading ...</div>
 		<div v-else>
 			<render-list

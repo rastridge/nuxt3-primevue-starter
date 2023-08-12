@@ -240,7 +240,6 @@
 	//
 	const submitForm = (state) => {
 		saving.value = true
-
 		emit('submitted', state)
 	}
 	const cancelForm = () => {

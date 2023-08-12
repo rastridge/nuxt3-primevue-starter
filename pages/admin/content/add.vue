@@ -15,7 +15,7 @@
 		<Head>
 			<Title>Add Custom page</Title>
 		</Head>
-		<common-header title="Add Custom page" />
+		<admin-header title="Add Custom page" />
 		<content-form @submitted="onSubmit" />
 	</div>
 </template>

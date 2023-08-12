@@ -24,7 +24,7 @@
 		<Head>
 			<Title>Edit payment {{ id }}</Title>
 		</Head>
-		<common-header title="Edit payment" />
+		<admin-header title="Edit payment" />
 		<payments-form :id="id" @submitted="onSubmit" />
 	</div>
 </template>

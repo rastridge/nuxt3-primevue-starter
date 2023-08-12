@@ -3,7 +3,7 @@
 		<Head>
 			<Title>Accounts List</Title>
 		</Head>
-		<common-header title="Account List" />
+		<admin-header :title="app" />
 		<p v-if="pending"><ProgressSpinner /> Loading ...</p>
 
 		<div class="text-center mb-2">

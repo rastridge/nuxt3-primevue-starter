@@ -23,7 +23,7 @@
 		<Head>
 			<Title>Edit event{{ id }}</Title>
 		</Head>
-		<common-header title="Edit event" />
+		<admin-header title="Edit event" />
 		<events-form :id="id" @submitted="onSubmit" />
 	</div>
 </template>
