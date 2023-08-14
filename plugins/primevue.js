@@ -9,8 +9,7 @@ import DataView from 'primevue/dataview'
 import Dialog from 'primevue/dialog'
 import Dropdown from 'primevue/dropdown'
 import Column from 'primevue/column'
-import ColumnGroup from 'primevue/columngroup' // optional
-import Row from 'primevue/row' // optional
+import Image from 'primevue/image'
 import InputText from 'primevue/inputtext'
 import OverlayPanel from 'primevue/overlaypanel'
 import ProgressBar from 'primevue/progressbar'
@@ -34,6 +33,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 	nuxtApp.vueApp.component('Dialog', Dialog)
 	nuxtApp.vueApp.component('Dropdown', Dropdown)
 	nuxtApp.vueApp.component('InputText', InputText)
+	nuxtApp.vueApp.component('Image', Image)
 	nuxtApp.vueApp.component('OverlayPanel', OverlayPanel)
 	nuxtApp.vueApp.component('ProgressSpinner', ProgressSpinner)
 	nuxtApp.vueApp.component('ProgressBar', ProgressBar)

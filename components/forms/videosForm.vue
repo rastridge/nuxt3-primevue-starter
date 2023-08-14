@@ -1,5 +1,9 @@
 <template>
 	<div>
+		XXX
+		<img
+			src="https://media.my-test-site.net/uploads/1691967948846-now-2023_Binghamton_7s_2nd_place.jpg "
+		/>
 		<FormKit
 			type="form"
 			:config="{ validationVisibility: 'live' }"
@@ -97,15 +101,15 @@
 		state.value = data.value
 
 		// Adjust for local time and Format for Primevue calendar
-		state.value.video_event_dt = $dayjs(
-			videos_data.value.video_event_dt
-		).format('YYYY-MM-DD')
-		state.value.video_release_dt = $dayjs(
-			videos_data.value.video_release_dt
-		).format('YYYY-MM-DD')
-		state.value.video_expire_dt = $dayjs(
-			videos_data.value.video_expire_dt
-		).format('YYYY-MM-DD')
+		state.value.video_event_dt = $dayjs(data.value.video_event_dt).format(
+			'YYYY-MM-DD'
+		)
+		state.value.video_release_dt = $dayjs(data.value.video_release_dt).format(
+			'YYYY-MM-DD'
+		)
+		state.value.video_expire_dt = $dayjs(data.value.video_expire_dt).format(
+			'YYYY-MM-DD'
+		)
 	}
 
 	//

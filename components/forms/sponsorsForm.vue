@@ -1,10 +1,5 @@
 <template>
 	<div>
-		<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
-		<img src="/nuxt.png" alt="/nuxt.png" width="100%" />
-
-		<img :src="oldblue" style="width: 320px" />
-
 		<FormKit
 			type="form"
 			:config="{ validationVisibility: 'live' }"
@@ -56,19 +51,17 @@
 			<br />
 			<!-- image file  -->
 			<div>
+				<label for="ad_image_path">Current image filepath</label><br />
 				<input
 					v-model="state.ad_image_path"
 					id="ad_image_path"
 					name="ad_image_path"
 					disabled
 					type="text"
-					style="width: 40rem"
+					style="width: 100%"
 				/>
-
-				<p>image path ->{{ state.ad_image_path }}</p>
-				<div>
-					image->
-					<img src="/nuxt.png" alt="/nuxt.png" width="100%" />
+				<div class="card flex justify-content-center">
+					<Image :src="state.ad_image_path" alt="Image" width="320" />
 				</div>
 			</div>
 		</FormKit>
@@ -152,25 +145,49 @@
 
 		const file = fileInput.value.files[0]
 		// console.log('IN handleFileUpload file = ', file)
-		const formData = new FormData()
-		formData.append('file', file)
-		openProgressModal()
-		// upload to media.my-test-site.net
-		// Find server code in folder Nuxt3-brc-media-api
-		const res = await fetch(`https://media.my-test-site.net/images/upload`, {
-			method: 'POST',
-			body: formData,
-			headers: {
-				authorization: auth.user.token,
-			},
+		const photoUrl = URL.createObjectURL(file)
+		const image = new Image()
+		const imageDimensions = await new Promise((resolve) => {
+			image.onload = () => {
+				const dimensions = {
+					height: image.height,
+					width: image.width,
+				}
+				resolve(dimensions)
+			}
+			image.src = photoUrl
 		})
+		// console.log(imageDimensions)
 
-		const data = await res.json()
-		closeProgressModal()
-		image.value = data.imageUrl
-		console.log('IN handle image.value = ', image.value)
-		state.value.ad_image_path = data.imageUrl
+		if (imageDimensions.height === 125 && imageDimensions.width === 750) {
+			const formData = new FormData()
+			formData.append('file', file)
+			openProgressModal()
+			// upload to media.my-test-site.net
+			// Find server code in folder Nuxt3-brc-media-api
+			const res = await fetch(`https://media.my-test-site.net/images/upload`, {
+				method: 'POST',
+				body: formData,
+				headers: {
+					authorization: auth.user.token,
+				},
+			})
+
+			const data = await res.json()
+			closeProgressModal()
+			image.value = data.imageUrl
+			// console.log('IN handle image.value = ', image.value)
+			state.value.ad_image_path = data.imageUrl
+		} else {
+			alert(
+				'Illegal dimensons ' +
+					imageDimensions.height +
+					' ' +
+					imageDimensions.width
+			)
+		}
 	}
+	// }
 	//
 	// form handlers
 	//

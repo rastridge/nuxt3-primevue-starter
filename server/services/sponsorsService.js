@@ -88,7 +88,7 @@ async function addOne({
 }) {
 	// check for other users with proposed email address
 	let sql = `select * from inbrc_sponsors where deleted = 0`
-	sponsors = await doDBQuery(sql)
+	const sponsors = await doDBQuery(sql)
 	let sponsor = sponsors.find((u) => u.ad_client_email === ad_client_email)
 
 	if (!sponsor) {
@@ -118,7 +118,7 @@ async function addOne({
 		const sponsor = await doDBQuery(sql, inserts)
 		sponsor.error = ''
 
-		const email = {
+		/* const email = {
 			from: FROM,
 			fromName: FROM_NAME,
 			to: 'ron.astridge@me.com',
@@ -126,7 +126,7 @@ async function addOne({
 			body_text: '',
 			body_html: `<h3>An Buffalo Rugby Club sponsorship for ${ad_client_name} has been created. Email ${ad_client_email}</h3>`,
 		}
-		// sendEmail(email)
+		sendEmail(email) */
 	} else {
 		sponsor.error = `Sponsor with email ${ad_client_email} already exists`
 		console.log(sponsor.error)
