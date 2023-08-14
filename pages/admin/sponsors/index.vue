@@ -4,10 +4,6 @@
 			<Title>{{ app }} Administration</Title>
 		</Head>
 		<admin-header :title="app" />
-		XXXXXX
-		<img
-			src="https://media.my-test-site.net/uploads/1691967948846-now-2023_Binghamton_7s_2nd_place.jpg "
-		/>
 
 		<div v-if="pending" class="text-center text-2xl">Loading ...</div>
 		<div v-else>

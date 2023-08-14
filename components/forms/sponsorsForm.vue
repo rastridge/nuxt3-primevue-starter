@@ -1,6 +1,10 @@
 <template>
 	<div>
 		<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
+		<img src="/nuxt.png" alt="/nuxt.png" width="100%" />
+
+		<img :src="oldblue" style="width: 320px" />
+
 		<FormKit
 			type="form"
 			:config="{ validationVisibility: 'live' }"
@@ -61,8 +65,8 @@
 					style="width: 40rem"
 				/>
 
-				<p v-if="state.ad_image_path">image path ->{{ state.ad_image_path }}</p>
-				<div v-if="state.ad_image_path">
+				<p>image path ->{{ state.ad_image_path }}</p>
+				<div>
 					image->
 					<img src="/nuxt.png" alt="/nuxt.png" width="100%" />
 				</div>
@@ -92,6 +96,8 @@
 
 <script setup>
 	import { useAuthStore } from '~/stores/authStore'
+	import oldblue from '~/assets/imgs/2023_old_blue_dannish.jpg'
+
 	const auth = useAuthStore()
 	const saving = ref(false)
 	const fileInput = ref(null)

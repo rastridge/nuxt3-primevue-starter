@@ -84,19 +84,17 @@
 	//
 	if (props.id !== 0) {
 		// get opponent with id === props.id
-		const {
-			data,
-			pending,
-			error,
-			refresh,
-		} = await useFetch(`/videos/${props.id}`, {
-			key: props.id,
-			method: 'get',
-			headers: {
-				authorization: auth.user.token,
-			},
-		})
-		state.value data.value
+		const { data, pending, error, refresh } = await useFetch(
+			`/videos/${props.id}`,
+			{
+				key: props.id,
+				method: 'get',
+				headers: {
+					authorization: auth.user.token,
+				},
+			}
+		)
+		state.value = data.value
 
 		// Adjust for local time and Format for Primevue calendar
 		state.value.video_event_dt = $dayjs(
