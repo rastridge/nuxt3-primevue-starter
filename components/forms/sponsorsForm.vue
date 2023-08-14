@@ -60,7 +60,7 @@
 					type="text"
 					style="width: 100%"
 				/>
-				<div class="card flex justify-content-center">
+				<div class="card flex justify-content-start">
 					<Image :src="state.ad_image_path" alt="Image" width="320" />
 				</div>
 			</div>
@@ -183,7 +183,8 @@
 				'Illegal dimensons ' +
 					imageDimensions.height +
 					' ' +
-					imageDimensions.width
+					imageDimensions.width +
+					'Image must be 125h 750w'
 			)
 		}
 	}
