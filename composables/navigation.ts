@@ -162,6 +162,12 @@ export function useNavigationMenu() {
 						visible: () => checkPerm('videos') > 0,
 					},
 					{
+						label: 'Sponsors',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/sponsors',
+						visible: () => checkPerm('sponsors') > 0,
+					},
+					{
 						label: 'Log out',
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/logout',

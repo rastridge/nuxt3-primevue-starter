@@ -44,6 +44,7 @@
 				@changeState="changeState"
 			></input-body>
 		</FormKit>
+
 		<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
 
 		<Button class="m-1" label="Cancel" @click.prevent="cancelForm()"> </Button>

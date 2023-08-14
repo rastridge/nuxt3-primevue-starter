@@ -85,7 +85,7 @@
 	if (props.id !== 0) {
 		// get opponent with id === props.id
 		const {
-			data: videos_data,
+			data,
 			pending,
 			error,
 			refresh,
@@ -96,7 +96,7 @@
 				authorization: auth.user.token,
 			},
 		})
-		state.value = videos_data.value
+		state.value data.value
 
 		// Adjust for local time and Format for Primevue calendar
 		state.value.video_event_dt = $dayjs(
@@ -115,11 +115,10 @@
 	//
 	const submitForm = (state) => {
 		saving.value = true
-
 		emit('submitted', state)
 	}
 
 	const cancelForm = () => {
-		navigateTo('/admin/opponents')
+		navigateTo('/admin/videos')
 	}
 </script>
