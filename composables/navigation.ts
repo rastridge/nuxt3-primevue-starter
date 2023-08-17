@@ -78,6 +78,11 @@ export function useNavigationMenu() {
 						icon: 'pi pi-fw pi-bookmark',
 						to: '/contributions',
 					},
+					{
+						label: 'Sponsors',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/sponsors',
+					},
 				],
 				visible: () => !auth.isLoggedIn,
 			},

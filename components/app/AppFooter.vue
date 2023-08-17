@@ -4,11 +4,12 @@
 
 <template>
 	<div class="mt-4 layout-footer">
-		<span class="font-medium ml-2"
-			>Copyright {{ $dayjs().format('YYYY') }} &copy; The Buffalo Rugby Club -
-			Buffalo New York</span
-		>
+		<div class="text-center w-75%">
+			<sponsor-ads />
+			<span class="font-medium ml-2"
+				>Copyright {{ $dayjs().format('YYYY') }} &copy; The Buffalo Rugby Club -
+				Buffalo New York</span
+			>
+		</div>
 	</div>
 </template>
-
-<style scoped></style>

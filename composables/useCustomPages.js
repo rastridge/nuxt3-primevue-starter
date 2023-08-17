@@ -32,6 +32,6 @@ export default function useCustomPages() {
 	}
 
 	return {
-		getAll,
+		getCustomMenuItems,
 	}
 }

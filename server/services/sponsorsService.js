@@ -2,6 +2,7 @@ const { doDBQuery } = useQuery()
 export const sponsorsService = {
 	getAll,
 	getAllCurrent,
+	getSponsorIds,
 	getOne,
 	editOne,
 	addOne,
@@ -76,6 +77,19 @@ async function getOne(id) {
 
 	const sponsor = await doDBQuery(sql)
 	return sponsor[0]
+}
+async function getSponsorIds() {
+	const sql = `SELECT
+										ad_client_id as id
+								FROM
+										inbrc_sponsors
+								WHERE
+										deleted = 0 AND
+								STATUS
+										= 1`
+
+	const adIds = await doDBQuery(sql)
+	return adIds
 }
 
 async function addOne({

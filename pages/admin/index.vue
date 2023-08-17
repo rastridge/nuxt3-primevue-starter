@@ -26,7 +26,5 @@
 	import oldblue from '~/assets/imgs/2023_old_blue_dannish.jpg'
 	const placemark = usePlacemarkStore()
 	const auth = useAuthStore()
-	const activityLog = useActivityLogs()
 	const sess = JSON.parse(sessionStorage.getItem('auth'))
-	activityLog('IN admin index', 'yahoo')
 </script>

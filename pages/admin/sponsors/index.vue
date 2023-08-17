@@ -23,24 +23,23 @@
 </template>
 
 <script setup>
-	const { getAll, deleteOne, changeStatusOne } = useFetchAll()
-	const { getAccess } = useRenderListAccess()
-
 	//
 	// Initialize values for Renderlist
 	//
 	const app = 'sponsors'
+	const { getAccess } = useRenderListAccess()
 	const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
+	const { getAll, deleteOne, changeStatusOne } = useFetchAll()
 	const { data: sponsors, pending } = await getAll(app)
 
 	//
 	// Renderlist actions
 	//
 	const deleteItem = async (id) => {
-		await deleteOne('app', id)
+		await deleteOne(app, id)
 	}
 
 	const changeStatus = async ({ id, status }) => {
-		await changeStatusOne('app', { id, status })
+		await changeStatusOne(app, { id, status })
 	}
 </script>

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Head>
-			<Title>Events Admin</Title>
+			<Title>{{ app }} Administration</Title>
 		</Head>
 		<admin-header :title="app" />
 
@@ -34,13 +34,13 @@
 <script setup>
 	import { usePlacemarkStore } from '@/stores'
 	const placemark = usePlacemarkStore()
-	const { getAll, deleteOne, changeStatusOne } = useFetchAll()
 	//
 	// Initialize values for Renderlist and Select Year
 	//
-	const { getAccess } = useRenderListAccess()
 	const app = 'events'
+	const { getAccess } = useRenderListAccess()
 	const { editable, addable, deleteable, statusable, viewable } = getAccess(app)
+	const { getAll, deleteOne, changeStatusOne } = useFetchAll()
 
 	//
 	// Initialize year select
@@ -75,10 +75,10 @@
 	// Renderlist actions
 	//
 	const deleteItem = async (id) => {
-		await deleteOne('events', id)
+		await deleteOne(app, id)
 	}
 
 	const changeStatus = async ({ id, status }) => {
-		await changeStatusOne('events', { id, status })
+		await changeStatusOne(app, { id, status })
 	}
 </script>
