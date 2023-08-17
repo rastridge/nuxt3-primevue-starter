@@ -24,15 +24,19 @@
 			<FormKit
 				label="Sponsor email"
 				name="ad_client_email"
-				type="text"
-				validation="required"
+				type="email"
+				validation="required | email"
 			/>
 
 			<FormKit
 				label="Sponsor phone"
 				name="ad_client_phone"
-				type="text"
-				validation="required"
+				placeholder="xxx-xxx-xxxx"
+				validation=" required | matches:/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/"
+				type="tel"
+				:validation-messages="{
+					matches: 'Phone number must be in the format xxx-xxx-xxxx',
+				}"
 			/>
 
 			<FormKit

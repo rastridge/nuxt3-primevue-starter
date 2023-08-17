@@ -12,7 +12,7 @@ export default function useQuery() {
 		if (inserts) {
 			sql = mysql.format(sql, inserts)
 		}
-		console.log('IN dbQery sql = ', sql)
+		// console.log('IN dbQery sql = ', sql)
 		const [rows, fields] = await conn1.execute(sql)
 		await conn1.end()
 		return rows
