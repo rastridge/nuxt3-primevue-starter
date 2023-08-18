@@ -12,6 +12,6 @@
 <script setup>
 	const hover = ref(false)
 	const props = defineProps({
-		email: { type: String, default: 'Aol', required: true },
+		email: { type: String, required: true },
 	})
 </script>
