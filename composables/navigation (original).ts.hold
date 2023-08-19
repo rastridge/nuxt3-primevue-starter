@@ -2,9 +2,9 @@ import { useAuthStore } from '~/stores/authStore'
 const auth = useAuthStore()
 import { useMenuStore } from '@/stores'
 const menuStore = useMenuStore()
-const customMenuItems = menuStore.getCustomMenuItems
 
 const checkPerm = (app) => {
+	// const user = JSON.parse(sessionStorage.getItem('auth'))
 	const user = auth.user
 	const temp = user.perms
 	const perms = temp.find(function (u) {
@@ -15,6 +15,9 @@ const checkPerm = (app) => {
 
 export function useNavigationMenu() {
 	const navigationMenu = () => {
+		// const customMenuItems = JSON.parse(sessionStorage.getItem('custommenu'))
+
+		const customMenuItems = menuStore.getCustomMenuItems
 		return [
 			{
 				items: [
@@ -30,70 +33,61 @@ export function useNavigationMenu() {
 						to: '/loginpage',
 						visible: () => !auth.isLoggedIn,
 					},
-
+				],
+			},
+			{
+				label: 'About',
+				items: [
 					{
-						label: 'About',
+						label: 'News',
 						icon: 'pi pi-fw pi-bookmark',
-						items: [
-							{
-								label: 'News',
-								icon: 'pi pi-fw pi-bookmark',
-								to: '/news',
-							},
-							{
-								label: 'Events',
-								icon: 'pi pi-fw pi-bookmark',
-								to: '/events',
-							},
-							{
-								label: 'Payments',
-								icon: 'pi pi-fw pi-bookmark',
-								to: '/payments',
-							},
-							{
-								label: 'Officers',
-								icon: 'pi pi-fw pi-bookmark',
-								to: '/officers',
-							},
-							{
-								label: 'Members',
-								icon: 'pi pi-fw pi-bookmark',
-								to: '/members',
-							},
-							{
-								label: 'Schedule',
-								icon: 'pi pi-fw pi-bookmark',
-								to: '/games/schedule',
-							},
-							{
-								label: 'Opponents',
-								icon: 'pi pi-fw pi-bookmark',
-								to: '/opponents',
-							},
-							{
-								label: 'Contributions',
-								icon: 'pi pi-fw pi-bookmark',
-								to: '/contributions',
-							},
-							{
-								label: 'Sponsors',
-								icon: 'pi pi-fw pi-bookmark',
-								to: '/sponsors',
-							},
-						],
-						visible: () => !auth.isLoggedIn,
+						to: '/news',
+					},
+					{
+						label: 'Events',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/events',
+					},
+					{
+						label: 'Payments',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/payments',
+					},
+					{
+						label: 'Officers',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/officers',
+					},
+					{
+						label: 'Members',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/members',
+					},
+					{
+						label: 'Schedule',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/games/schedule',
+					},
+					{
+						label: 'Opponents',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/opponents',
+					},
+					{
+						label: 'Contributions',
+						icon: 'pi pi-fw pi-bookmark',
+						to: '/contributions',
 					},
 				],
+				visible: () => !auth.isLoggedIn,
 			},
 			{
 				label: 'Custom Pages',
 				items: customMenuItems,
 				visible: () => !auth.isLoggedIn,
 			},
-
 			{
 				label: 'Admin',
-				icon: 'pi pi-fw pi-plus',
 				items: [
 					{
 						label: 'Admin Users',
@@ -182,7 +176,14 @@ export function useNavigationMenu() {
 				],
 				visible: () => auth.isLoggedIn,
 			},
+
+			{
+				label: 'Pages',
+				items: [{ label: 'I18n', icon: 'pi pi-fw pi-database', to: '/i18n' }],
+				visible: () => !auth.isLoggedIn,
+			},
 		]
 	}
+
 	return { navigationMenu }
 }

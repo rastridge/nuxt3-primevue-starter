@@ -46,29 +46,40 @@
 				validation="required"
 			/>
 
-			<!-- ad image file upload 			-->
+			<!-- ad image file upload 
 			<p>Image must be 750w 125h 72dpi</p>
-			<label for="ad_image">Add or Replace Advert image file</label><br />
 
+			<label for="ad_image">Add or Replace Advert image file</label><br />
+			<input ref="fileInput" type="file" @change="handleFileUpload()" />
+			-->
 			<!-- <Toast /> -->
 
 			<FileUpload
 				mode="basic"
 				name="fileInput"
-				:auto="true"
+				url="https://media.my-test-site.net/images/upload"
 				accept="image/*"
 				customUpload
 				@uploader="customUploader"
 			/>
-			<br />
-			<!-- show image file  -->
 
-			<div class="card flex justify-content-start">
-				<label
-					>Current image filepath is<br />
-					{{ state.ad_image_path }}</label
-				>
-				<Image :src="state.ad_image_path" alt="Image" width="320" />
+			<br />
+			<br />
+			<br />
+			<!-- image file  -->
+			<div>
+				<label for="ad_image_path">Current image filepath</label><br />
+				<input
+					v-model="state.ad_image_path"
+					id="ad_image_path"
+					name="ad_image_path"
+					disabled
+					type="text"
+					style="width: 100%"
+				/>
+				<div class="card flex justify-content-start">
+					<Image :src="state.ad_image_path" alt="Image" width="320" />
+				</div>
 			</div>
 		</FormKit>
 

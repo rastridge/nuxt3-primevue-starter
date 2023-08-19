@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import { useToast } from 'primevue/usetoast'
+	// import { useToast } from 'primevue/usetoast'
 	import { usePrimeVue } from 'primevue/config'
 	import AppTopBar from '../components/app/AppTopbar.vue'
 	import AppMenu from '../components/app/AppMenu.vue'
@@ -17,7 +17,7 @@
 	const menuActive = ref(false)
 
 	const primeVue = usePrimeVue()
-	const toast = useToast()
+	// const toast = useToast()
 	const route = useRoute()
 
 	const navigation = useNavigationMenu()
@@ -26,7 +26,7 @@
 		() => route,
 		() => {
 			menuActive.value = false
-			toast.removeAllGroups()
+			// toast.removeAllGroups()
 		}
 	)
 
