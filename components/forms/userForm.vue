@@ -139,7 +139,7 @@
 					</table>
 				</div>
 				<Button
-					class="p-button m-4 center"
+					class="p-button m-4"
 					label="Submit user"
 					@click="submitForm(state)"
 				>
@@ -147,8 +147,7 @@
 
 				<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
 
-				<Button class="p-button center" label="Cancel" @click="cancelForm">
-				</Button>
+				<Button class="p-button" label="Cancel" @click="cancelForm"> </Button>
 			</div>
 		</div>
 	</div>

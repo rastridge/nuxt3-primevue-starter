@@ -15,7 +15,7 @@
 				placeholder="Select a member type"
 			/>
 		</div>
-		<div style="width: 175px" class="center mb-2">
+		<div style="width: 175px" class="mb-2">
 			<!-- <Dropdown
 				v-model="alpha"
 				:options="alphas"
