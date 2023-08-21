@@ -13,6 +13,8 @@
 					you at the email address associated with this username
 				</div>
 			</div>
+
+			<!-- 			xxx old xxx
 			<form>
 				<label for="username" class="block text-900 font-medium mb-2"
 					>Username</label
@@ -30,7 +32,12 @@
 				class="w-50 mr-3"
 				@click="handleSubmit"
 			></Button>
-			<Button label="Cancel" class="w-50" @click="cancelForm()"></Button>
+			<Button label="Cancel" class="w-50" @click="cancelForm()"></Button> -->
+
+			<FormKit type="form" submit-label="Request" @submit="handleSubmit">
+				<FormKit type="text" name="username" label="Username"> </FormKit>
+			</FormKit>
+			<Button label="Cancel" class="small w-50" @click="cancelForm()"></Button>
 		</div>
 	</div>
 </template>
@@ -45,7 +52,8 @@
 	const cancelForm = () => {
 		navigateTo('/loginpage')
 	}
-	const handleSubmit = async function () {
+	const handleSubmit = async function (state) {
+		const username = state.username
 		const { data, error } = await useFetch('/users/resetrequest', {
 			method: 'POST',
 			body: { username },
