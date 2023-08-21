@@ -1,9 +1,9 @@
 <template>
 	<div id="sponsorad">
-		<div class="card">
-			<div v-if="item" class="m-3">
+		<div class="card w-full">
+			<div v-if="item">
 				<a :href="item.ad_client_website" target="_blank">
-					<Image :src="item.ad_image_path" />
+					<img :src="item.ad_image_path" style="width: 100%" />
 				</a>
 			</div>
 		</div>

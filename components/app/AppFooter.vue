@@ -4,9 +4,9 @@
 
 <template>
 	<div class="mt-4 layout-footer">
-		<div class="text-center w-75%">
+		<div class="text-center w-full">
 			<sponsor-ads />
-			<span class="font-medium ml-2"
+			<span class="text-xs md:text-lg text-gray-50"
 				>Copyright {{ $dayjs().format('YYYY') }} &copy; The Buffalo Rugby Club -
 				Buffalo New York</span
 			>
