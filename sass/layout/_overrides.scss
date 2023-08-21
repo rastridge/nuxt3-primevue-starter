@@ -12,6 +12,17 @@ button {
 	box-shadow: none !important;
 } */
 
+// increase padding on large screens
+
+.card {
+	padding: 0.5rem;
+}
+@media (min-width: 768px) {
+	.card {
+		padding: 1.5rem;
+	}
+}
+
 .p-radiobutton {
 	margin-right: 5px;
 }

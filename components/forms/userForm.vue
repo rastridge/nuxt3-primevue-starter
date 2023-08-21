@@ -1,153 +1,157 @@
 <template>
 	<div>
 		<p v-if="!apps_data"><ProgressSpinner /> Loading</p>
-		<div v-else>
-			<div>
-				<Button
-					class="p-button mb-4"
-					style="display: block; margin-left: auto; margin-right: auto"
-					label="Submit user"
-					@click="submitForm(state)"
-				>
-				</Button>
+		<div
+			v-else
+			style="display: block; margin-left: auto; margin-right: auto"
+			class="surface-card p-4 shadow-2 border-round w-full lg:w-6"
+		>
+			<div class="text-center">
 				<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
-
 				<Button
-					class="p-button mb-4"
-					label="Cancel"
-					style="display: block; margin-left: auto; margin-right: auto"
-					@click="cancelForm"
-				>
-				</Button>
-				<div
-					style="
-						display: block;
-						width: 340px;
-						margin-left: auto;
-						margin-right: auto;
-					"
-				>
-					<p v-if="alert.message" class="alert-danger">
-						ERROR: {{ alert.message }}
-					</p>
-					<label for="admin_user_name">Username</label>
-					<InputText
-						id="admin_user_name"
-						type="text"
-						v-model.trim="state.admin_user_name"
-						class="w-full"
-					/>
-					<p v-if="username_required" class="alert-danger">Required</p>
-					<label for="admin_user_email">Email</label>
-					<InputText
-						id="admin_user_email"
-						type="email"
-						v-model.trim="state.admin_user_email"
-						class="w-full"
-					/>
-					<p v-if="email_required" class="alert-danger">Required</p>
-					<div v-if="!addForm">
-						<Checkbox v-model="reset" :binary="true" />
-						<label> Change password</label>
-					</div>
-					<br />
-
-					<div v-if="reset || addForm">
-						<label for="password">New Password:</label>
-						<InputText
-							id="password"
-							type="password"
-							v-model.trim="state.password"
-							class="w-full"
-						/>
-						<p v-if="password_required" class="alert-danger">Required</p>
-						<label for="repeatPass">Repeat Password:</label>
-						<InputText
-							id="repeatPass"
-							type="password"
-							v-model.trim="repeatPass"
-							class="w-full"
-						/>
-						<p v-if="!match" class="alert-danger">No match</p>
-					</div>
-					<p v-if="alert.message" class="alert-danger">
-						ERROR: {{ alert.message }}
-					</p>
-				</div>
-
-				<div class="m-5 text-xl text-center">Admin User Permissions</div>
-				<div
-					style="
-						white-space: nowrap;
-						display: block;
-						width: 400px;
-						margin-left: auto;
-						margin-right: auto;
-					"
-				>
-					<table>
-						<thead>
-							<tr>
-								<th class="text-right">Application</th>
-								<th>Manage</th>
-								<th>Create</th>
-								<th>View</th>
-								<th>No access</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="(item, index) in apps_data" :key="item.admin_app_id">
-								<td class="text-end">{{ item.admin_app_name }}:</td>
-								<td>
-									<div>
-										<input
-											type="radio"
-											v-model="state.perms[index].admin_perm"
-											value="3"
-										/>
-									</div>
-								</td>
-								<td>
-									<div>
-										<input
-											type="radio"
-											v-model="state.perms[index].admin_perm"
-											value="2"
-										/>
-									</div>
-								</td>
-								<td>
-									<div>
-										<input
-											type="radio"
-											v-model="state.perms[index].admin_perm"
-											value="1"
-										/>
-									</div>
-								</td>
-								<td>
-									<div>
-										<input
-											type="radio"
-											v-model="state.perms[index].admin_perm"
-											value="0"
-										/>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<Button
-					class="p-button m-4"
+					class="mb-4 mr-4"
 					label="Submit user"
 					@click="submitForm(state)"
 				>
 				</Button>
 
-				<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
+				<Button class="p-button mb-4" label="Cancel" @click="cancelForm">
+				</Button>
+			</div>
+			<p v-if="alert.message" class="alert-danger">
+				ERROR: {{ alert.message }}
+			</p>
+			<label for="admin_user_name" class="block text-900 font-medium mb-2"
+				>Username</label
+			>
+			<InputText
+				v-model="state.admin_user_name"
+				id="admin_user_name"
+				type="text"
+				class="w-full mb-3"
+				size="small"
+			/>
+			<p v-if="username_required" class="alert-danger">Required</p>
 
-				<Button class="p-button" label="Cancel" @click="cancelForm"> </Button>
+			<label for="admin_user_email" class="block text-900 font-medium mb-2"
+				>Email</label
+			>
+			<InputText
+				v-model="state.admin_user_email"
+				id="admin_user_email"
+				type="email"
+				class="w-full mb-3"
+				size="small"
+			/>
+			<p v-if="email_required" class="alert-danger">Required</p>
+
+			<div v-if="!addForm">
+				<label for="reset" class="block text-900 font-medium mb-2"
+					>Change password</label
+				>
+				<Checkbox id="reset" v-model="reset" :binary="true" />
+			</div>
+
+			<div v-if="reset || addForm">
+				<label for="password" class="block text-900 font-medium mb-2"
+					>New Password:</label
+				>
+				<InputText
+					v-model="state.password"
+					id="password"
+					type="password"
+					class="w-full mb-3"
+					size="small"
+				/>
+
+				<p v-if="password_required" class="alert-danger">Required</p>
+				<label for="repeatPass" class="block text-900 font-medium mb-2"
+					>Repeat Password:</label
+				>
+				<InputText
+					v-model="repeatPass"
+					id="repeatPass"
+					type="password"
+					class="w-full mb-3"
+					size="small"
+				/>
+				<p v-if="!match" class="alert-danger">No match</p>
+			</div>
+			<p v-if="alert.message" class="alert-danger">
+				ERROR: {{ alert.message }}
+			</p>
+
+			<div class="m-5 md:text-2xl font-semibold text-center">
+				Admin User Permissions
+			</div>
+			<div class="mb-3 border-solid">
+				<table
+					style="margin-left: auto; margin-right: auto"
+					class="w-full text-xs md:text-lg border-solid"
+				>
+					<thead>
+						<tr>
+							<th class="text-right">Application</th>
+							<th>Manage</th>
+							<th>Create</th>
+							<th>View</th>
+							<th style="white-space: nowrap">No access</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(item, index) in apps_data" :key="item.admin_app_id">
+							<td class="text-end">{{ item.admin_app_name }}:</td>
+							<td>
+								<div>
+									<input
+										type="radio"
+										v-model="state.perms[index].admin_perm"
+										value="3"
+									/>
+								</div>
+							</td>
+							<td>
+								<div>
+									<input
+										type="radio"
+										v-model="state.perms[index].admin_perm"
+										value="2"
+									/>
+								</div>
+							</td>
+							<td>
+								<div>
+									<input
+										type="radio"
+										v-model="state.perms[index].admin_perm"
+										value="1"
+									/>
+								</div>
+							</td>
+							<td>
+								<div>
+									<input
+										type="radio"
+										v-model="state.perms[index].admin_perm"
+										value="0"
+									/>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="text-center">
+				<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
+				<Button
+					class="p-button mb-4 mr-4"
+					label="Submit user"
+					@click="submitForm(state)"
+				>
+				</Button>
+
+				<Button class="p-button mb-4" label="Cancel" @click="cancelForm">
+				</Button>
 			</div>
 		</div>
 	</div>
