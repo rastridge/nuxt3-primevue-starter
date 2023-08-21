@@ -144,6 +144,7 @@
 
 <template>
 	<div>
+		<!-- default start up blue primary  theme? -->
 		<Link
 			rel="stylesheet"
 			:href="
@@ -169,3 +170,8 @@
 		</div>
 	</div>
 </template>
+<!-- <style>
+	body {
+		background-color: #1c73c7;
+	}
+</style> -->

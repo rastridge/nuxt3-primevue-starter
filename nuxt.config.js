@@ -66,12 +66,12 @@ export default defineNuxtConfig({
 
 	primevue: {
 		config: {
-			// ripple: true,
+			ripple: true,
 		},
 	},
 	css: [
 		'primevue/resources/primevue.css',
-		'primevue/resources/themes/lara-light-blue/theme.css',
+		// 'primevue/resources/themes/lara-light-blue/theme.css',
 		'primeicons/primeicons.css',
 		'primeflex/primeflex.css',
 	],

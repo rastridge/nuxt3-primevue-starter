@@ -5,7 +5,7 @@ export function updateTheme(themeName: string, themeColor: string) {
 }
 
 export const useThemeStore = defineStore('theme', {
-	// a function that returns a fresh state
+	// a function that returns a fresh state - sets the default startup theme-color?
 	state: () => ({
 		themeName: 'saga',
 		themeColor: 'blue',
