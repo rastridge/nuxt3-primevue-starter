@@ -499,8 +499,8 @@ async function resetRequest({ username }) {
 	// if username exists
 	if (cnt) {
 		const msg =
-			'To reset your user admin password <a href="https://main--peaceful-tarsier-458ff9.netlify.app/reset/' +
-			// 'To reset your user admin password <a href="http://localhost:3000/reset/' +
+			// 'To reset your user admin password <a href="https://main--peaceful-tarsier-458ff9.netlify.app/reset/' +
+			'To reset your user admin password <a href="http://localhost:3000/reset/' +
 			username +
 			'" rel="noopener noreferrer" target="_blank" >Click here</a>'
 
@@ -515,7 +515,7 @@ async function resetRequest({ username }) {
 
 async function resetPassword({ username, password }) {
 	// update user password
-	let sql = `UPDATE inbrc_admin_users
+	const sql = `UPDATE inbrc_admin_users
 					SET
 						admin_user_pass = ?,
 						modified_dt= NOW()
@@ -523,7 +523,7 @@ async function resetPassword({ username, password }) {
 						admin_user_name = ?`
 
 	const hashedpassword = await bcrypt.hashSync(password, 10)
-	let inserts = []
+	const inserts = []
 	inserts.push(hashedpassword, username)
 	const result = await doDBQuery(sql, inserts)
 

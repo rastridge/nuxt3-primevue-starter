@@ -96,10 +96,11 @@ export default defineNuxtConfig({
 		],
 	},
 	build: {
-		transpile: ['nuxt', 'primevue'],
+		// transpile: ['nuxt', 'primevue'],
+		transpile: ['primevue'],
 	},
-	sourcemap: {
+	/* 	sourcemap: {
 		client: false,
 		server: true,
-	},
+	}, */
 })

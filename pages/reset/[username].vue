@@ -1,10 +1,9 @@
 <template>
 	<div>
-		username {{ username }}
 		<FormKit
 			type="form"
 			id="password_reset"
-			submit-label="Reset"
+			submit-label="Reset password"
 			@submit="submitHandler"
 		>
 			<FormKit
@@ -25,8 +24,6 @@
 				validation-visibility="live"
 				validation-label="Confirmation"
 			/>
-			<pre wrap>password= {{ password }}</pre>
-			<pre wrap>username= {{ username }}</pre>
 		</FormKit>
 	</div>
 </template>
@@ -37,7 +34,6 @@
 	const username = ref(route.params.username)
 
 	const submitHandler = async (state) => {
-		const username = state.username
 		const password = state.password
 		const { data, error } = await useFetch('/users/resetpassword', {
 			method: 'POST',
@@ -47,6 +43,6 @@
 			},
 		})
 
-		navigateTo('/loginpage')
+		navigateTo('/')
 	}
 </script>

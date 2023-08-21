@@ -14,9 +14,7 @@
 	await menuStore.initCustomMenuItems()
 
 	// stay logged in?
-	if (!localStorage.getItem('auth')) {
-		navigateTo('/')
-	} else {
+	if (localStorage.getItem('auth')) {
 		auth.loginAuto()
 	}
 </script>
