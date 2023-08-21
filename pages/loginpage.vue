@@ -3,58 +3,63 @@
 		<div v-if="alert.message" :class="`alert ${alert.type}`">
 			{{ alert.message }}
 		</div>
-		<!-- 		<div class="formgrid grid">
-			<div class="field">
-				<label for="firstname1">Firstname</label>
-				<input
-					id="firstname1"
-					type="text"
-					class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-				/>
-			</div>
-			<div class="field">
-				<label for="lastname1">Lastname</label>
-				<input
-					id="lastname1"
-					type="password"
-					class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-				/>
-			</div>
-		</div>
- -->
-		<div v-if="!auth.isLoggedIn" class="card">
-			<h3>Login Admin Users</h3>
 
-			<FormKit type="form" submit_label="Login" @submit="handleSubmit">
-				<FormKit
-					type="text"
-					name="username"
-					label="Username"
-					validate="required|length:5"
-				>
-				</FormKit>
-				<!-- password = {{ password }}
-				<Password v-model="password" toggleMask :feedback="false" /> -->
-				<FormKit
-					type="password"
-					name="password"
-					label="Password"
-					validate="required|length:5"
-					suffix-icon="eyeClosed"
-					@suffix-icon-click="handleIconClick"
-				>
-				</FormKit>
-
-				<div class="mb-4">
-					<Checkbox v-model="keeploggedin" :binary="true" />
-					<label> Keep me logged in</label>
+		<div
+			v-if="!auth.isLoggedIn"
+			class="surface-card p-4 shadow-2 border-round w-full lg:w-6"
+		>
+			<div class="text-center mb-5">
+				<div class="text-900 md:text-2xl font-medium mb-3">
+					Login Admin User
 				</div>
-			</FormKit>
-			<div>
-				<nuxt-link to="/resetpassword" active-class="active"
-					><a>Forgot password?</a></nuxt-link
-				>
 			</div>
+			<form>
+				<div>
+					<label for="username" class="block text-900 font-medium mb-2"
+						>Username</label
+					>
+					<InputText
+						id="username"
+						type="text"
+						v-model="username"
+						class="w-full mb-3"
+					/>
+
+					<label for="password" class="block text-900 font-medium mb-2"
+						>Password</label
+					>
+					<InputText
+						id="password"
+						type="password"
+						v-model="password"
+						class="w-full mb-3"
+					/>
+
+					<div class="flex align-items-center justify-content-between mb-6">
+						<div class="flex align-items-center">
+							<Checkbox
+								id="rememberme1"
+								:binary="true"
+								v-model="keeploggedin"
+								class="mr-2"
+							></Checkbox>
+							<label for="rememberme1">Keep me logged in</label>
+						</div>
+						<nuxt-link
+							to="/resetpassword"
+							class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
+							active-class="active"
+							><a>Forgot password?</a></nuxt-link
+						>
+					</div>
+				</div>
+			</form>
+			<Button
+				label="Log In"
+				icon="pi pi-user"
+				class="w-full"
+				@click="handleSubmit"
+			></Button>
 		</div>
 	</div>
 </template>
@@ -64,25 +69,14 @@
 	import { useAlertStore } from '~/stores/alertStore'
 	const auth = useAuthStore()
 	const alert = useAlertStore() // used in template
-	// const password = ref('')
+	const username = ref('')
+	const password = ref('')
 
-	const handleIconClick = (node, e) => {
-		node.props.suffixIcon =
-			node.props.suffixIcon === 'eye' ? 'eyeClosed' : 'eye'
-		node.props.type = node.props.type === 'password' ? 'text' : 'password'
-	}
 	const keeploggedin = ref(false)
-	const handleSubmit = async (state) => {
-		// state.password = password.value
-		// console.log(state.username + state.password + password.value)
-		if (state.username && state.password) {
-			auth.login(state.username, state.password, keeploggedin) // pinia auth store
+	const handleSubmit = async () => {
+		console.log(username.value + password.value + keeploggedin.value)
+		if (username.value && password.value) {
+			auth.login(username.value, password.value, keeploggedin.value) // pinia auth store
 		}
 	}
 </script>
-
-<style>
-	.formkit-suffix-icon:hover {
-		color: var(--fk-color-primary);
-	}
-</style>

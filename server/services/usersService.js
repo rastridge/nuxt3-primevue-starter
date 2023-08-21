@@ -500,6 +500,7 @@ async function resetRequest({ username }) {
 	if (cnt) {
 		const msg =
 			'To reset your user admin password <a href="https://main--peaceful-tarsier-458ff9.netlify.app/reset/' +
+			// 'To reset your user admin password <a href="http://localhost:3000/reset/' +
 			username +
 			'">Click here</a>'
 
