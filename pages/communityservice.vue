@@ -32,9 +32,10 @@
 					><div class="text-sm md:text-xl text-center">Before</div></template
 				>
 				<template #content
-					><img
+					><nuxt-img
 						src="https://piwigo.buffalorugby.org/piwigo/_data/i/galleries/albums/2011/Buffalo-Rugby-and-Habitat-for-Humanity-Team-Up/2011_Jan_Habitat_-_02-me.jpg"
 						style="width: 100%"
+						loading="lazy"
 				/></template>
 			</Card>
 
@@ -45,9 +46,10 @@
 					><div class="text-sm md:text-xl text-center">After</div></template
 				>
 				<template #content
-					><img
+					><nuxt-img
 						src="https://piwigo.buffalorugby.org/piwigo/_data/i/galleries/albums/2011/Buffalo-Rugby-and-Habitat-for-Humanity-Team-Up/2011_Jan_Habitat_-_20-me.jpg"
 						style="width: 100%"
+						loading="lazy"
 				/></template>
 			</Card>
 
@@ -60,7 +62,7 @@
 					</div></template
 				>
 				<template #content
-					><img
+					><nuxt-img
 						src="https://piwigo.buffalorugby.org/piwigo/_data/i/galleries/albums/2011/Buffalo-Rugby-and-Habitat-for-Humanity-Team-Up/2011_Jan_Habitat_-_19-me.jpg"
 						style="width: 100%"
 				/></template>
@@ -75,7 +77,7 @@
 					</div></template
 				>
 				<template #content
-					><img
+					><nuxt-img
 						src="https://piwigo.buffalorugby.org/piwigo/_data/i/galleries/albums/2012/Habitat/2012_38_sherwood-me.png"
 						style="width: 100%"
 				/></template>
@@ -90,7 +92,7 @@
 					</div></template
 				>
 				<template #content
-					><img
+					><nuxt-img
 						src="https://piwigo.buffalorugby.org/piwigo/_data/i/galleries/albums/2013/2013Habitat-me.jpeg"
 						style="width: 100%"
 				/></template>
@@ -105,7 +107,7 @@
 					</div></template
 				>
 				<template #content
-					><img
+					><nuxt-img
 						src="https://piwigo.buffalorugby.org/piwigo/_data/i/galleries/albums/2013/2013-Nov-Habitat-for-Humanity/2013_Nov_Habitat_-_04-me.jpg"
 						style="width: 100%"
 				/></template>
@@ -120,7 +122,7 @@
 					</div></template
 				>
 				<template #content
-					><img
+					><nuxt-img
 						src="https://piwigo.buffalorugby.org/piwigo/_data/i/galleries/albums/2015/2015-Habitat-for-Humanity/2015_Mar_Habitat_-_6-me.jpg"
 						style="width: 100%"
 				/></template>
@@ -135,7 +137,7 @@
 					</div></template
 				>
 				<template #content
-					><img
+					><nuxt-img
 						src="https://piwigo.buffalorugby.org/piwigo/_data/i/galleries/albums/2016/2016Habitat-me.jpeg"
 						style="width: 100%"
 				/></template>
@@ -150,7 +152,7 @@
 					</div></template
 				>
 				<template #content
-					><img
+					><nuxt-img
 						src="https://piwigo.buffalorugby.org/piwigo/_data/i/upload/2018/01/06/20180106095736-91a274d5-sm.jpg"
 						style="width: 100%"
 				/></template>
@@ -165,7 +167,7 @@
 					</div></template
 				>
 				<template #content
-					><img
+					><nuxt-img
 						src="https://piwigo.buffalorugby.org/piwigo/upload/2020/02/03/20200203114429-c21712e3.jpg"
 						style="width: 100%"
 				/></template>
@@ -180,7 +182,7 @@
 					</div></template
 				>
 				<template #content
-					><img
+					><nuxt-img
 						src="https://buffalorugby.org/_img/_news_newsletters/1684069054325-AST_7104_640.jpeg"
 						style="width: 100%"
 				/></template>
