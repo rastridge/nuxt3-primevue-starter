@@ -61,9 +61,12 @@
 				@uploader="customUploader"
 			/>
 			<br />
+			<br />
 			<!-- show image file  -->
-
-			<div class="card flex justify-content-start">
+			<div
+				v-if="state.ad_image_path"
+				class="card flex justify-content-start mb-2"
+			>
 				<label
 					>Current image filepath is<br />
 					{{ state.ad_image_path }}</label
@@ -73,7 +76,6 @@
 		</FormKit>
 
 		<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
-
 		<Button label="Cancel" @click="cancelForm()"> </Button>
 
 		<!-- Modal -->

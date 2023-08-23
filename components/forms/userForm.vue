@@ -4,7 +4,7 @@
 		<div
 			v-else
 			style="display: block; margin-left: auto; margin-right: auto"
-			class="surface-card p-4 shadow-2 border-round w-full lg:w-6"
+			class="surface-card p-4 shadow-2 border-round w-full md:w-9"
 		>
 			<div class="text-center">
 				<p v-if="saving" class="text-2xl"><ProgressSpinner /> Saving ...</p>
@@ -81,13 +81,13 @@
 				ERROR: {{ alert.message }}
 			</p>
 
-			<div class="m-5 md:text-2xl font-semibold text-center">
+			<div class="m-5 md:text-xl font-semibold text-center">
 				Admin User Permissions
 			</div>
-			<div class="mb-3 border-solid">
+			<div class="mb-3">
 				<table
 					style="margin-left: auto; margin-right: auto"
-					class="w-full text-xs md:text-lg border-solid"
+					class="text-xs md:text-sm"
 				>
 					<thead>
 						<tr>

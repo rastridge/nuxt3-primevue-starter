@@ -1,9 +1,5 @@
 <template>
 	<div>
-		XXX
-		<img
-			src="https://media.my-test-site.net/uploads/1691967948846-now-2023_Binghamton_7s_2nd_place.jpg "
-		/>
 		<FormKit
 			type="form"
 			:config="{ validationVisibility: 'live' }"

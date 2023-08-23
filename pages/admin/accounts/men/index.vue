@@ -15,20 +15,12 @@
 				placeholder="Select a member type"
 			/>
 		</div>
-		<div style="width: 175px" class="mb-2">
-			<!-- <Dropdown
-				v-model="alpha"
-				:options="alphas"
-				optionLabel="label"
-				optionValue="value"
-				placeholder="Select initial letter"
-			/> -->
+		<div class="text-center mb-2">
 			<FormKit
+				v-model="alpha"
 				type="select"
 				label="Last name begins with"
-				v-model="alpha"
 				:options="alphas"
-				help="Select initial letter"
 			/>
 		</div>
 		<div v-if="pending" class="text-center text-2xl">Loading ...</div>

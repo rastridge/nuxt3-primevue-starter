@@ -36,7 +36,7 @@
 									})
 								"
 								><i v-if="slotProps.data.status" class="pi pi-thumbs-up"></i
-								><i v-else class="pi pi-thumbs-down"></i
+								><i v-else class="pi pi-thumbs-down-fill"></i
 							></a> </template
 					></Column>
 					<Column field="title" header="Name"></Column>

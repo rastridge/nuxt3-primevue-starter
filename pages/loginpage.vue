@@ -47,6 +47,7 @@
 						></Checkbox>
 						<label for="rememberme1">Keep me logged in</label>
 					</div>
+
 					<nuxt-link
 						to="/resetpassword"
 						class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer"
@@ -72,9 +73,9 @@
 		navigateTo('/')
 	}
 	const handleSubmit = async (state) => {
-		console.log(state.username + state.password + state.keeploggedin)
+		console.log(state.username + state.password + keeploggedin.value)
 		if (state.username && state.password) {
-			auth.login(state.username, state.password, state.keeploggedin) // pinia auth store
+			auth.login(state.username, state.password, keeploggedin.value) // pinia auth store
 		}
 	}
 </script>

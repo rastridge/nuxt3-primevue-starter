@@ -26,59 +26,53 @@ export function useNavigationMenu() {
 					},
 					{
 						label: 'Login',
-						icon: 'pi pi-fw pi-bookmark',
+						icon: 'pi pi-fw pi-sign-in',
 						to: '/loginpage',
 						visible: () => !auth.isLoggedIn,
 					},
 
 					{
 						label: 'About',
-						icon: 'pi pi-fw pi-bookmark',
 						items: [
 							{
 								label: 'News',
-								icon: 'pi pi-fw pi-bookmark',
 								to: '/news',
 							},
 							{
 								label: 'Events',
-								icon: 'pi pi-fw pi-bookmark',
 								to: '/events',
 							},
 							{
 								label: 'Payments',
-								icon: 'pi pi-fw pi-bookmark',
 								to: '/payments',
 							},
 							{
 								label: 'Officers',
-								icon: 'pi pi-fw pi-bookmark',
 								to: '/officers',
 							},
 							{
 								label: 'Members',
-								icon: 'pi pi-fw pi-bookmark',
 								to: '/members',
 							},
 							{
 								label: 'Schedule',
-								icon: 'pi pi-fw pi-bookmark',
 								to: '/games/schedule',
 							},
 							{
 								label: 'Opponents',
-								icon: 'pi pi-fw pi-bookmark',
 								to: '/opponents',
 							},
 							{
 								label: 'Contributions',
-								icon: 'pi pi-fw pi-bookmark',
 								to: '/contributions',
 							},
 							{
 								label: 'Sponsors',
-								icon: 'pi pi-fw pi-bookmark',
 								to: '/sponsors',
+							},
+							{
+								label: 'Community Service',
+								to: '/communityservice',
 							},
 						],
 						visible: () => !auth.isLoggedIn,
@@ -175,7 +169,7 @@ export function useNavigationMenu() {
 					},
 					{
 						label: 'Log out',
-						icon: 'pi pi-fw pi-bookmark',
+						icon: 'pi pi-fw pi-sign-out',
 						to: '/logout',
 						visible: () => auth.isLoggedIn,
 					},
