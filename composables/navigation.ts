@@ -74,6 +74,10 @@ export function useNavigationMenu() {
 								label: 'Community Service',
 								to: '/communityservice',
 							},
+							{
+								label: 'Leaders',
+								to: '/leaders',
+							},
 						],
 						visible: () => !auth.isLoggedIn,
 					},
