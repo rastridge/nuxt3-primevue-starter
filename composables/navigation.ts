@@ -168,6 +168,12 @@ export function useNavigationMenu() {
 						visible: () => checkPerm('sponsors') > 0,
 					},
 					{
+						label: 'Leaders',
+						icon: 'pi pi-fw pi-user-edit',
+						to: '/admin/leaders',
+						visible: () => checkPerm('leaders') > 0,
+					},
+					{
 						label: 'Log out',
 						icon: 'pi pi-fw pi-sign-out',
 						to: '/logout',
