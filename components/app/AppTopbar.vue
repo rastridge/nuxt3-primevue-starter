@@ -1,6 +1,7 @@
 <script setup lang="ts">
 	import { useThemeStore } from '@/stores'
 	const themeStore = useThemeStore()
+	const navigation = useNavigationMenu()
 
 	const emit = defineEmits(['menuToggle'])
 
@@ -33,6 +34,11 @@
 		>
 			<i class="pi pi-bars" />
 		</button>
+
+		<AppMenu2
+			:model="navigation.navigationMenu()"
+			@menu-item-click="onMenuItemClick"
+		/>
 
 		<!-- <button
 			v-styleclass="{
